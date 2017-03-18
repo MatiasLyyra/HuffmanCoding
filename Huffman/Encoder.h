@@ -1,22 +1,26 @@
-//
-// Created by Matias-PC on 16.3.2017.
-//
-
 #ifndef HUFFMANCODING_ENCODER_H
 #define HUFFMANCODING_ENCODER_H
 
 #include <vector>
+#include <string>
 
 #include "Common.h"
 
 namespace huffman
 {
     class Encoder {
+
     public:
-        void encodeData(const types::encode_table_t& encode_table, const std::vector<unsigned char>& data);
+        explicit Encoder(const std::string& fileName);
+        void encodeData(const types::encode_table_t& encode_table, const std::vector<types::byte_t>& data);
 
     private:
-        std::vector<bool> encodedData_;
+        void writeBitTooBuffer(uint32_t code, uint8_t length);
+        void writeBuffer();
+
+        types::byte_t buffer_[constants::BUFFER_SIZE_BYTES];
+        uint64_t bitsInBuffer_;
+        std::string fileName_;
     };
 }
 

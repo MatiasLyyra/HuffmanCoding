@@ -1,11 +1,9 @@
-//
-// Created by Matias-PC on 15.3.2017.
-//
-
 #ifndef HUFFMANCODING_TREENODE_H
 #define HUFFMANCODING_TREENODE_H
 
 #include <memory>
+
+#include "Common.h"
 
 namespace huffman
 {
@@ -19,16 +17,16 @@ namespace huffman
             bool operator()(const TreeNode* a, const TreeNode* b) const;
         };
 
-        explicit TreeNode(unsigned char data = '\0');
+        explicit TreeNode(types::byte_t data = '\0');
         TreeNode(const TreeNode& treeNode) = delete;
         TreeNode& operator=(const TreeNode&) = delete;
-        unsigned char getData() const;
+        types::byte_t getData() const;
         const TreeNode* getLeftChild() const;
         const TreeNode* getRightChild() const;
         unsigned getFrequency() const;
         bool isLeaf() const;
     private:
-        unsigned char data_;
+        types::byte_t data_;
         std::unique_ptr<TreeNode> left_;
         std::unique_ptr<TreeNode> right_;
         unsigned frequency_;

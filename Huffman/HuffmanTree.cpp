@@ -1,13 +1,12 @@
-//
-// Created by Matias-PC on 15.3.2017.
-//
-
 #include "HuffmanTree.h"
-#include "TreeNode.h"
 
 #include <queue>
 #include <ostream>
 #include <cassert>
+#include <string>
+
+#include "TreeNode.h"
+
 
 namespace
 {
@@ -58,7 +57,7 @@ namespace
     }
 
     std::array<unsigned, huffman::constants::CHARACTERS>
-    calculateCharacterFrequencies(const std::vector<unsigned char>& characters)
+    calculateCharacterFrequencies(const std::vector<huffman::types::byte_t>& characters)
     {
         std::array<unsigned, huffman::constants::CHARACTERS> frequencies{};
         for (auto i : characters)
@@ -73,7 +72,7 @@ huffman::HuffmanTree::HuffmanTree() : root_(nullptr)
 {
 }
 
-void huffman::HuffmanTree::constructTree(const std::vector<unsigned char>& characters)
+void huffman::HuffmanTree::constructTree(const std::vector<types::byte_t>& characters)
 {
     if (characters.empty())
     {
@@ -85,7 +84,7 @@ void huffman::HuffmanTree::constructTree(const std::vector<unsigned char>& chara
     for (int i = 0; i < constants::CHARACTERS; ++i) {
         if (frequencies[i] != 0)
         {
-            TreeNode* leaf = new TreeNode{static_cast<unsigned char>(i)};
+            TreeNode* leaf = new TreeNode{static_cast<types::byte_t>(i)};
             leaf->isLeaf_ = true;
             leaf->frequency_ = frequencies[i];
             queue.push(leaf);

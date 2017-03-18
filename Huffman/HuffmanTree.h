@@ -1,7 +1,3 @@
-//
-// Created by Matias-PC on 15.3.2017.
-//
-
 #ifndef HUFFMANCODING_HUFFMANTREE_H
 #define HUFFMANCODING_HUFFMANTREE_H
 
@@ -22,7 +18,7 @@ namespace huffman
         HuffmanTree();
         HuffmanTree(const HuffmanTree& treeNode) = delete;
         HuffmanTree& operator=(const HuffmanTree&) = delete;
-        void constructTree(const std::vector<unsigned char>& characters);
+        void constructTree(const std::vector<types::byte_t>& characters);
         types::encode_table_t constructEncodingTable() const;
         void printTree(std::ostream& ostream) const;
         const TreeNode* getRoot() const;
@@ -32,6 +28,5 @@ namespace huffman
     };
 
 }
-
 
 #endif //HUFFMANCODING_HUFFMANTREE_H

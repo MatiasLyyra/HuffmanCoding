@@ -1,7 +1,3 @@
-//
-// Created by Matias-PC on 16.3.2017.
-//
-
 #ifndef HUFFMANCODING_CONSTANTS_H
 #define HUFFMANCODING_CONSTANTS_H
 
@@ -13,6 +9,8 @@ namespace huffman
     {
         constexpr unsigned CHARACTERS = 256;
         constexpr unsigned MAX_CODE_LENGTH = 32;
+        static constexpr unsigned char BITS_IN_BYTE = 8;
+        static constexpr unsigned BUFFER_SIZE_BYTES = 1024 * 50;
     }
     namespace types
     {
@@ -20,6 +18,7 @@ namespace huffman
         // Second value is the length of the code
         using encode_entry_t = std::pair<uint32_t, uint8_t>;
         using encode_table_t = std::array<encode_entry_t, constants::CHARACTERS>;
+        using byte_t = unsigned char;
     }
 }
 #endif //HUFFMANCODING_CONSTANTS_H

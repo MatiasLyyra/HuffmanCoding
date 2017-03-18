@@ -1,10 +1,6 @@
-//
-// Created by Matias-PC on 15.3.2017.
-//
-
 #include "TreeNode.h"
 
-huffman::TreeNode::TreeNode(unsigned char data)
+huffman::TreeNode::TreeNode(types::byte_t data)
         : data_(data),
           left_(nullptr),
           right_(nullptr),
