@@ -46,6 +46,7 @@ void huffman::Encoder::writeBuffer()
 {
     //TODO: Check if opening the stream failed
     std::ofstream ofstream{fileName_, std::ios_base::app | std::ios::out | std::ios::binary};
+    ofstream.rdbuf()->pubsetbuf(0, 0);
     ofstream.write(reinterpret_cast<char *>(&buffer_[0]), bitsInBuffer_ / constants::BITS_IN_BYTE);
     std::memset(&buffer_, 0, sizeof(buffer_));
     bitsInBuffer_ = 0;
