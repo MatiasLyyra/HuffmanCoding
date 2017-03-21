@@ -3,7 +3,7 @@
 //
 
 #include "gtest/gtest.h"
-#include "Huffman/HuffmanTree.h"
+#include "huffman/HuffmanTree.h"
 
 class HuffmanTreeTest : public ::testing::Test
 {
@@ -15,5 +15,10 @@ public:
     virtual void SetUp() {
 
     }
-    HuffmanTree tree;
+    huffman::HuffmanTree tree;
 };
+
+TEST_F(HuffmanTreeTest, Test1)
+{
+    ASSERT_TRUE(tree.getRoot() == nullptr);
+}
