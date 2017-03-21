@@ -1,21 +1,40 @@
 #include "Encoder.h"
 
 #include <cassert>
-#include <cstdint>
-#include <cstring>
-#include <fstream>
 
-huffman::Encoder::Encoder(const std::string& fileName)
-        : bitsInBuffer_(0),
-          fileName_(fileName)
+#include "io/FileUtils.h"
+#include "TreeNode.h"
+
+namespace
 {
-    std::memset(&buffer_, 0, sizeof(buffer_));
+    uint64_t writeTreeInBinary(const huffman::TreeNode& root, huffman::io::FileBuffer& fileBuffer)
+    {
+        if (root.isLeaf())
+        {
+            fileBuffer.writeBitToBuffer(1, 0);
+            fileBuffer.writeToBuffer(root.getData());
+            return 1 + huffman::constants::BITS_IN_BYTE;
+        }
+        else
+        {
+            uint64_t lenghtInBits = 1;
+            fileBuffer.writeBitToBuffer(0, 0);
+            lenghtInBits += writeTreeInBinary(*root.getLeftChild(), fileBuffer);
+            lenghtInBits += writeTreeInBinary(*root.getRightChild(), fileBuffer);
+            return lenghtInBits;
+        }
+    }
+}
+
+huffman::Encoder::Encoder(const std::string& fileName) : filename_(fileName)
+{
 }
 
 void huffman::Encoder::encodeData(const huffman::types::encode_table_t &encode_table, const std::vector<types::byte_t>& data)
 {
     assert(encode_table.size() == constants::CHARACTERS);
     //TODO: Add code that writes the header here
+    std::vector<bool> encodedData;
     for (auto byte : data)
     {
         types::encode_entry_t encode_entry = encode_table[byte];
@@ -23,33 +42,20 @@ void huffman::Encoder::encodeData(const huffman::types::encode_table_t &encode_t
         uint8_t length = encode_entry.second;
         for (uint8_t i = 0; i < length; ++i)
         {
-            writeBitTooBuffer(code, i);
+            int shiftAmount = length - 1 - i;
+            uint32_t bit = (code & (1 << shiftAmount)) >> shiftAmount;
+            encodedData.push_back(bit == 1);
         }
     }
-    //TODO: Replace writeBuffer() with some clean up method
-    writeBuffer();
+    io::writeBinaryFile(filename_.c_str(), encodedData);
 }
 
-void huffman::Encoder::writeBitTooBuffer(uint32_t code, uint8_t length)
+void huffman::Encoder::createHeader(const huffman::TreeNode &root)
 {
-    std::size_t index = bitsInBuffer_ / constants::BITS_IN_BYTE;
-    code = (code & (1 << length)) >> length;
-    buffer_[index] |= code << ((constants::BITS_IN_BYTE - 1) - (bitsInBuffer_ % constants::BITS_IN_BYTE));
-    ++bitsInBuffer_;
-    if (bitsInBuffer_ == (constants::BUFFER_SIZE_BYTES * constants::BITS_IN_BYTE))
-    {
-        writeBuffer();
-    }
+    /*fileBuffer_.writeToBuffer(static_cast<uint64_t>(0));
+    uint64_t lenghtInBits = writeTreeInBinary(root, fileBuffer_);
+    fileBuffer_*/
 }
 
-void huffman::Encoder::writeBuffer()
-{
-    //TODO: Check if opening the stream failed
-    std::ofstream ofstream{fileName_, std::ios_base::app | std::ios::out | std::ios::binary};
-    ofstream.rdbuf()->pubsetbuf(0, 0);
-    ofstream.write(reinterpret_cast<char *>(&buffer_[0]), bitsInBuffer_ / constants::BITS_IN_BYTE);
-    std::memset(&buffer_, 0, sizeof(buffer_));
-    bitsInBuffer_ = 0;
-}
 
 

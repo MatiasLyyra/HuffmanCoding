@@ -5,22 +5,20 @@
 #include <string>
 
 #include "Common.h"
+#include "io/FileBuffer.h"
 
 namespace huffman
 {
+    class TreeNode;
     class Encoder {
 
     public:
         explicit Encoder(const std::string& fileName);
+        void createHeader(const huffman::TreeNode& root);
         void encodeData(const types::encode_table_t& encode_table, const std::vector<types::byte_t>& data);
 
     private:
-        void writeBitTooBuffer(uint32_t code, uint8_t length);
-        void writeBuffer();
-
-        types::byte_t buffer_[constants::BUFFER_SIZE_BYTES];
-        uint64_t bitsInBuffer_;
-        std::string fileName_;
+        std::string filename_;
     };
 }
 

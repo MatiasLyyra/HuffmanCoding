@@ -133,3 +133,8 @@ huffman::types::encode_table_t huffman::HuffmanTree::constructEncodingTable() co
     return encode_table;
 }
 
+huffman::HuffmanTree::~HuffmanTree()
+{
+
+}
+

@@ -18,6 +18,7 @@ namespace huffman
         HuffmanTree();
         HuffmanTree(const HuffmanTree& treeNode) = delete;
         HuffmanTree& operator=(const HuffmanTree&) = delete;
+        ~HuffmanTree();
         void constructTree(const std::vector<types::byte_t>& characters);
         types::encode_table_t constructEncodingTable() const;
         void printTree(std::ostream& ostream) const;
