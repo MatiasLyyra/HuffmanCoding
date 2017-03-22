@@ -7,6 +7,7 @@
 
 namespace
 {
+    /*
     uint64_t writeTreeInBinary(const huffman::TreeNode& root, huffman::io::FileBuffer& fileBuffer)
     {
         if (root.isLeaf())
@@ -23,7 +24,7 @@ namespace
             lenghtInBits += writeTreeInBinary(*root.getRightChild(), fileBuffer);
             return lenghtInBits;
         }
-    }
+    }*/
 }
 
 huffman::Encoder::Encoder(const std::string& fileName) : filename_(fileName)

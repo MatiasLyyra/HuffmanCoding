@@ -31,9 +31,16 @@ std::vector<huffman::types::byte_t> huffman::Decoder::decode(const huffman::Tree
 {
     std::vector<bool> encodedData = io::readBinaryFile(filename_.c_str());
     std::vector<types::byte_t> decodedData;
-    for (uint64_t i = 0; i < encodedData.size(); ++i)
+    const huffman::TreeNode* current;
+    for (uint64_t i = 0; i < encodedData.size();)
     {
-        decodedData.push_back(decodeByte(root, encodedData, i));
+        current = &root;
+        while (!current->isLeaf())
+        {
+            current = encodedData.at(i) ? current->getRightChild() : current->getLeftChild();
+            ++i;
+        }
+        decodedData.push_back(current->getData());
     }
     return decodedData;
 }
