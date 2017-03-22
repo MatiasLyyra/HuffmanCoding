@@ -9,19 +9,20 @@
 #include "huffman/Decoder.h"
 
 int main() {
-    huffman::HuffmanTree huffmanTree;
+
     auto start = std::chrono::high_resolution_clock::now();
-    std::vector<huffman::types::byte_t> characters = huffman::io::readFile("/home/lyma/Documents/test/testfile.txt");
-    huffmanTree.constructTree(characters);
+    std::vector<huffman::types::byte_t> characters = huffman::io::readFile("C:\\Projects\\small.txt");
+    huffman::HuffmanTree huffmanTree{characters};
     huffmanTree.printTree(std::cout);
     huffman::types::encode_table_t encode_table = huffmanTree.constructEncodingTable();
     huffman::Encoder encoder{"big.pack"};
+    encoder.createHeader(*huffmanTree.getRoot());
     encoder.encodeData(encode_table, characters);
-    huffman::Decoder decoder{"/home/lyma/Documents/HuffmanCoding/build/debug/big.pack"};
-    std::vector<huffman::types::byte_t> decodedData = decoder.decode(*huffmanTree.getRoot());
+    huffman::Decoder decoder{"big.pack"};
+    std::vector<huffman::types::byte_t> decodedData = decoder.decode();
     huffman::io::writeFile("Unpacked.txt", decodedData);
     auto finish = std::chrono::high_resolution_clock::now();
-    std::cout << std::chrono::duration_cast<std::chrono::milliseconds>(finish-start).count() << " ms\n" << std::endl;
+    std::cout << std::chrono::duration_cast<std::chrono::milliseconds>(finish-start).count() << " ms" << std::endl;
     std::cin.ignore();
     return 0;
 }

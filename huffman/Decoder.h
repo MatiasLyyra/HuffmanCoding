@@ -12,7 +12,7 @@ namespace huffman
     {
     public:
         explicit Decoder(const std::string& filename);
-        std::vector<huffman::types::byte_t> decode(const huffman::TreeNode &root);
+        std::vector<huffman::types::byte_t> decode();
 
     private:
         std::string filename_;

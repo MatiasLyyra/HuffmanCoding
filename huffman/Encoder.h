@@ -5,7 +5,6 @@
 #include <string>
 
 #include "Common.h"
-#include "io/FileBuffer.h"
 
 namespace huffman
 {

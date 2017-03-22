@@ -46,9 +46,14 @@ std::vector<huffman::types::byte_t> huffman::io::readFile(const char* filename)
     return std::vector<types::byte_t>{};
 }
 
-void huffman::io::writeBinaryFile(const char *filename, const std::vector<bool> &data)
+void huffman::io::writeBinaryFile(const char* filename, const std::vector<bool> &data, bool append)
 {
-    std::ofstream ofstream{filename, std::ios::binary | std::ios::out};
+    std::ofstream ofstream;
+    if (append)
+        ofstream.open(filename, std::ios::binary | std::ios::out |  std::ios::app);
+    else
+        ofstream.open(filename, std::ios::binary | std::ios::out);
+
     uint64_t length = data.size();
     write64BitNumber(length, ofstream);
     for (uint64_t i = 0; i < length;)
@@ -65,13 +70,23 @@ void huffman::io::writeBinaryFile(const char *filename, const std::vector<bool> 
     }
 }
 
-std::vector<bool> huffman::io::readBinaryFile(const char* filename)
+std::vector<bool> huffman::io::readBinaryFile(const char* filename, bool ignoreHeader)
 {
     uint8_t data[8];
     std::ifstream ifstream{filename, std::ios::in | std::ios::binary};
 
     ifstream.read(reinterpret_cast<char*>(&data[0]), sizeof(data));
     uint64_t length = read64BitNumber(data);
+    if (ignoreHeader)
+    {
+        //Round length up to closest multiple of 8
+        uint64_t dataSize = (length + huffman::constants::BITS_IN_BYTE - 1 -
+                            (length + huffman::constants::BITS_IN_BYTE - 1) % huffman::constants::BITS_IN_BYTE) /
+                            huffman::constants::BITS_IN_BYTE;
+        ifstream.seekg(dataSize, std::ios::cur);
+        ifstream.read(reinterpret_cast<char*>(&data[0]), sizeof(data));
+        length = read64BitNumber(data);
+    }
     std::vector<bool> encodedData;
     encodedData.resize(length);
 

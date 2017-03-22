@@ -7,24 +7,29 @@
 
 namespace
 {
-    /*
-    uint64_t writeTreeInBinary(const huffman::TreeNode& root, huffman::io::FileBuffer& fileBuffer)
+    void insertByte(huffman::types::byte_t byte, std::vector<bool>& vector)
+    {
+        for (int i = 0; i < huffman::constants::BITS_IN_BYTE; ++i)
+        {
+            huffman::types::byte_t mask = static_cast<huffman::types::byte_t>(1 << huffman::constants::BITS_IN_BYTE - 1 - i);
+            vector.push_back((byte & mask) != 0);
+        }
+    }
+
+    void writeTreeInBinary(const huffman::TreeNode& root, std::vector<bool>& treeInBinary)
     {
         if (root.isLeaf())
         {
-            fileBuffer.writeBitToBuffer(1, 0);
-            fileBuffer.writeToBuffer(root.getData());
-            return 1 + huffman::constants::BITS_IN_BYTE;
+            treeInBinary.push_back(true);
+            insertByte(root.getData(), treeInBinary);
         }
         else
         {
-            uint64_t lenghtInBits = 1;
-            fileBuffer.writeBitToBuffer(0, 0);
-            lenghtInBits += writeTreeInBinary(*root.getLeftChild(), fileBuffer);
-            lenghtInBits += writeTreeInBinary(*root.getRightChild(), fileBuffer);
-            return lenghtInBits;
+            treeInBinary.push_back(false);
+            writeTreeInBinary(*root.getLeftChild(), treeInBinary);
+            writeTreeInBinary(*root.getRightChild(), treeInBinary);
         }
-    }*/
+    }
 }
 
 huffman::Encoder::Encoder(const std::string& fileName) : filename_(fileName)
@@ -33,8 +38,7 @@ huffman::Encoder::Encoder(const std::string& fileName) : filename_(fileName)
 
 void huffman::Encoder::encodeData(const huffman::types::encode_table_t &encode_table, const std::vector<types::byte_t>& data)
 {
-    assert(encode_table.size() == constants::CHARACTERS);
-    //TODO: Add code that writes the header here
+    static_assert(encode_table.size() == constants::CHARACTERS);
     std::vector<bool> encodedData;
     for (auto byte : data)
     {
@@ -48,14 +52,14 @@ void huffman::Encoder::encodeData(const huffman::types::encode_table_t &encode_t
             encodedData.push_back(bit == 1);
         }
     }
-    io::writeBinaryFile(filename_.c_str(), encodedData);
+    io::writeBinaryFile(filename_.c_str(), encodedData, true);
 }
 
-void huffman::Encoder::createHeader(const huffman::TreeNode &root)
+void huffman::Encoder::createHeader(const huffman::TreeNode& root)
 {
-    /*fileBuffer_.writeToBuffer(static_cast<uint64_t>(0));
-    uint64_t lenghtInBits = writeTreeInBinary(root, fileBuffer_);
-    fileBuffer_*/
+    std::vector<bool> treeInBinary;
+    writeTreeInBinary(root, treeInBinary);
+    io::writeBinaryFile(filename_.c_str(), treeInBinary);
 }
 
 
