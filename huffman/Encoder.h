@@ -12,12 +12,16 @@ namespace huffman
     class Encoder {
 
     public:
-        explicit Encoder(const std::string& fileName);
+        Encoder();
         void createHeader(const huffman::TreeNode& root);
         void encodeData(const types::encode_table_t& encode_table, const std::vector<types::byte_t>& data);
+        const std::vector<bool>& getHeaderData() const;
+        const std::vector<bool>& getEncodedData() const;
+
 
     private:
-        std::string filename_;
+        std::vector<bool> headerData_;
+        std::vector<bool> encodedData_;
     };
 }
 

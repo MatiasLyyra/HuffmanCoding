@@ -9,7 +9,7 @@
 #include "huffman/Decoder.h"
 
 int main() {
-
+    /*
     auto start = std::chrono::high_resolution_clock::now();
     std::vector<huffman::types::byte_t> characters = huffman::io::readFile("C:\\Projects\\small.txt");
     huffman::HuffmanTree huffmanTree{characters};
@@ -24,6 +24,7 @@ int main() {
     auto finish = std::chrono::high_resolution_clock::now();
     std::cout << std::chrono::duration_cast<std::chrono::milliseconds>(finish-start).count() << " ms" << std::endl;
     std::cin.ignore();
+     */
     return 0;
 }
 

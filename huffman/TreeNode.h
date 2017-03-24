@@ -17,7 +17,7 @@ namespace huffman
             bool operator()(const TreeNode* a, const TreeNode* b) const;
         };
 
-        explicit TreeNode(types::byte_t data = '\0');
+        explicit TreeNode(types::byte_t data = 0, unsigned frequency = 0, bool isLeaf = false);
         TreeNode(const TreeNode& treeNode) = delete;
         TreeNode& operator=(const TreeNode&) = delete;
         types::byte_t getData() const;

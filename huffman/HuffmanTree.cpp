@@ -6,23 +6,11 @@
 #include <string>
 
 #include "TreeNode.h"
+#include "io/FileUtils.h"
 
 
 namespace
 {
-    huffman::types::byte_t readByte(const std::vector<bool>& treeInBinary, uint64_t start)
-    {
-        huffman::types::byte_t byte = 0;
-        for (int i = 0; i < huffman::constants::BITS_IN_BYTE; ++i)
-        {
-            if (treeInBinary.at(start + i))
-            {
-                byte |= 1 << (huffman::constants::BITS_IN_BYTE - 1 - i);
-            }
-        }
-        return byte;
-    }
-
     void printTreeRecursive(std::ostream& ostream, const huffman::TreeNode& root, std::string& string)
     {
         if (root.isLeaf())
@@ -84,22 +72,25 @@ namespace
 
 huffman::HuffmanTree::HuffmanTree(const std::vector<types::byte_t>& characters) : root_(nullptr)
 {
-    constructTree(characters);
+    if (!characters.empty())
+    {
+        constructTree(characters);
+    }
 }
 
 huffman::HuffmanTree::HuffmanTree(const std::vector<bool>& treeInBinary) : root_(nullptr)
 {
-    uint64_t index = 0;
-    TreeNode* root = readNodes(treeInBinary, index);
-    root_.reset(root);
+    if (!treeInBinary.empty())
+    {
+        uint64_t index = 0;
+        TreeNode* root = readNodes(treeInBinary, index);
+        root_.reset(root);
+    }
 }
 
 void huffman::HuffmanTree::constructTree(const std::vector<types::byte_t>& characters)
 {
-    if (characters.empty())
-    {
-        return;
-    }
+
     std::priority_queue<TreeNode*, std::vector<TreeNode*>, TreeNode::TreeNodeComparator> queue;
 
     auto frequencies = calculateCharacterFrequencies(characters);
@@ -164,7 +155,7 @@ huffman::TreeNode* huffman::HuffmanTree::readNodes(const std::vector<bool>& tree
 {
     if (treeInBinary.at(index++))
     {
-        huffman::types::byte_t byte = readByte(treeInBinary, index);
+        huffman::types::byte_t byte = huffman::io::readByte(treeInBinary, index);
         index += huffman::constants::BITS_IN_BYTE;
         TreeNode* leaf = new huffman::TreeNode{byte};
         leaf->isLeaf_ = true;
@@ -176,6 +167,19 @@ huffman::TreeNode* huffman::HuffmanTree::readNodes(const std::vector<bool>& tree
     parent->left_.reset(left);
     parent->right_.reset(right);
     return parent;
+}
+
+huffman::HuffmanTree::HuffmanTree(huffman::HuffmanTree &&huffmanTree) : root_(nullptr)
+{
+    root_ = std::move(huffmanTree.root_);
+}
+
+huffman::HuffmanTree &huffman::HuffmanTree::operator=(huffman::HuffmanTree &&other)
+{
+    if (this != &other)
+    {
+        root_ = std::move(other.root_);
+    }
 }
 
 

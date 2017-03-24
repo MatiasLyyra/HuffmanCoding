@@ -17,9 +17,10 @@ namespace huffman
     public:
         explicit HuffmanTree(const std::vector<types::byte_t>& characters);
         explicit HuffmanTree(const std::vector<bool>& treeInBinary);
-        HuffmanTree() = delete;
         HuffmanTree(const HuffmanTree& treeNode) = delete;
         HuffmanTree& operator=(const HuffmanTree&) = delete;
+        HuffmanTree(HuffmanTree&& huffmanTree);
+        HuffmanTree& operator=(HuffmanTree&& other);
         ~HuffmanTree();
         types::encode_table_t constructEncodingTable() const;
         void printTree(std::ostream& ostream) const;
@@ -27,7 +28,6 @@ namespace huffman
 
     private:
         void constructTree(const std::vector<types::byte_t>& characters);
-        void constructTree(const std::vector<bool>& treeInBinary);
         huffman::TreeNode* readNodes(const std::vector<bool>& treeInBinary, uint64_t& index);
         std::unique_ptr<TreeNode> root_;
     };

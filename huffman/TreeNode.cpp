@@ -1,11 +1,11 @@
 #include "TreeNode.h"
 
-huffman::TreeNode::TreeNode(types::byte_t data)
+huffman::TreeNode::TreeNode(types::byte_t data, unsigned frequency, bool isLeaf)
         : data_(data),
           left_(nullptr),
           right_(nullptr),
-          frequency_(0),
-          isLeaf_(false)
+          frequency_(frequency),
+          isLeaf_(isLeaf)
 {
 }
 
@@ -34,10 +34,17 @@ bool huffman::TreeNode::isLeaf() const {
 
 bool huffman::TreeNode::TreeNodeComparator::operator()(const huffman::TreeNode* a, const huffman::TreeNode* b) const
 {
-    if (a->frequency_ != b->frequency_)
+    if (a->frequency_ > b->frequency_)
     {
-        return a->frequency_ > b->frequency_;
+        return true;
     }
-    return a->data_ < b->data_;
+    if (a->frequency_ == b->frequency_)
+    {
+        if (a->data_ > b->data_)
+        {
+            return true;
+        }
+    }
+    return false;
 }
 

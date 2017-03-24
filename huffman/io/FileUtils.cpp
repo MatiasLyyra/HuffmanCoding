@@ -1,61 +1,48 @@
 #include "FileUtils.h"
 
 #include <fstream>
-#include <iterator>
 #include <memory>
+#include <cassert>
 
-namespace
+
+uint64_t huffman::io::read64BitNumber(const uint8_t (&data)[8])
 {
-    uint64_t read64BitNumber(const uint8_t (&data)[8])
+    uint64_t number = 0;
+    for (int i = 0; i < 8; ++i)
     {
-        uint64_t number = 0;
-        for (int i = 0; i < 8; ++i)
-        {
-            number |= data[i] << (i * huffman::constants::BITS_IN_BYTE);
-        }
-        return number;
+        number |= data[i] << (i * huffman::constants::BITS_IN_BYTE);
     }
-
-    void write64BitNumber(uint64_t number, std::ofstream& ofstream)
-    {
-        uint8_t data[8];
-
-        for (int i = 0; i < 8; ++i)
-        {
-            data[i] = static_cast<uint8_t>((number & (0xff << (i * huffman::constants::BITS_IN_BYTE)))
-                     >> i * huffman::constants::BITS_IN_BYTE);
-        }
-        ofstream.write(reinterpret_cast<char*>(&data[0]), sizeof(data));
-    }
-}
-std::vector<huffman::types::byte_t> huffman::io::readFile(const char* filename)
-{
-    std::ifstream file{filename, std::ios::binary | std::ios::in};
-    if (file.is_open())
-    {
-        std::streampos fileSize;
-        file.seekg(0, std::ios::end);
-        fileSize = file.tellg();
-        file.seekg(0, std::ios::beg);
-
-        std::unique_ptr<types::byte_t[]> buffer{new unsigned char[fileSize]};
-        file.read(reinterpret_cast<char*>(&buffer.get()[0]), fileSize*sizeof(types::byte_t));
-        return std::vector<types::byte_t>{buffer.get(), buffer.get() + fileSize*sizeof(types::byte_t)};
-    }
-
-    return std::vector<types::byte_t>{};
+    return number;
 }
 
-void huffman::io::writeBinaryFile(const char* filename, const std::vector<bool> &data, bool append)
+void huffman::io::write64BitNumberToStream(uint64_t number, std::ostream &ostream)
 {
-    std::ofstream ofstream;
-    if (append)
-        ofstream.open(filename, std::ios::binary | std::ios::out |  std::ios::app);
-    else
-        ofstream.open(filename, std::ios::binary | std::ios::out);
+    uint8_t data[8];
 
+    for (int i = 0; i < 8; ++i)
+    {
+        data[i] = static_cast<uint8_t>((number & (0xff << (i * huffman::constants::BITS_IN_BYTE)))
+                 >> i * huffman::constants::BITS_IN_BYTE);
+    }
+    ostream.write(reinterpret_cast<char*>(&data[0]), sizeof(data));
+}
+
+std::vector<huffman::types::byte_t> huffman::io::readFile(std::istream& istream)
+{
+    std::streampos fileSize;
+    istream.seekg(0, std::ios::end);
+    fileSize = istream.tellg();
+    istream.seekg(0, std::ios::beg);
+
+    std::unique_ptr<types::byte_t[]> buffer{new unsigned char[fileSize]};
+    istream.read(reinterpret_cast<char*>(&buffer.get()[0]), fileSize*sizeof(types::byte_t));
+    return std::vector<types::byte_t>{buffer.get(), buffer.get() + fileSize*sizeof(types::byte_t)};
+}
+
+void huffman::io::writeBinaryFile(std::ostream& ostream, const std::vector<bool>& data)
+{
     uint64_t length = data.size();
-    write64BitNumber(length, ofstream);
+    write64BitNumberToStream(length, ostream);
     for (uint64_t i = 0; i < length;)
     {
         huffman::types::byte_t byte = 0;
@@ -66,16 +53,14 @@ void huffman::io::writeBinaryFile(const char* filename, const std::vector<bool> 
                 byte |= 1 << (constants::BITS_IN_BYTE - 1 - j);
             }
         }
-        ofstream.write(reinterpret_cast<char *>(&byte), sizeof(types::byte_t));
+        ostream.write(reinterpret_cast<char *>(&byte), sizeof(types::byte_t));
     }
 }
 
-std::vector<bool> huffman::io::readBinaryFile(const char* filename, bool ignoreHeader)
+std::vector<bool> huffman::io::readBinaryFile(std::istream& istream, bool ignoreHeader)
 {
     uint8_t data[8];
-    std::ifstream ifstream{filename, std::ios::in | std::ios::binary};
-
-    ifstream.read(reinterpret_cast<char*>(&data[0]), sizeof(data));
+    istream.read(reinterpret_cast<char*>(&data[0]), sizeof(data));
     uint64_t length = read64BitNumber(data);
     if (ignoreHeader)
     {
@@ -83,8 +68,8 @@ std::vector<bool> huffman::io::readBinaryFile(const char* filename, bool ignoreH
         uint64_t dataSize = (length + huffman::constants::BITS_IN_BYTE - 1 -
                             (length + huffman::constants::BITS_IN_BYTE - 1) % huffman::constants::BITS_IN_BYTE) /
                             huffman::constants::BITS_IN_BYTE;
-        ifstream.seekg(dataSize, std::ios::cur);
-        ifstream.read(reinterpret_cast<char*>(&data[0]), sizeof(data));
+        istream.seekg(dataSize, std::ios::cur);
+        istream.read(reinterpret_cast<char*>(&data[0]), sizeof(data));
         length = read64BitNumber(data);
     }
     std::vector<bool> encodedData;
@@ -93,7 +78,7 @@ std::vector<bool> huffman::io::readBinaryFile(const char* filename, bool ignoreH
     for (uint64_t i = 0; i < length;)
     {
         uint8_t byte;
-        ifstream.read(reinterpret_cast<char*>(&byte), sizeof(uint8_t));
+        istream.read(reinterpret_cast<char*>(&byte), sizeof(uint8_t));
         for (int j = 0; j < constants::BITS_IN_BYTE && i < length; ++j, ++i)
         {
             bool value = (byte & (1 << (constants::BITS_IN_BYTE - 1 - j))) != 0;
@@ -103,8 +88,30 @@ std::vector<bool> huffman::io::readBinaryFile(const char* filename, bool ignoreH
     return encodedData;
 }
 
-void huffman::io::writeFile(const char* filename, const std::vector<huffman::types::byte_t>& data)
+void huffman::io::writeFile(std::ostream& ostream, const std::vector<huffman::types::byte_t>& data)
 {
-    std::ofstream ofstream{filename, std::ios::binary | std::ios::out};
-    ofstream.write(reinterpret_cast<const char*>(data.data()), data.size() * sizeof(types::byte_t));
+    ostream.write(reinterpret_cast<const char*>(data.data()), data.size() * sizeof(types::byte_t));
+}
+
+void huffman::io::insertByte(huffman::types::byte_t byte, std::vector<bool> &vector)
+{
+    for (int i = 0; i < huffman::constants::BITS_IN_BYTE; ++i)
+    {
+        huffman::types::byte_t mask = static_cast<huffman::types::byte_t>(1 << huffman::constants::BITS_IN_BYTE - 1 - i);
+        vector.push_back((byte & mask) != 0);
+    }
+}
+
+huffman::types::byte_t huffman::io::readByte(const std::vector<bool> &treeInBinary, uint64_t start)
+{
+    assert(start > 0 && start <= (treeInBinary.size() - huffman::constants::BITS_IN_BYTE));
+    huffman::types::byte_t byte = 0;
+    for (int i = 0; i < huffman::constants::BITS_IN_BYTE; ++i)
+    {
+        if (treeInBinary.at(start + i))
+        {
+            byte |= 1 << (huffman::constants::BITS_IN_BYTE - 1 - i);
+        }
+    }
+    return byte;
 }

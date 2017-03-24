@@ -1,8 +1,8 @@
 #ifndef HUFFMANCODING_DECODER_H
 #define HUFFMANCODING_DECODER_H
 
-#include <string>
 #include <vector>
+
 #include "Common.h"
 
 namespace huffman
@@ -11,11 +11,13 @@ namespace huffman
     class Decoder
     {
     public:
-        explicit Decoder(const std::string& filename);
-        std::vector<huffman::types::byte_t> decode();
+        Decoder();
+        void decode(const std::vector<bool>& treeInBinary, const std::vector<bool>& encodedData);
+
+        const std::vector<huffman::types::byte_t>& getDecodedData() const;
 
     private:
-        std::string filename_;
+        std::vector<huffman::types::byte_t> decodedData_;
     };
 }
 
