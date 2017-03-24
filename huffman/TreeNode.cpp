@@ -24,11 +24,13 @@ const huffman::TreeNode* huffman::TreeNode::getRightChild() const
     return right_.get();
 }
 
-unsigned int huffman::TreeNode::getFrequency() const {
+unsigned int huffman::TreeNode::getFrequency() const
+{
     return frequency_;
 }
 
-bool huffman::TreeNode::isLeaf() const {
+bool huffman::TreeNode::isLeaf() const
+{
     return isLeaf_;
 }
 

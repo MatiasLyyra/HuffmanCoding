@@ -16,8 +16,7 @@ namespace
         if (root.isLeaf())
         {
             ostream << string << " : " << root.getData() << std::endl;
-        }
-        else
+        } else
         {
             assert(root.getLeftChild() != nullptr);
             assert(root.getRightChild() != nullptr);
@@ -39,8 +38,7 @@ namespace
         if (root.isLeaf())
         {
             encode_table[root.getData()] = huffman::types::encode_entry_t{code, depth};
-        }
-        else
+        } else
         {
             uint32_t leftCode = code << 1;
             uint32_t rightCode = (code << 1) + 1;
@@ -94,9 +92,11 @@ void huffman::HuffmanTree::constructTree(const std::vector<types::byte_t>& chara
     std::priority_queue<TreeNode*, std::vector<TreeNode*>, TreeNode::TreeNodeComparator> queue;
 
     auto frequencies = calculateCharacterFrequencies(characters);
-    for (int i = 0; i < constants::CHARACTERS; ++i) {
+    for (int i = 0; i < constants::CHARACTERS; ++i)
+    {
         if (frequencies[i] != 0)
         {
+            //TODO: Maybe use unique_ptr here instead of just raw pointers.
             TreeNode* leaf = new TreeNode{static_cast<types::byte_t>(i)};
             leaf->isLeaf_ = true;
             leaf->frequency_ = frequencies[i];
@@ -137,7 +137,8 @@ const huffman::TreeNode* huffman::HuffmanTree::getRoot() const
     return root_.get();
 }
 
-huffman::types::encode_table_t huffman::HuffmanTree::constructEncodingTable() const {
+huffman::types::encode_table_t huffman::HuffmanTree::constructEncodingTable() const
+{
     types::encode_table_t encode_table{};
     if (root_ != nullptr)
     {
@@ -169,12 +170,12 @@ huffman::TreeNode* huffman::HuffmanTree::readNodes(const std::vector<bool>& tree
     return parent;
 }
 
-huffman::HuffmanTree::HuffmanTree(huffman::HuffmanTree &&huffmanTree) : root_(nullptr)
+huffman::HuffmanTree::HuffmanTree(huffman::HuffmanTree&& huffmanTree) : root_(nullptr)
 {
     root_ = std::move(huffmanTree.root_);
 }
 
-huffman::HuffmanTree &huffman::HuffmanTree::operator=(huffman::HuffmanTree &&other)
+huffman::HuffmanTree& huffman::HuffmanTree::operator=(huffman::HuffmanTree&& other)
 {
     if (this != &other)
     {

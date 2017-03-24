@@ -13,8 +13,7 @@ namespace
         {
             treeInBinary.push_back(true);
             huffman::io::insertByte(root.getData(), treeInBinary);
-        }
-        else
+        } else
         {
             treeInBinary.push_back(false);
             writeTreeInBinary(*root.getLeftChild(), treeInBinary);
@@ -29,7 +28,8 @@ huffman::Encoder::Encoder()
 {
 }
 
-void huffman::Encoder::encodeData(const huffman::types::encode_table_t& encode_table, const std::vector<types::byte_t>& data)
+void
+huffman::Encoder::encodeData(const huffman::types::encode_table_t& encode_table, const std::vector<types::byte_t>& data)
 {
     static_assert(encode_table.size() == constants::CHARACTERS);
 
@@ -59,12 +59,14 @@ void huffman::Encoder::createHeader(const huffman::TreeNode& root)
     writeTreeInBinary(root, headerData_);
 }
 
-const std::vector<bool>& huffman::Encoder::getHeaderData() const {
+const std::vector<bool>& huffman::Encoder::getHeaderData() const
+{
     return headerData_;
 }
 
 
-const std::vector<bool>& huffman::Encoder::getEncodedData() const {
+const std::vector<bool>& huffman::Encoder::getEncodedData() const
+{
     return encodedData_;
 }
 

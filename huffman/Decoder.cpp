@@ -25,7 +25,7 @@ void huffman::Decoder::decode(const std::vector<bool>& treeInBinary, const std::
 
 }
 
-const std::vector<huffman::types::byte_t> &huffman::Decoder::getDecodedData() const
+const std::vector<huffman::types::byte_t>& huffman::Decoder::getDecodedData() const
 {
     return decodedData_;
 }
