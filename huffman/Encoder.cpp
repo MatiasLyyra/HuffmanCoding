@@ -1,6 +1,7 @@
 #include "Encoder.h"
 
 #include <sstream>
+#include <cassert>
 
 #include "io/FileUtils.h"
 #include "TreeNode.h"
@@ -31,7 +32,7 @@ huffman::Encoder::Encoder()
 void
 huffman::Encoder::encodeData(const huffman::types::encode_table_t& encode_table, const std::vector<types::byte_t>& data)
 {
-    static_assert(encode_table.size() == constants::CHARACTERS);
+    assert(encode_table.size() == constants::CHARACTERS);
 
     for (auto byte : data)
     {
