@@ -16,42 +16,35 @@ namespace huffman
         friend class HuffmanTree;
 
     public:
-        /**
-         * Comparator used for determining order of the nodes when constructing the tree. Nodes are primarily ordered
-         * by frequency where lower frequency has higher priority. Nodes are secondarily ordered by the data where
-         * smaller data value has higher priority.
-         */
-        struct TreeNodeComparator
-        {
-            bool operator()(const TreeNode* a, const TreeNode* b) const;
-        };
 
+        using handle_t = int;
+        static constexpr int empty_handle = -1;
         /**
          * Constructs node based on given arguments.
+         * @param handle Handle to this node.
          * @param data Data that the node holds. Default is 0.
          * @param frequency Frequency of the data. Default is 0.
          * @param isLeaf Whether Node is leaf. Default is false.
          */
-        explicit TreeNode(types::byte_t data = 0, unsigned frequency = 0, bool isLeaf = false);
-
-        TreeNode(const TreeNode& treeNode) = delete;
-
-        TreeNode& operator=(const TreeNode&) = delete;
+        explicit TreeNode(handle_t handle, types::byte_t data = 0, unsigned frequency = 0, bool isLeaf = false);
 
         types::byte_t getData() const;
 
-        const TreeNode* getLeftChild() const;
+        handle_t getHandle() const;
 
-        const TreeNode* getRightChild() const;
+        handle_t getLeftChildHandle() const;
+
+        handle_t getRightChildHandle() const;
 
         unsigned getFrequency() const;
 
         bool isLeaf() const;
 
     private:
+        handle_t handle_;
         types::byte_t data_;
-        std::unique_ptr<TreeNode> left_;
-        std::unique_ptr<TreeNode> right_;
+        handle_t left_;
+        handle_t right_;
         unsigned frequency_;
         bool isLeaf_;
     };

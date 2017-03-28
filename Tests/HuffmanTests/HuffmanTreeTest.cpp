@@ -10,7 +10,7 @@
 
 // Forward declare helper functions
 void validateEncodingTable(const huffman::types::encode_table_t& encode_table);
-void validateTree(const huffman::TreeNode& root, bool ignoreFrequencies);
+void validateTree(const huffman::HuffmanTree& huffmanTree, bool ignoreFrequencies);
 
 // Constructs HuffmanTree with character frequencies of:
 // a: 5 c: 3 d: 2 b: 1 B: 1 e: 2
@@ -77,7 +77,7 @@ public:
 
 TEST_F(HuffmanTreeCharactersFixture, TreeIsConstructedCorrectly)
 {
-    validateTree(*huffmanTree.getRoot(), false);
+    validateTree(huffmanTree, false);
 }
 // Encoding table should be following:
 // a: 0 d: 101 e: 110 c: 111 B: 1000 b: 1001
@@ -89,48 +89,49 @@ TEST_F(HuffmanTreeCharactersFixture, EncodingTableIsCorrect)
 TEST_F(HuffmanTreeBinaryFixture, TreeIsConstructedCorrectlyBinary)
 {
     // Ignore frequencies as the HuffmanTree constructed from binary data doesn't contain them
-    validateTree(*huffmanTreeBinary.getRoot(), true);
+    validateTree(huffmanTreeBinary, true);
 }
 
 TEST_F(HuffmanTreeBinaryFixture, EncodingTableIsCorrectBinary)
 {
     validateEncodingTable(huffmanTreeBinary.constructEncodingTable());
 }
-void validateTree(const huffman::TreeNode& root, bool ignoreFrequencies)
+void validateTree(const huffman::HuffmanTree& huffmanTree, bool ignoreFrequencies)
 {
-    ASSERT_EQ('\0', root.getData());
+    const huffman::TreeNode* root = huffmanTree.getRoot();
+    ASSERT_EQ('\0', root->getData());
 
-    ASSERT_EQ('a', root.getLeftChild()->getData());
+    ASSERT_EQ('a', huffmanTree.getNode(root->getLeftChildHandle())->getData());
 
-    const huffman::TreeNode* node9 = root.getRightChild();
+    const huffman::TreeNode* node9 = huffmanTree.getNode(root->getRightChildHandle());
     ASSERT_EQ('\0', node9->getData());
 
-    const huffman::TreeNode* node4 = node9->getLeftChild();
-    const huffman::TreeNode* node5 = node9->getRightChild();
+    const huffman::TreeNode* node4 = huffmanTree.getNode(node9->getLeftChildHandle());
+    const huffman::TreeNode* node5 = huffmanTree.getNode(node9->getRightChildHandle());
     ASSERT_EQ('\0', node4->getData());
     ASSERT_EQ('\0', node5->getData());
 
-    ASSERT_EQ('e', node5->getLeftChild()->getData());
+    ASSERT_EQ('e', huffmanTree.getNode(node5->getLeftChildHandle())->getData());
 
-    ASSERT_EQ('c', node5->getRightChild()->getData());
+    ASSERT_EQ('c', huffmanTree.getNode(node5->getRightChildHandle())->getData());
 
-    ASSERT_EQ('d', node4->getRightChild()->getData());
+    ASSERT_EQ('d', huffmanTree.getNode(node4->getRightChildHandle())->getData());
 
-    const huffman::TreeNode* node2 = node4->getLeftChild();
-    ASSERT_EQ('B', node2->getLeftChild()->getData());
-    ASSERT_EQ('b', node2->getRightChild()->getData());
+    const huffman::TreeNode* node2 = huffmanTree.getNode(node4->getLeftChildHandle());
+    ASSERT_EQ('B', huffmanTree.getNode(node2->getLeftChildHandle())->getData());
+    ASSERT_EQ('b', huffmanTree.getNode(node2->getRightChildHandle())->getData());
 
     if (!ignoreFrequencies) {
-        ASSERT_EQ(14, root.getFrequency());
-        ASSERT_EQ(5, root.getLeftChild()->getFrequency());
+        ASSERT_EQ(14, root->getFrequency());
+        ASSERT_EQ(5, huffmanTree.getNode(root->getLeftChildHandle())->getFrequency());
         ASSERT_EQ(9, node9->getFrequency());
         ASSERT_EQ(4, node4->getFrequency());
         ASSERT_EQ(5, node5->getFrequency());
-        ASSERT_EQ(2, node5->getLeftChild()->getFrequency());
-        ASSERT_EQ(3, node5->getRightChild()->getFrequency());
-        ASSERT_EQ(2, node4->getRightChild()->getFrequency());
-        ASSERT_EQ(1, node2->getLeftChild()->getFrequency());
-        ASSERT_EQ(1, node2->getRightChild()->getFrequency());
+        ASSERT_EQ(2, huffmanTree.getNode(node5->getLeftChildHandle())->getFrequency());
+        ASSERT_EQ(3, huffmanTree.getNode(node5->getRightChildHandle())->getFrequency());
+        ASSERT_EQ(2, huffmanTree.getNode(node4->getRightChildHandle())->getFrequency());
+        ASSERT_EQ(1, huffmanTree.getNode(node2->getLeftChildHandle())->getFrequency());
+        ASSERT_EQ(1, huffmanTree.getNode(node2->getRightChildHandle())->getFrequency());
     }
 }
 void validateEncodingTable(const huffman::types::encode_table_t& encode_table)
@@ -157,4 +158,24 @@ void validateEncodingTable(const huffman::types::encode_table_t& encode_table)
     // 1001 = 9
     ASSERT_EQ(static_cast<uint32_t>(9), encode_table['b'].first);
     ASSERT_EQ(static_cast<uint8_t>(4), encode_table['b'].second);
+}
+
+TEST_F(HuffmanTreeCharactersFixture, ComparingNodesWorks)
+{
+    huffman::HuffmanTree::TreeNodeComparator comparator(huffmanTree);
+    auto rootHandle = huffmanTree.getRoot()->getHandle();
+    auto aNodeHandle = huffmanTree.getRoot()->getLeftChildHandle();
+
+    auto parentHandle = huffmanTree.getNode(huffmanTree.getRoot()->getHandle())->getRightChildHandle();
+    parentHandle = huffmanTree.getNode(parentHandle)->getLeftChildHandle();
+    parentHandle = huffmanTree.getNode(parentHandle)->getLeftChildHandle();
+
+    auto BNodeHandle = huffmanTree.getNode(parentHandle)->getLeftChildHandle();
+    auto bNodeHandle = huffmanTree.getNode(parentHandle)->getRightChildHandle();
+
+    ASSERT_FALSE(comparator(aNodeHandle, rootHandle));
+    ASSERT_TRUE(comparator(rootHandle, aNodeHandle));
+    ASSERT_FALSE(comparator(aNodeHandle, aNodeHandle));
+    ASSERT_FALSE(comparator(BNodeHandle, bNodeHandle));
+    ASSERT_TRUE(comparator(bNodeHandle, BNodeHandle));
 }

@@ -11,49 +11,6 @@
 
 namespace
 {
-    void printTreeRecursive(std::ostream& ostream, const huffman::TreeNode& root, std::string& string)
-    {
-        if (root.isLeaf())
-        {
-            ostream << string << " : " << root.getData() << std::endl;
-        } else
-        {
-            assert(root.getLeftChild() != nullptr);
-            assert(root.getRightChild() != nullptr);
-
-            string += "0";
-            printTreeRecursive(ostream, *root.getLeftChild(), string);
-            string.pop_back();
-
-            string += "1";
-            printTreeRecursive(ostream, *root.getRightChild(), string);
-            string.pop_back();
-
-        }
-    }
-
-    void collectCharacterCodes(huffman::types::encode_table_t& encode_table, const huffman::TreeNode& root,
-                               uint32_t code, uint8_t depth)
-    {
-        if (root.isLeaf())
-        {
-            encode_table[root.getData()] = huffman::types::encode_entry_t{code, depth};
-        } else
-        {
-            uint32_t leftCode = code << 1;
-            uint32_t rightCode = (code << 1) + 1;
-            ++depth;
-
-            assert(root.getLeftChild() != nullptr);
-            assert(root.getRightChild() != nullptr);
-            assert(depth < huffman::constants::MAX_CODE_LENGTH);
-
-            collectCharacterCodes(encode_table, *root.getLeftChild(), leftCode, depth);
-            collectCharacterCodes(encode_table, *root.getRightChild(), rightCode, depth);
-
-        }
-    }
-
     std::array<unsigned, huffman::constants::CHARACTERS>
     calculateCharacterFrequencies(const std::vector<huffman::types::byte_t>& characters)
     {
@@ -64,11 +21,9 @@ namespace
         }
         return frequencies;
     }
-
-
 }
 
-huffman::HuffmanTree::HuffmanTree(const std::vector<types::byte_t>& characters) : root_(nullptr)
+huffman::HuffmanTree::HuffmanTree(const std::vector<types::byte_t>& characters) : root_(TreeNode::empty_handle), nodes_{}
 {
     if (!characters.empty())
     {
@@ -76,73 +31,74 @@ huffman::HuffmanTree::HuffmanTree(const std::vector<types::byte_t>& characters) 
     }
 }
 
-huffman::HuffmanTree::HuffmanTree(const std::vector<bool>& treeInBinary) : root_(nullptr)
+huffman::HuffmanTree::HuffmanTree(const std::vector<bool>& treeInBinary) : root_(TreeNode::empty_handle), nodes_{}
 {
     if (!treeInBinary.empty())
     {
         uint64_t index = 0;
-        TreeNode* root = readNodes(treeInBinary, index);
-        root_.reset(root);
+        root_ = readNodes(treeInBinary, index);
     }
 }
 
 void huffman::HuffmanTree::constructTree(const std::vector<types::byte_t>& characters)
 {
-
-    std::priority_queue<TreeNode*, std::vector<TreeNode*>, TreeNode::TreeNodeComparator> queue;
+    TreeNodeComparator comparator{*this};
+    std::priority_queue<TreeNode::handle_t, std::vector<TreeNode::handle_t>, TreeNodeComparator> queue(comparator);
 
     auto frequencies = calculateCharacterFrequencies(characters);
     for (int i = 0; i < constants::CHARACTERS; ++i)
     {
         if (frequencies[i] != 0)
         {
-            //TODO: Maybe use unique_ptr here instead of just raw pointers.
-            TreeNode* leaf = new TreeNode{static_cast<types::byte_t>(i)};
-            leaf->isLeaf_ = true;
-            leaf->frequency_ = frequencies[i];
-            queue.push(leaf);
+            TreeNode leaf{getNextFreeHandle(), static_cast<types::byte_t>(i), frequencies[i], true};
+            nodes_.push_back(leaf);
+            queue.push(leaf.handle_);
         }
     }
 
     while (queue.size() > 1)
     {
-        TreeNode* left = queue.top();
+        TreeNode* left = &nodes_[queue.top()];
         queue.pop();
-        TreeNode* right = queue.top();
+        TreeNode* right = &nodes_[queue.top()];
         queue.pop();
 
-        TreeNode* parent = new TreeNode;
-        parent->frequency_ = left->frequency_ + right->frequency_;
-        parent->left_.reset(left);
-        parent->right_.reset(right);
-        queue.push(parent);
+        TreeNode parent{getNextFreeHandle()};
+        parent.frequency_ = left->frequency_ + right->frequency_;
+        parent.left_ = left->handle_;
+        parent.right_ = right->handle_;
+        nodes_.push_back(parent);
+        queue.push(parent.handle_);
     }
-    TreeNode* root = queue.top();
+    root_ = queue.top();
     queue.pop();
-    root_.reset(root);
 }
 
 void huffman::HuffmanTree::printTree(std::ostream& ostream) const
 {
-    if (root_ == nullptr)
+    if (root_ == TreeNode::empty_handle)
     {
         return;
     }
     std::string buffer;
-    printTreeRecursive(ostream, *root_, buffer);
+    printTreeRecursive(ostream, root_, buffer);
 }
 
 const huffman::TreeNode* huffman::HuffmanTree::getRoot() const
 {
-    return root_.get();
+    if (root_ == TreeNode::empty_handle)
+    {
+        return nullptr;
+    }
+    return &nodes_[root_];
 }
 
 huffman::types::encode_table_t huffman::HuffmanTree::constructEncodingTable() const
 {
     types::encode_table_t encode_table{};
-    if (root_ != nullptr)
+    if (root_ != TreeNode::empty_handle)
     {
-        collectCharacterCodes(encode_table, *root_, 0, 0);
+        collectCharacterCodes(encode_table, root_, 0, 0);
     }
     return encode_table;
 }
@@ -152,35 +108,104 @@ huffman::HuffmanTree::~HuffmanTree()
 
 }
 
-huffman::TreeNode* huffman::HuffmanTree::readNodes(const std::vector<bool>& treeInBinary, uint64_t& index)
+huffman::TreeNode::handle_t huffman::HuffmanTree::readNodes(const std::vector<bool>& treeInBinary, uint64_t& index)
 {
     if (treeInBinary.at(index++))
     {
         huffman::types::byte_t byte = huffman::io::readByte(treeInBinary, index);
         index += huffman::constants::BITS_IN_BYTE;
-        TreeNode* leaf = new huffman::TreeNode{byte};
-        leaf->isLeaf_ = true;
-        return leaf;
+        TreeNode leaf{getNextFreeHandle(), byte, 0, true};
+        nodes_.push_back(leaf);
+        return leaf.handle_;
     }
-    TreeNode* parent = new TreeNode;
-    TreeNode* left = readNodes(treeInBinary, index);
-    TreeNode* right = readNodes(treeInBinary, index);
-    parent->left_.reset(left);
-    parent->right_.reset(right);
-    return parent;
+    auto left = readNodes(treeInBinary, index);
+    auto right = readNodes(treeInBinary, index);
+
+    TreeNode parent{getNextFreeHandle()};
+    parent.left_ = left;
+    parent.right_ = right;
+    nodes_.push_back(parent);
+    return parent.handle_;
 }
 
-huffman::HuffmanTree::HuffmanTree(huffman::HuffmanTree&& huffmanTree) : root_(nullptr)
-{
-    root_ = std::move(huffmanTree.root_);
-}
 
-huffman::HuffmanTree& huffman::HuffmanTree::operator=(huffman::HuffmanTree&& other)
+const huffman::TreeNode* huffman::HuffmanTree::getNode(huffman::TreeNode::handle_t handle) const
 {
-    if (this != &other)
+    if (handle == TreeNode::empty_handle)
     {
-        root_ = std::move(other.root_);
+        return nullptr;
+    }
+    return &nodes_[handle];
+}
+
+huffman::TreeNode::handle_t huffman::HuffmanTree::getNextFreeHandle()
+{
+    return static_cast<TreeNode::handle_t>(nodes_.size());
+}
+
+void huffman::HuffmanTree::collectCharacterCodes(huffman::types::encode_table_t& encode_table,
+                                                 huffman::TreeNode::handle_t rootHandle,
+                                                 uint32_t code, uint8_t depth) const
+{
+    const huffman::TreeNode* root = getNode(rootHandle);
+    if (root->isLeaf())
+    {
+        encode_table[root->getData()] = huffman::types::encode_entry_t{code, depth};
+    } else
+    {
+        uint32_t leftCode = code << 1;
+        uint32_t rightCode = (code << 1) + 1;
+        ++depth;
+
+        assert(root->getLeftChildHandle() != TreeNode::empty_handle);
+        assert(root->getRightChildHandle() != TreeNode::empty_handle);
+        assert(depth < huffman::constants::MAX_CODE_LENGTH);
+
+        collectCharacterCodes(encode_table, root->getLeftChildHandle(), leftCode, depth);
+        collectCharacterCodes(encode_table, root->getRightChildHandle(), rightCode, depth);
+
     }
 }
 
+void huffman::HuffmanTree::printTreeRecursive(std::ostream& ostream, TreeNode::handle_t rootHandle,
+                                              std::string& string) const
+{
+    const TreeNode* root = getNode(rootHandle);
+    if (root->isLeaf())
+    {
+        ostream << string << " : " << root->getData() << std::endl;
+    }
+    else
+    {
+        assert(root->getLeftChildHandle() != TreeNode::empty_handle);
+        assert(root->getRightChildHandle() != TreeNode::empty_handle);
+
+        string += "0";
+        printTreeRecursive(ostream, root->getLeftChildHandle(), string);
+        string.pop_back();
+
+        string += "1";
+        printTreeRecursive(ostream, root->getRightChildHandle(), string);
+        string.pop_back();
+
+    }
+}
+
+bool huffman::HuffmanTree::TreeNodeComparator::operator()(const huffman::TreeNode::handle_t aHandle, const huffman::TreeNode::handle_t bHandle) const
+{
+    const huffman::TreeNode* a = huffmanTree_.getNode(aHandle);
+    const huffman::TreeNode* b = huffmanTree_.getNode(bHandle);
+    if (a->frequency_ > b->frequency_)
+    {
+        return true;
+    }
+    if (a->frequency_ == b->frequency_)
+    {
+        if (a->data_ > b->data_)
+        {
+            return true;
+        }
+    }
+    return false;
+}
 

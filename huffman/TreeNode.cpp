@@ -1,9 +1,10 @@
 #include "TreeNode.h"
 
-huffman::TreeNode::TreeNode(types::byte_t data, unsigned frequency, bool isLeaf)
-        : data_(data),
-          left_(nullptr),
-          right_(nullptr),
+huffman::TreeNode::TreeNode(handle_t handle, types::byte_t data, unsigned frequency, bool isLeaf)
+        : handle_(handle),
+          data_(data),
+          left_(empty_handle),
+          right_(empty_handle),
           frequency_(frequency),
           isLeaf_(isLeaf)
 {
@@ -14,14 +15,14 @@ unsigned char huffman::TreeNode::getData() const
     return data_;
 }
 
-const huffman::TreeNode* huffman::TreeNode::getLeftChild() const
+huffman::TreeNode::handle_t huffman::TreeNode::getLeftChildHandle() const
 {
-    return left_.get();
+    return left_;
 }
 
-const huffman::TreeNode* huffman::TreeNode::getRightChild() const
+huffman::TreeNode::handle_t huffman::TreeNode::getRightChildHandle() const
 {
-    return right_.get();
+    return right_;
 }
 
 unsigned int huffman::TreeNode::getFrequency() const
@@ -34,19 +35,9 @@ bool huffman::TreeNode::isLeaf() const
     return isLeaf_;
 }
 
-bool huffman::TreeNode::TreeNodeComparator::operator()(const huffman::TreeNode* a, const huffman::TreeNode* b) const
+huffman::TreeNode::handle_t huffman::TreeNode::getHandle() const
 {
-    if (a->frequency_ > b->frequency_)
-    {
-        return true;
-    }
-    if (a->frequency_ == b->frequency_)
-    {
-        if (a->data_ > b->data_)
-        {
-            return true;
-        }
-    }
-    return false;
+    return handle_;
 }
+
 

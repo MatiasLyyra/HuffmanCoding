@@ -5,6 +5,7 @@
 #include <string>
 
 #include "Common.h"
+#include "HuffmanTree.h"
 
 namespace huffman
 {
@@ -21,9 +22,9 @@ namespace huffman
 
         /**
          * Creates binary representation of the HuffmanTree. Encoded tree can be read from getEncodedData().
-         * @param root Root of the HuffmanTree.
+         * @param huffmanTree HuffmanTree.
          */
-        void createHeader(const huffman::TreeNode& root);
+        void createHeader(const huffman::HuffmanTree& huffmanTree);
 
         /**
          * Encodes given data based on encoding table. Encoded data can be read with getEncodedData().

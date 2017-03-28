@@ -5,11 +5,11 @@ class TreeNodeFixture : public ::testing::Test
 {
 public:
     TreeNodeFixture()
-            : defaultNode(),
-              aNode('a', 50, true),
-              ANode('A', 50, true),
-              bNode('b', 25, true),
-              parentNode('\0', 10)
+            : defaultNode(0),
+              aNode(1, 'a', 50, true),
+              ANode(2, 'A', 50, true),
+              bNode(3, 'b', 25, true),
+              parentNode(4, '\0', 10)
     {
     }
 
@@ -39,16 +39,4 @@ TEST_F(TreeNodeFixture, NodesAreConstructedCorrectly)
     ASSERT_EQ(50, ANode.getFrequency());
     ASSERT_EQ(25, bNode.getFrequency());
     ASSERT_EQ(10, parentNode.getFrequency());
-}
-
-TEST_F(TreeNodeFixture, ComparingNodesWorks)
-{
-    huffman::TreeNode::TreeNodeComparator comparator;
-    ASSERT_TRUE(comparator(&aNode, &ANode));
-    ASSERT_FALSE(comparator(&aNode, &aNode));
-    ASSERT_FALSE(comparator(&ANode, &aNode));
-    ASSERT_TRUE(comparator(&aNode, &bNode));
-    ASSERT_FALSE(comparator(&bNode, &aNode));
-    ASSERT_TRUE(comparator(&parentNode, &defaultNode));
-    ASSERT_FALSE(comparator(&defaultNode, &parentNode));
 }

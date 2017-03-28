@@ -7,6 +7,7 @@
 #include <vector>
 
 #include "Common.h"
+#include "TreeNode.h"
 
 namespace huffman
 {
@@ -19,6 +20,19 @@ namespace huffman
     {
 
     public:
+        /**
+         * Comparator used for determining order of the nodes when constructing the tree. Nodes are primarily ordered
+         * by frequency where lower frequency has higher priority. Nodes are secondarily ordered by the data where
+         * smaller data value has higher priority.
+         */
+        struct TreeNodeComparator
+        {
+            TreeNodeComparator(const HuffmanTree& huffmanTree) : huffmanTree_(huffmanTree)
+            {
+            }
+            bool operator()(const huffman::TreeNode::handle_t aHandle, const huffman::TreeNode::handle_t bHandle) const;
+            const HuffmanTree& huffmanTree_;
+        };
         /**
          * Constructs huffman tree based on character frequencies in characters vector.
          * @param characters Character vector that is used to calculate character frequencies from.
@@ -33,13 +47,7 @@ namespace huffman
          */
         explicit HuffmanTree(const std::vector<bool>& treeInBinary);
 
-        HuffmanTree(const HuffmanTree& treeNode) = delete;
-
-        HuffmanTree& operator=(const HuffmanTree&) = delete;
-
-        HuffmanTree(HuffmanTree&& huffmanTree);
-
-        HuffmanTree& operator=(HuffmanTree&& other);
+        const TreeNode* getNode(TreeNode::handle_t handle) const;
 
         ~HuffmanTree();
 
@@ -64,9 +72,17 @@ namespace huffman
     private:
         void constructTree(const std::vector<types::byte_t>& characters);
 
-        huffman::TreeNode* readNodes(const std::vector<bool>& treeInBinary, uint64_t& index);
+        TreeNode::handle_t getNextFreeHandle();
 
-        std::unique_ptr<TreeNode> root_;
+        void collectCharacterCodes(huffman::types::encode_table_t& encode_table, huffman::TreeNode::handle_t rootHandle,
+                                   uint32_t code, uint8_t depth) const;
+
+        void printTreeRecursive(std::ostream& ostream, TreeNode::handle_t root, std::string& string) const;
+
+        TreeNode::handle_t readNodes(const std::vector<bool>& treeInBinary, uint64_t& index);
+
+        std::vector<TreeNode> nodes_;
+        TreeNode::handle_t root_;
     };
 
 }

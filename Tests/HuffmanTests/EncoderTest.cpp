@@ -40,7 +40,7 @@ TEST_F(EncoderFixture, EncodingWorks)
 TEST_F(EncoderFixture, HeaderDataIsCorrect)
 {
     huffman::HuffmanTree huffmanTree{testutils::createHuffmanTreeFromCharacters()};
-    encoder.createHeader(*huffmanTree.getRoot());
+    encoder.createHeader(huffmanTree);
     const std::vector<bool>& actual = encoder.getHeaderData();
     std::vector<bool> expected{testutils::getExpectedHuffmanTreeInBinary()};
     ASSERT_EQ(expected.size(), actual.size());

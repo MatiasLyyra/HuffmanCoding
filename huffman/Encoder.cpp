@@ -5,20 +5,22 @@
 
 #include "io/FileUtils.h"
 #include "TreeNode.h"
+#include "HuffmanTree.h"
 
 namespace
 {
-    void writeTreeInBinary(const huffman::TreeNode& root, std::vector<bool>& treeInBinary)
+    void writeTreeInBinary(huffman::TreeNode::handle_t rootHandle, const huffman::HuffmanTree &huffmanTree, std::vector<bool>& treeInBinary)
     {
-        if (root.isLeaf())
+        const huffman::TreeNode* root = huffmanTree.getNode(rootHandle);
+        if (root->isLeaf())
         {
             treeInBinary.push_back(true);
-            huffman::io::insertByte(root.getData(), treeInBinary);
+            huffman::io::insertByte(root->getData(), treeInBinary);
         } else
         {
             treeInBinary.push_back(false);
-            writeTreeInBinary(*root.getLeftChild(), treeInBinary);
-            writeTreeInBinary(*root.getRightChild(), treeInBinary);
+            writeTreeInBinary(root->getLeftChildHandle(), huffmanTree, treeInBinary);
+            writeTreeInBinary(root->getRightChildHandle(), huffmanTree, treeInBinary);
         }
     }
 }
@@ -55,9 +57,9 @@ huffman::Encoder::encodeData(const huffman::types::encode_table_t& encode_table,
     }
 }
 
-void huffman::Encoder::createHeader(const huffman::TreeNode& root)
+void huffman::Encoder::createHeader(const huffman::HuffmanTree& huffmanTree)
 {
-    writeTreeInBinary(root, headerData_);
+    writeTreeInBinary(huffmanTree.getRoot()->getHandle(), huffmanTree, headerData_);
 }
 
 const std::vector<bool>& huffman::Encoder::getHeaderData() const

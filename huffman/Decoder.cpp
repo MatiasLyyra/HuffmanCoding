@@ -17,7 +17,8 @@ void huffman::Decoder::decode(const std::vector<bool>& treeInBinary, const std::
         current = huffmanTree.getRoot();
         while (!current->isLeaf() && i < encodedData.size())
         {
-            current = encodedData.at(i) ? current->getRightChild() : current->getLeftChild();
+            current = encodedData.at(i) ? huffmanTree.getNode(current->getRightChildHandle()) : huffmanTree.getNode(
+                    current->getLeftChildHandle());
             ++i;
         }
         decodedData_.push_back(current->getData());
