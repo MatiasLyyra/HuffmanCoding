@@ -22,4 +22,5 @@ set(CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} ${LINK_FLAGS}" )
 
 set(SOURCE_FILES main.cpp)
 add_executable(HuffmanCoding ${SOURCE_FILES})
+target_link_libraries(HuffmanCoding Common)
 target_link_libraries(HuffmanCoding Huffman)

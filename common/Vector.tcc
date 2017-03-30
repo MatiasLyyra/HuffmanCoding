@@ -2,6 +2,14 @@
 #define HUFFMANCODING_VECTOR_TPP
 
 template <class T>
+Vector<T>::Vector()
+        : size_(0),
+          capacity_(16),
+          data_(new char[sizeof(T) * capacity_])
+{
+}
+
+template <class T>
 Vector<T>::Vector(size_type size, T const& defaultValue)
         : size_(size),
           capacity_(std::max(size_, static_cast<size_type>(16))),
@@ -75,33 +83,27 @@ void Vector<T>::insert(size_type position, size_type n, T const& value)
     {
         throw std::out_of_range("Index out of bounds");
     }
-    std::unique_ptr<char[]> tmp{new char[sizeof(T) * new_size]};
-    size_type old_size = size_;
-    auto tmp_it = reinterpret_cast<iterator>(tmp.get());
-    auto old_it = begin();
-
-    for (int i = 0; i < position; ++i)
+    Vector<T> tmp;
+    tmp.reserve(new_size);
+    tmp.insert(*this, 0, position);
+    for (int i = 0; i < n; ++i)
     {
-        new (&tmp_it[i]) T(old_it[i]);
+        tmp.push_back(T{value});
     }
+    tmp.insert((*this), position, size_);
 
-    for (int i = position; i < (position + n); ++i)
+    swap(tmp);
+}
+template <class T>
+void Vector<T>::insert(Vector<T> const &other, size_type start, size_type end)
+{
+    if (start > end || end > other.size())
     {
-        new (&tmp_it[i]) T(value);
+        throw std::out_of_range("Invalid starting or ending indexes");
     }
-
-    for (int i = (position + n); i < new_size; ++i)
+    for (int i = start; i < end; ++i)
     {
-        new (&tmp_it[i]) T(old_it[i]);
-    }
-
-    std::swap(size_, new_size);
-    std::swap(data_, tmp);
-    capacity_ = size_;
-
-    for (int i = 0; i < old_size; ++i)
-    {
-        old_it[old_size - 1 - i].~T();
+        push_back(other[i]);
     }
 }
 

@@ -17,7 +17,8 @@ namespace common
         using reference = T&;
         using const_reference = const T&;
 
-        Vector(size_type size = 0, T const& defaultValue = T());
+        Vector();
+        explicit Vector(size_type size, T const& defaultValue = T{});
         Vector(Vector<T> const &other);
         Vector<T>& operator=(Vector<T> other);
         Vector(Vector<T> &&other) = default;
@@ -33,6 +34,8 @@ namespace common
         void pop_back() noexcept;
         void insert(size_type position, T const& value);
         void insert(size_type position, size_type n, T const& value);
+        void insert(Vector<T> const &other, size_type start, size_type end);
+
         void clear() noexcept;
 
         reference operator[] (size_type index)
@@ -51,7 +54,7 @@ namespace common
             {
                 throw std::out_of_range("Index out of bounds");
             }
-            iterator it = begin();
+            auto it = begin();
             return it[index];
         }
 
@@ -120,8 +123,6 @@ namespace common
             return size_ == 0;
         }
 
-
-
     private:
         static constexpr float RESERVE_MULTIPLIER = 1.5;
         size_type size_;
@@ -129,7 +130,7 @@ namespace common
         std::unique_ptr<char[]> data_;
     };
 
-#include "Vector.tpp"
+#include "Vector.tcc"
 }
 
 #endif //HUFFMANCODING_VECTOR_H
