@@ -3,6 +3,7 @@
 #include <fstream>
 #include <memory>
 #include <cassert>
+#include <Vector.h>
 
 
 uint64_t huffman::io::read64BitNumber(const uint8_t (&data)[8])
@@ -27,7 +28,7 @@ void huffman::io::write64BitNumberToStream(uint64_t number, std::ostream& ostrea
     ostream.write(reinterpret_cast<char*>(&data[0]), sizeof(data));
 }
 
-std::vector<huffman::types::byte_t> huffman::io::readFile(std::istream& istream)
+common::Vector<huffman::types::byte_t> huffman::io::readFile(std::istream& istream)
 {
     std::streampos fileSize;
     istream.seekg(0, std::ios::end);
@@ -36,7 +37,7 @@ std::vector<huffman::types::byte_t> huffman::io::readFile(std::istream& istream)
 
     std::unique_ptr<types::byte_t[]> buffer{new unsigned char[fileSize]};
     istream.read(reinterpret_cast<char*>(&buffer.get()[0]), fileSize * sizeof(types::byte_t));
-    return std::vector<types::byte_t>{buffer.get(), buffer.get() + fileSize * sizeof(types::byte_t)};
+    return common::Vector<types::byte_t>{buffer.get(), buffer.get() + fileSize * sizeof(types::byte_t)};
 }
 
 void huffman::io::writeBinaryFile(std::ostream& ostream, const std::vector<bool>& data)
@@ -88,9 +89,9 @@ std::vector<bool> huffman::io::readBinaryFile(std::istream& istream, bool ignore
     return encodedData;
 }
 
-void huffman::io::writeFile(std::ostream& ostream, const std::vector<huffman::types::byte_t>& data)
+void huffman::io::writeFile(std::ostream& ostream, const common::Vector<huffman::types::byte_t>& data)
 {
-    ostream.write(reinterpret_cast<const char*>(data.data()), data.size() * sizeof(types::byte_t));
+    ostream.write(reinterpret_cast<const char*>(data.begin()), data.size() * sizeof(types::byte_t));
 }
 
 void huffman::io::insertByte(huffman::types::byte_t byte, std::vector<bool>& vector)

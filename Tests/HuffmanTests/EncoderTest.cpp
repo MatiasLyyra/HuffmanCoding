@@ -24,7 +24,7 @@ TEST_F(EncoderFixture, EncodingWorks)
     huffman::HuffmanTree huffmanTree{testutils::createHuffmanTreeFromCharacters()};
     huffman::types::encode_table_t encode_table = huffmanTree.constructEncodingTable();
     std::string message = "aecaaBb";
-    std::vector<huffman::types::byte_t> characters{testutils::convertStringToByteVector(message)};
+    common::Vector<huffman::types::byte_t> characters{testutils::convertStringToByteVector(message)};
     std::size_t expectedLength = 17;
     bool expected[expectedLength] = {false, true, true, false, true, true, true, false, false, true, false, false, false, true,
                                      false, false, true};
@@ -55,7 +55,7 @@ TEST_F(EncoderFixture, InvalidDataThrowsExecption)
     huffman::HuffmanTree huffmanTree{testutils::createHuffmanTreeFromCharacters()};
     huffman::types::encode_table_t encode_table = huffmanTree.constructEncodingTable();
     std::string message = "aelcauaBb";
-    std::vector<huffman::types::byte_t> characters{testutils::convertStringToByteVector(message)};
+    common::Vector<huffman::types::byte_t> characters{testutils::convertStringToByteVector(message)};
     ASSERT_THROW(encoder.encodeData(encode_table, characters), std::invalid_argument);
     ASSERT_EQ(0, encoder.getEncodedData().size());
 }

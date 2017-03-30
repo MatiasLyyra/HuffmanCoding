@@ -4,6 +4,7 @@
 #include <string>
 
 #include <huffman/Common.h>
+#include <common/Vector.h>
 
 namespace huffman
 {
@@ -15,7 +16,7 @@ namespace testutils
     huffman::HuffmanTree createHuffmanTreeFromCharacters();
     huffman::HuffmanTree createHuffmanTreeFromBinary();
     std::vector<bool> getExpectedHuffmanTreeInBinary();
-    std::vector<huffman::types::byte_t> convertStringToByteVector(const std::string& string);
+    common::Vector<huffman::types::byte_t> convertStringToByteVector(const std::string& string);
 }
 
 #endif //HUFFMANCODING_TESTUTILS_H

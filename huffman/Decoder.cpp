@@ -8,7 +8,7 @@ huffman::Decoder::Decoder() : decodedData_{}
 
 }
 
-void huffman::Decoder::decode(const std::vector<bool>& treeInBinary, const std::vector<bool>& encodedData)
+void huffman::Decoder::decodeData(const std::vector<bool>& treeInBinary, const std::vector<bool>& encodedData)
 {
     huffman::HuffmanTree huffmanTree{treeInBinary};
     const huffman::TreeNode* current;
@@ -26,7 +26,7 @@ void huffman::Decoder::decode(const std::vector<bool>& treeInBinary, const std::
 
 }
 
-const std::vector<huffman::types::byte_t>& huffman::Decoder::getDecodedData() const
+const common::Vector<huffman::types::byte_t>& huffman::Decoder::getDecodedData() const
 {
     return decodedData_;
 }

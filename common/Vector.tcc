@@ -10,6 +10,20 @@ Vector<T>::Vector()
 }
 
 template <class T>
+Vector<T>::Vector(iterator start, iterator end)
+        : size_(end - start),
+          capacity_(size_),
+          data_(new char[sizeof(T) * capacity_])
+{
+    auto it_input = start;
+    auto it = begin();
+    for (int i = 0; i < size_; ++it_input, ++i)
+    {
+        new (&it[i]) T(*it_input);
+    }
+}
+
+template <class T>
 Vector<T>::Vector(size_type size, T const& defaultValue)
         : size_(size),
           capacity_(std::max(size_, static_cast<size_type>(16))),

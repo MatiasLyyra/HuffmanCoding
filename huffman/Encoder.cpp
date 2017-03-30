@@ -9,7 +9,7 @@
 
 namespace
 {
-    void writeTreeInBinary(huffman::TreeNode::handle_t rootHandle, const huffman::HuffmanTree &huffmanTree, std::vector<bool>& treeInBinary)
+    void writeTreeInBinary(huffman::types::handle_t rootHandle, const huffman::HuffmanTree &huffmanTree, std::vector<bool>& treeInBinary)
     {
         const huffman::TreeNode* root = huffmanTree.getNode(rootHandle);
         if (root->isLeaf())
@@ -32,7 +32,7 @@ huffman::Encoder::Encoder()
 }
 
 void
-huffman::Encoder::encodeData(const huffman::types::encode_table_t& encode_table, const std::vector<types::byte_t>& data)
+huffman::Encoder::encodeData(const huffman::types::encode_table_t& encode_table, const common::Vector<types::byte_t>& data)
 {
     assert(encode_table.size() == constants::CHARACTERS);
 

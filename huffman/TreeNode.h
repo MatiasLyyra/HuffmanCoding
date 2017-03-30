@@ -16,9 +16,6 @@ namespace huffman
         friend class HuffmanTree;
 
     public:
-
-        using handle_t = int;
-        static constexpr int empty_handle = -1;
         /**
          * Constructs node based on given arguments.
          * @param handle Handle to this node.
@@ -26,25 +23,25 @@ namespace huffman
          * @param frequency Frequency of the data. Default is 0.
          * @param isLeaf Whether Node is leaf. Default is false.
          */
-        explicit TreeNode(handle_t handle, types::byte_t data = 0, unsigned frequency = 0, bool isLeaf = false);
+        explicit TreeNode(types::handle_t handle, types::byte_t data = 0, unsigned frequency = 0, bool isLeaf = false);
 
         types::byte_t getData() const;
 
-        handle_t getHandle() const;
+        types::handle_t getHandle() const;
 
-        handle_t getLeftChildHandle() const;
+        types::handle_t getLeftChildHandle() const;
 
-        handle_t getRightChildHandle() const;
+        types::handle_t getRightChildHandle() const;
 
         unsigned getFrequency() const;
 
         bool isLeaf() const;
 
     private:
-        handle_t handle_;
+        types::handle_t handle_;
         types::byte_t data_;
-        handle_t left_;
-        handle_t right_;
+        types::handle_t left_;
+        types::handle_t right_;
         unsigned frequency_;
         bool isLeaf_;
     };

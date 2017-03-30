@@ -21,7 +21,7 @@ TEST(FileUtils, ReadFileWorks)
 {
     std::string message = "Hello, World!";
     std::istringstream iss{message};
-    std::vector<huffman::types::byte_t> characters{huffman::io::readFile(iss)};
+    common::Vector<huffman::types::byte_t> characters{huffman::io::readFile(iss)};
     huffman::types::byte_t expected[13] = {'H', 'e', 'l', 'l', 'o', ',', ' ', 'W', 'o', 'r', 'l', 'd','!'};
     ASSERT_EQ(13, characters.size());
     for (int i = 0; i < 13; ++i)
@@ -73,7 +73,7 @@ TEST_F(FileUtilsFixture, ReadingBinaryFileWorks)
 TEST(FileUtils, WritingFileWorks)
 {
     std::string message = "Hello, World!";
-    std::vector<huffman::types::byte_t> characters{testutils::convertStringToByteVector(message)};
+    common::Vector<huffman::types::byte_t> characters{testutils::convertStringToByteVector(message)};
     auto expectedSize = characters.size();
     std::stringstream ss;
     huffman::io::writeFile(ss, characters);

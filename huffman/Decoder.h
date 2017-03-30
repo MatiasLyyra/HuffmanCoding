@@ -2,6 +2,7 @@
 #define HUFFMANCODING_DECODER_H
 
 #include <vector>
+#include <Vector.h>
 
 #include "Common.h"
 
@@ -23,12 +24,12 @@ namespace huffman
          * @param treeInBinary Binary representation of HuffmanTree
          * @param encodedData Encoded data which is decoded
          */
-        void decode(const std::vector<bool>& treeInBinary, const std::vector<bool>& encodedData);
+        void decodeData(const std::vector<bool>& treeInBinary, const std::vector<bool>& encodedData);
 
-        const std::vector<huffman::types::byte_t>& getDecodedData() const;
+        const common::Vector<huffman::types::byte_t>& getDecodedData() const;
 
     private:
-        std::vector<huffman::types::byte_t> decodedData_;
+        common::Vector<huffman::types::byte_t> decodedData_;
     };
 }
 

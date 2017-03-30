@@ -7,7 +7,7 @@
 huffman::HuffmanTree testutils::createHuffmanTreeFromCharacters()
 {
     std::string message = "aaaacccddeabBe";
-    std::vector<huffman::types::byte_t> characters{convertStringToByteVector(message)};
+    common::Vector<huffman::types::byte_t> characters{convertStringToByteVector(message)};
     huffman::HuffmanTree tree{characters};
     return tree;
 }
@@ -54,10 +54,10 @@ std::vector<bool> testutils::getExpectedHuffmanTreeInBinary()
     huffman::io::insertByte('c', treeInBinary);
     return treeInBinary;
 }
-std::vector<huffman::types::byte_t> testutils::convertStringToByteVector(const std::string& string)
+common::Vector<huffman::types::byte_t> testutils::convertStringToByteVector(const std::string& string)
 {
-    std::vector<huffman::types::byte_t> characters;
-    std::vector<huffman::types::byte_t>::size_type i = 0;
+    common::Vector<huffman::types::byte_t> characters;
+    common::Vector<huffman::types::byte_t>::size_type i = 0;
     for (; i < string.size(); ++i)
     {
         huffman::types::byte_t byte = static_cast<huffman::types::byte_t>(string.at(i));

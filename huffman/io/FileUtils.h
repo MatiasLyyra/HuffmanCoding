@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <iosfwd>
+#include <Vector.h>
 #include "../Common.h"
 
 namespace huffman
@@ -14,14 +15,14 @@ namespace huffman
          * @param istream Stream to read data from.
          * @return Returns vector of bytes containing data from the stream
          */
-        std::vector<huffman::types::byte_t> readFile(std::istream& istream);
+        common::Vector<huffman::types::byte_t> readFile(std::istream& istream);
 
         /**
          * Writes data to the specified stream
          * @param ostream Stream to write to
          * @param data Data that is written to the stream
          */
-        void writeFile(std::ostream& ostream, const std::vector<huffman::types::byte_t>& data);
+        void writeFile(std::ostream& ostream, const common::Vector<huffman::types::byte_t>& data);
 
         /**
          * Writes data as binary data to the stream.

@@ -17,6 +17,7 @@ namespace huffman
          */
         constexpr unsigned MAX_CODE_LENGTH = 32;
         static constexpr unsigned char BITS_IN_BYTE = 8;
+        static constexpr int empty_handle = -1;
     }
     namespace types
     {
@@ -30,6 +31,12 @@ namespace huffman
          * Array that is used to encode bytes. Index of the cell represents the byte/character.
          */
         using encode_table_t = std::array<encode_entry_t, constants::CHARACTERS>;
+
+        /**
+         * Handle for accessing specific TreeNode
+         */
+        using handle_t = int;
+
         using byte_t = unsigned char;
     }
 }

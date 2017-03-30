@@ -18,7 +18,7 @@ class HuffmanTreeCharactersFixture : public ::testing::Test
 {
 
 public:
-    HuffmanTreeCharactersFixture() : huffmanTree{std::vector<huffman::types::byte_t>{}}
+    HuffmanTreeCharactersFixture() : huffmanTree{common::Vector<huffman::types::byte_t>{}}
     {
     }
 

@@ -20,6 +20,7 @@ namespace common
         Vector();
         explicit Vector(size_type size, T const& defaultValue = T{});
         Vector(Vector<T> const &other);
+        Vector(iterator start, iterator end);
         Vector<T>& operator=(Vector<T> other);
         Vector(Vector<T> &&other) = default;
         Vector<T>& operator=(Vector<T> &&other) = default;

@@ -20,8 +20,8 @@ TEST_F(DecoderFixture, DecodingWorks)
     {
         encodedData.push_back(encodedString[i] == '1');
     }
-    decoder.decode(testutils::getExpectedHuffmanTreeInBinary(), encodedData);
-    const std::vector<huffman::types::byte_t>& actualBytes = decoder.getDecodedData();
+    decoder.decodeData(testutils::getExpectedHuffmanTreeInBinary(), encodedData);
+    const common::Vector<huffman::types::byte_t>& actualBytes = decoder.getDecodedData();
     ASSERT_EQ(10, actualBytes.size());
     for (int i = 0; i < 10; ++i)
     {
@@ -37,5 +37,5 @@ TEST_F(DecoderFixture, DecoderDoesNotThrowWithGarbageValues)
     {
         encodedData.push_back(encodedString[i] == '1');
     }
-    ASSERT_NO_THROW(decoder.decode(testutils::getExpectedHuffmanTreeInBinary(), encodedData));
+    ASSERT_NO_THROW(decoder.decodeData(testutils::getExpectedHuffmanTreeInBinary(), encodedData));
 }

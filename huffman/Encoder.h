@@ -4,9 +4,9 @@
 #include <vector>
 #include <string>
 
+#include "Vector.h"
 #include "Common.h"
 #include "HuffmanTree.h"
-
 namespace huffman
 {
     class TreeNode;
@@ -33,7 +33,7 @@ namespace huffman
          * @throw Throws std::invalid_argument exception if character is encountered without proper value in encoding table
          * i.e. any encode entry with length of zero.
          */
-        void encodeData(const types::encode_table_t& encode_table, const std::vector<types::byte_t>& data);
+        void encodeData(const types::encode_table_t& encode_table, const common::Vector<types::byte_t>& data);
 
         const std::vector<bool>& getHeaderData() const;
 
