@@ -1,0 +1,234 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - coverage.info.cleaned - common/Vector.tcc</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">common</a> - Vector.tcc<span style="font-size: 80%;"> (source / <a href="Vector.tcc.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">coverage.info.cleaned</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">78</td>
+            <td class="headerCovTableEntry">80</td>
+            <td class="headerCovTableEntryHi">97.5 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2017-03-31 16:18:14</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">27</td>
+            <td class="headerCovTableEntry">27</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #ifndef HUFFMANCODING_VECTOR_TPP</a>
+<span class="lineNum">       2 </span>            : #define HUFFMANCODING_VECTOR_TPP
+<a name="3"><span class="lineNum">       3 </span>            : </a>
+<span class="lineNum">       4 </span>            : template &lt;class T&gt;
+<span class="lineNum">       5 </span><span class="lineCov">         50 : Vector&lt;T&gt;::Vector()</span>
+<span class="lineNum">       6 </span>            :         : size_(0),
+<span class="lineNum">       7 </span>            :           capacity_(16),
+<span class="lineNum">       8 </span><span class="lineCov">         50 :           data_(new char[sizeof(T) * capacity_])</span>
+<span class="lineNum">       9 </span>            : {
+<span class="lineNum">      10 </span><span class="lineCov">         50 : }</span>
+<a name="11"><span class="lineNum">      11 </span>            : </a>
+<span class="lineNum">      12 </span>            : template &lt;class T&gt;
+<span class="lineNum">      13 </span><span class="lineCov">          1 : Vector&lt;T&gt;::Vector(iterator start, iterator end)</span>
+<span class="lineNum">      14 </span>            :         : size_(end - start),
+<span class="lineNum">      15 </span>            :           capacity_(size_),
+<span class="lineNum">      16 </span><span class="lineCov">          1 :           data_(new char[sizeof(T) * capacity_])</span>
+<span class="lineNum">      17 </span>            : {
+<span class="lineNum">      18 </span><span class="lineCov">          1 :     auto it_input = start;</span>
+<span class="lineNum">      19 </span><span class="lineCov">          1 :     auto it = begin();</span>
+<span class="lineNum">      20 </span><span class="lineCov">         14 :     for (int i = 0; i &lt; size_; ++it_input, ++i)</span>
+<span class="lineNum">      21 </span>            :     {
+<span class="lineNum">      22 </span><span class="lineCov">         13 :         new (&amp;it[i]) T(*it_input);</span>
+<span class="lineNum">      23 </span>            :     }
+<span class="lineNum">      24 </span><span class="lineCov">          1 : }</span>
+<a name="25"><span class="lineNum">      25 </span>            : </a>
+<span class="lineNum">      26 </span>            : template &lt;class T&gt;
+<span class="lineNum">      27 </span><span class="lineCov">         10 : Vector&lt;T&gt;::Vector(size_type size, T const&amp; defaultValue)</span>
+<span class="lineNum">      28 </span>            :         : size_(size),
+<span class="lineNum">      29 </span><span class="lineCov">         20 :           capacity_(std::max(size_, static_cast&lt;size_type&gt;(16))),</span>
+<span class="lineNum">      30 </span><span class="lineCov">         30 :           data_(new char[sizeof(T) * capacity_])</span>
+<span class="lineNum">      31 </span>            : {
+<span class="lineNum">      32 </span>            : 
+<span class="lineNum">      33 </span><span class="lineCov">         50 :     for (auto it = begin(); it != end() ; ++it)</span>
+<span class="lineNum">      34 </span>            :     {
+<span class="lineNum">      35 </span><span class="lineCov">         40 :         new (it) T(defaultValue);</span>
+<span class="lineNum">      36 </span>            :     }
+<span class="lineNum">      37 </span><span class="lineCov">         10 : }</span>
+<a name="38"><span class="lineNum">      38 </span>            : </a>
+<span class="lineNum">      39 </span>            : template &lt;class T&gt;
+<span class="lineNum">      40 </span><span class="lineCov">         11 : Vector&lt;T&gt;::Vector(Vector&lt;T&gt; const&amp; other)</span>
+<span class="lineNum">      41 </span>            :         : size_(other.size_),
+<span class="lineNum">      42 </span>            :           capacity_(other.capacity_),
+<span class="lineNum">      43 </span><span class="lineCov">         11 :           data_(new char[sizeof(T) * capacity_])</span>
+<span class="lineNum">      44 </span>            : {
+<span class="lineNum">      45 </span><span class="lineCov">         11 :     assert(size_ == other.size_);</span>
+<span class="lineNum">      46 </span><span class="lineCov">         82 :     for (auto it = begin(), other_it = other.begin(); it != end(); ++it, ++other_it)</span>
+<span class="lineNum">      47 </span>            :     {
+<span class="lineNum">      48 </span><span class="lineCov">         71 :         new (it) T(*other_it);</span>
+<span class="lineNum">      49 </span>            :     }
+<span class="lineNum">      50 </span><span class="lineCov">         11 : }</span>
+<a name="51"><span class="lineNum">      51 </span>            : </a>
+<span class="lineNum">      52 </span>            : template &lt;class T&gt;
+<span class="lineNum">      53 </span><span class="lineCov">          6 : Vector&lt;T&gt;&amp; Vector&lt;T&gt;::operator=(Vector&lt;T&gt; other)</span>
+<span class="lineNum">      54 </span>            : {
+<span class="lineNum">      55 </span><span class="lineCov">          6 :     swap(other);</span>
+<span class="lineNum">      56 </span><span class="lineCov">          6 :     return *this;</span>
+<span class="lineNum">      57 </span>            : }
+<a name="58"><span class="lineNum">      58 </span>            : </a>
+<span class="lineNum">      59 </span>            : template &lt;class T&gt;
+<span class="lineNum">      60 </span><span class="lineCov">       5293 : void Vector&lt;T&gt;::reserve(size_type capacity)</span>
+<span class="lineNum">      61 </span>            : {
+<span class="lineNum">      62 </span><span class="lineCov">       5293 :     if (capacity &gt; capacity_)</span>
+<span class="lineNum">      63 </span>            :     {
+<span class="lineNum">      64 </span><span class="lineCov">         17 :         size_type new_capacity = capacity * RESERVE_MULTIPLIER;</span>
+<span class="lineNum">      65 </span><span class="lineCov">         34 :         std::unique_ptr&lt;char[]&gt; tmp{new char[sizeof(T) * new_capacity]};</span>
+<span class="lineNum">      66 </span><span class="lineCov">         17 :         iterator old_it = reinterpret_cast&lt;iterator&gt;(data_.get());</span>
+<span class="lineNum">      67 </span><span class="lineCov">         17 :         iterator tmp_it = reinterpret_cast&lt;iterator&gt;(tmp.get());</span>
+<span class="lineNum">      68 </span>            : 
+<span class="lineNum">      69 </span><span class="lineCov">      10775 :         for (int i = 0; i &lt; size_; ++i)</span>
+<span class="lineNum">      70 </span>            :         {
+<span class="lineNum">      71 </span><span class="lineCov">      10758 :             new (&amp;tmp_it[i]) T(old_it[i]);</span>
+<span class="lineNum">      72 </span>            :         }
+<span class="lineNum">      73 </span>            : 
+<span class="lineNum">      74 </span><span class="lineCov">         17 :         std::swap(capacity_, new_capacity);</span>
+<span class="lineNum">      75 </span><span class="lineCov">         17 :         std::swap(data_, tmp);</span>
+<span class="lineNum">      76 </span>            : 
+<span class="lineNum">      77 </span><span class="lineCov">      10775 :         for (int i = 0; i &lt; size_; ++i)</span>
+<span class="lineNum">      78 </span>            :         {
+<span class="lineNum">      79 </span><span class="lineCov">      10758 :             old_it[size_ - 1 - i].~T();</span>
+<span class="lineNum">      80 </span>            :         }
+<span class="lineNum">      81 </span>            :     }
+<span class="lineNum">      82 </span><span class="lineCov">       5293 : }</span>
+<a name="83"><span class="lineNum">      83 </span>            : </a>
+<span class="lineNum">      84 </span>            : template &lt;class T&gt;
+<span class="lineNum">      85 </span><span class="lineCov">          8 : void Vector&lt;T&gt;::swap(Vector&lt;T&gt; &amp;other) noexcept</span>
+<span class="lineNum">      86 </span>            : {
+<span class="lineNum">      87 </span><span class="lineCov">          8 :     std::swap(size_, other.size_);</span>
+<span class="lineNum">      88 </span><span class="lineCov">          8 :     std::swap(capacity_, other.capacity_);</span>
+<span class="lineNum">      89 </span><span class="lineCov">          8 :     std::swap(data_, other.data_);</span>
+<span class="lineNum">      90 </span><span class="lineCov">          8 : }</span>
+<a name="91"><span class="lineNum">      91 </span>            : </a>
+<span class="lineNum">      92 </span>            : template &lt;class T&gt;
+<span class="lineNum">      93 </span><span class="lineCov">          2 : void Vector&lt;T&gt;::insert(size_type position, size_type n, T const&amp; value)</span>
+<span class="lineNum">      94 </span>            : {
+<span class="lineNum">      95 </span><span class="lineCov">          2 :     size_type new_size = size_ + n;</span>
+<span class="lineNum">      96 </span><span class="lineCov">          2 :     if (position &gt; size_)</span>
+<span class="lineNum">      97 </span>            :     {
+<span class="lineNum">      98 </span><span class="lineNoCov">          0 :         throw std::out_of_range(&quot;Index out of bounds&quot;);</span>
+<span class="lineNum">      99 </span>            :     }
+<span class="lineNum">     100 </span><span class="lineCov">          4 :     Vector&lt;T&gt; tmp;</span>
+<span class="lineNum">     101 </span><span class="lineCov">          2 :     tmp.reserve(new_size);</span>
+<span class="lineNum">     102 </span><span class="lineCov">          2 :     tmp.insert(*this, 0, position);</span>
+<span class="lineNum">     103 </span><span class="lineCov">          6 :     for (int i = 0; i &lt; n; ++i)</span>
+<span class="lineNum">     104 </span>            :     {
+<span class="lineNum">     105 </span><span class="lineCov">          4 :         tmp.push_back(T{value});</span>
+<span class="lineNum">     106 </span>            :     }
+<span class="lineNum">     107 </span><span class="lineCov">          2 :     tmp.insert((*this), position, size_);</span>
+<span class="lineNum">     108 </span>            : 
+<span class="lineNum">     109 </span><span class="lineCov">          2 :     swap(tmp);</span>
+<a name="110"><span class="lineNum">     110 </span><span class="lineCov">          2 : }</span></a>
+<span class="lineNum">     111 </span>            : template &lt;class T&gt;
+<span class="lineNum">     112 </span><span class="lineCov">          4 : void Vector&lt;T&gt;::insert(Vector&lt;T&gt; const &amp;other, size_type start, size_type end)</span>
+<span class="lineNum">     113 </span>            : {
+<span class="lineNum">     114 </span><span class="lineCov">          4 :     if (start &gt; end || end &gt; other.size())</span>
+<span class="lineNum">     115 </span>            :     {
+<span class="lineNum">     116 </span><span class="lineNoCov">          0 :         throw std::out_of_range(&quot;Invalid starting or ending indexes&quot;);</span>
+<span class="lineNum">     117 </span>            :     }
+<span class="lineNum">     118 </span><span class="lineCov">         13 :     for (int i = start; i &lt; end; ++i)</span>
+<span class="lineNum">     119 </span>            :     {
+<span class="lineNum">     120 </span><span class="lineCov">          9 :         push_back(other[i]);</span>
+<span class="lineNum">     121 </span>            :     }
+<span class="lineNum">     122 </span><span class="lineCov">          4 : }</span>
+<a name="123"><span class="lineNum">     123 </span>            : </a>
+<span class="lineNum">     124 </span>            : template &lt;class T&gt;
+<span class="lineNum">     125 </span><span class="lineCov">          1 : void Vector&lt;T&gt;::insert(size_type position, T const&amp; value)</span>
+<span class="lineNum">     126 </span>            : {
+<span class="lineNum">     127 </span><span class="lineCov">          1 :     insert(position, 1, value);</span>
+<span class="lineNum">     128 </span><span class="lineCov">          1 : }</span>
+<a name="129"><span class="lineNum">     129 </span>            : </a>
+<span class="lineNum">     130 </span>            : template &lt;class T&gt;
+<span class="lineNum">     131 </span><span class="lineCov">       5290 : void Vector&lt;T&gt;::push_back(T const &amp;value)</span>
+<span class="lineNum">     132 </span>            : {
+<span class="lineNum">     133 </span><span class="lineCov">       5290 :     reserve(size_+1);</span>
+<span class="lineNum">     134 </span><span class="lineCov">       5290 :     auto it = begin();</span>
+<span class="lineNum">     135 </span><span class="lineCov">       5290 :     new (&amp;it[size_]) T(value);</span>
+<span class="lineNum">     136 </span><span class="lineCov">       5290 :     ++size_;</span>
+<span class="lineNum">     137 </span><span class="lineCov">       5290 : }</span>
+<a name="138"><span class="lineNum">     138 </span>            : </a>
+<span class="lineNum">     139 </span>            : template &lt;class T&gt;
+<span class="lineNum">     140 </span><span class="lineCov">       5414 : void Vector&lt;T&gt;::pop_back() noexcept</span>
+<span class="lineNum">     141 </span>            : {
+<span class="lineNum">     142 </span><span class="lineCov">       5414 :     if (size_ &gt; 0)</span>
+<span class="lineNum">     143 </span>            :     {
+<span class="lineNum">     144 </span><span class="lineCov">       5414 :         --size_;</span>
+<span class="lineNum">     145 </span><span class="lineCov">       5414 :         auto it = begin();</span>
+<span class="lineNum">     146 </span><span class="lineCov">       5245 :         it[size_].~T();</span>
+<span class="lineNum">     147 </span>            :     }
+<span class="lineNum">     148 </span><span class="lineCov">       5414 : }</span>
+<a name="149"><span class="lineNum">     149 </span>            : </a>
+<span class="lineNum">     150 </span>            : template &lt;class T&gt;
+<span class="lineNum">     151 </span><span class="lineCov">       5487 : void Vector&lt;T&gt;::clear() noexcept</span>
+<span class="lineNum">     152 </span>            : {
+<span class="lineNum">     153 </span><span class="lineCov">      10900 :     while (!empty())</span>
+<span class="lineNum">     154 </span>            :     {
+<span class="lineNum">     155 </span><span class="lineCov">       5413 :         pop_back();</span>
+<span class="lineNum">     156 </span>            :     }
+<span class="lineNum">     157 </span><span class="lineCov">         74 : }</span>
+<span class="lineNum">     158 </span>            : #endif //HUFFMANCODING_VECTOR_TPP
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.12</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>
