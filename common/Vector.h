@@ -17,9 +17,24 @@ namespace common
         using reference = T&;
         using const_reference = const T&;
 
+        /**
+         * Constructs empty vector
+         */
         Vector();
+
+        /**
+         * Constructs vector with specified size and and initializes them with defaultValue
+         * @param size Size of the vector
+         * @param defaultValue Value that is used to initialize the elements in the vector
+         */
         explicit Vector(size_type size, T const& defaultValue = T{});
         Vector(Vector<T> const &other);
+
+        /**
+         * Constructs vector from values in the iterator range
+         * @param start Starting point of the iterator range (inclusive)
+         * @param end Ending point of the iterator range (exclusive)
+         */
         Vector(iterator start, iterator end);
         Vector<T>& operator=(Vector<T> other);
         Vector(Vector<T> &&other) = default;
@@ -28,15 +43,56 @@ namespace common
         {
             clear();
         }
-        void reserve(size_type new_size);
+        /**
+         * Allocates space for elements to fit at lest specified number of elements. Reallocation only happens if
+         * specified capacity is larger than the current capacity.
+         * @param capacity New capacity of the vector.
+         */
+        void reserve(size_type capacity);
+
+        /**
+         * Swaps the contents of another vector with this Vector.
+         * @param other Other vector used for swapping.
+         */
         void swap(Vector<T> &other) noexcept;
 
+        /**
+         * Pushes specified value to the end of the vector.
+         * @param value Value to push back.
+         */
         void push_back(T const &value);
+
+        /**
+         * Removes the last element in the vector.
+         */
         void pop_back() noexcept;
+
+        /**
+         * Inserts value to the vector at specified location and shifts other values.
+         * @param position Index to insert element into.
+         * @param value Value to insert.
+         */
         void insert(size_type position, T const& value);
+
+        /**
+         * Inserts n amount of values to the vector at specified location and shifts other values.
+         * @param position Index of the first element to insert.
+         * @param n Amount of values to insert
+         * @param value Value to insert.
+         */
         void insert(size_type position, size_type n, T const& value);
+
+        /**
+         * Copies values from another vector to the end of this vector.
+         * @param other Vector to copy from.
+         * @param start Starting index of the other vector (inclusive)
+         * @param end Ending index of the other vector (exlusive)
+         */
         void insert(Vector<T> const &other, size_type start, size_type end);
 
+        /**
+         * Removes all elements in the vector.
+         */
         void clear() noexcept;
 
         reference operator[] (size_type index)
