@@ -1,9 +1,10 @@
 #ifndef HUFFMANCODING_BINARYFILEREADER_H
 #define HUFFMANCODING_BINARYFILEREADER_H
 
-#include <vector>
 #include <iosfwd>
-#include <Vector.h>
+
+#include "Vector.h"
+#include "BitStack.h"
 #include "../Common.h"
 
 namespace huffman
@@ -29,7 +30,7 @@ namespace huffman
          * @param ostream Stream to write to.
          * @param data Data that is written to the stream.
          */
-        void writeBinaryFile(std::ostream& ostream, const std::vector<bool>& data);
+        void writeBinaryFile(std::ostream& ostream, const common::BitStack& data);
 
         /**
          * Reads data from the stream to vector containing bool values.
@@ -37,7 +38,7 @@ namespace huffman
          * @param ignoreHeader Ignore the header data i.e. usually the HuffmanTree data and read the actual data
          * @return Data read from the stream
          */
-        std::vector<bool> readBinaryFile(std::istream& istream, bool ignoreHeader);
+        common::BitStack readBinaryFile(std::istream& istream, bool ignoreHeader);
 
         /**
          * Reads eight bytes from the data and outputs unsigned 64-bit number. First byte in the array is the least significant
@@ -60,7 +61,7 @@ namespace huffman
          * @param byte Byte to insert into the vector.
          * @param vector Vector to write into.
          */
-        void insertByte(huffman::types::byte_t byte, std::vector<bool>& vector);
+        void insertByte(huffman::types::byte_t byte, common::BitStack& vector);
 
         /**
          * Reads byte from the vector containing binary values starting from the specified index.
@@ -68,7 +69,7 @@ namespace huffman
          * @param start Starting index
          * @return Byte read from the vector
          */
-        huffman::types::byte_t readByte(const std::vector<bool>& vector, uint64_t start);
+        huffman::types::byte_t readByte(const common::BitStack& vector, uint64_t start);
     }
 }
 

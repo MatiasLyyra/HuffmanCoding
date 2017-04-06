@@ -1,4 +1,3 @@
-#include <vector>
 #include <string>
 
 #include "gtest/gtest.h"
@@ -60,7 +59,7 @@ class HuffmanTreeBinaryFixture : public ::testing::Test
 {
 
 public:
-    HuffmanTreeBinaryFixture() : huffmanTreeBinary{std::vector<bool>{}}
+    HuffmanTreeBinaryFixture() : huffmanTreeBinary{common::BitStack{}}
     {
     }
     virtual void TearDown()

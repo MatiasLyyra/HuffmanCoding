@@ -17,9 +17,9 @@ huffman::HuffmanTree testutils::createHuffmanTreeFromBinary()
     huffman::HuffmanTree tree{getExpectedHuffmanTreeInBinary()};
     return tree;
 }
-std::vector<bool> testutils::getExpectedHuffmanTreeInBinary()
+common::BitStack testutils::getExpectedHuffmanTreeInBinary()
 {
-    std::vector<bool> treeInBinary;
+    common::BitStack treeInBinary;
     // Root
     treeInBinary.push_back(false);
 

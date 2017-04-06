@@ -1,8 +1,8 @@
 #ifndef HUFFMANCODING_DECODER_H
 #define HUFFMANCODING_DECODER_H
 
-#include <vector>
-#include <Vector.h>
+#include "BitStack.h"
+#include "Vector.h"
 
 #include "Common.h"
 
@@ -24,7 +24,7 @@ namespace huffman
          * @param treeInBinary Binary representation of HuffmanTree
          * @param encodedData Encoded data which is decoded
          */
-        void decodeData(const std::vector<bool>& treeInBinary, const std::vector<bool>& encodedData);
+        void decodeData(const common::BitStack& treeInBinary, const common::BitStack& encodedData);
 
         const common::Vector<huffman::types::byte_t>& getDecodedData() const;
 

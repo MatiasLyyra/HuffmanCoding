@@ -1,12 +1,11 @@
 #ifndef HUFFMANCODING_HUFFMANTREE_H
 #define HUFFMANCODING_HUFFMANTREE_H
 
-#include <memory>
 #include <iosfwd>
 #include <cstdint>
-#include <vector>
 
 #include "Vector.h"
+#include "BitStack.h"
 #include "Common.h"
 #include "TreeNode.h"
 
@@ -43,7 +42,7 @@ namespace huffman
          * Binary data has to be in pre-order for this to work correctly.
          * @param treeInBinary Huffman tree in binary representation.
          */
-        explicit HuffmanTree(const std::vector<bool>& treeInBinary);
+        explicit HuffmanTree(const common::BitStack& treeInBinary);
 
         const TreeNode* getNode(types::handle_t handle) const;
 
@@ -77,7 +76,7 @@ namespace huffman
 
         void printTreeRecursive(std::ostream& ostream, types::handle_t root, std::string& string) const;
 
-        types::handle_t readNodes(const std::vector<bool>& treeInBinary, uint64_t& index);
+        types::handle_t readNodes(const common::BitStack& treeInBinary, uint64_t& index);
 
         common::Vector<TreeNode> nodes_;
         types::handle_t root_;

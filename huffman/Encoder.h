@@ -1,12 +1,13 @@
 #ifndef HUFFMANCODING_ENCODER_H
 #define HUFFMANCODING_ENCODER_H
 
-#include <vector>
 #include <string>
 
+#include "BitStack.h"
 #include "Vector.h"
 #include "Common.h"
 #include "HuffmanTree.h"
+
 namespace huffman
 {
     class TreeNode;
@@ -35,14 +36,14 @@ namespace huffman
          */
         void encodeData(const types::encode_table_t& encode_table, const common::Vector<types::byte_t>& data);
 
-        const std::vector<bool>& getHeaderData() const;
+        const common::BitStack& getHeaderData() const;
 
-        const std::vector<bool>& getEncodedData() const;
+        const common::BitStack& getEncodedData() const;
 
 
     private:
-        std::vector<bool> headerData_;
-        std::vector<bool> encodedData_;
+        common::BitStack headerData_;
+        common::BitStack encodedData_;
     };
 }
 

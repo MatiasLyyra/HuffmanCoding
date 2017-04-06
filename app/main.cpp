@@ -1,13 +1,14 @@
 #include <string>
 #include <fstream>
-#include <Vector.h>
-#include <Common.h>
-#include <io/FileUtils.h>
-#include <HuffmanTree.h>
-#include <Encoder.h>
 #include <iostream>
 #include <cstring>
-#include <Decoder.h>
+
+#include "Vector.h"
+#include "Common.h"
+#include "io/FileUtils.h"
+#include "HuffmanTree.h"
+#include "Encoder.h"
+#include "Decoder.h"
 
 bool encode(const std::string &inPath, const std::string &outPath);
 bool decode(const std::string &inPath, const std::string &outPath);

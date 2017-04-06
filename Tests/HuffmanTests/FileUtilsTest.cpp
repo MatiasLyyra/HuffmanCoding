@@ -8,12 +8,12 @@
 class FileUtilsFixture : public ::testing::Test
 {
 public:
-    std::vector<bool> binaryData;
-    std::vector<bool>::size_type expextedLength;
+    common::BitStack binaryData;
+    common::BitStack::size_type expectedLength;
 protected:
     virtual void SetUp() {
         binaryData = testutils::getExpectedHuffmanTreeInBinary();
-        expextedLength = binaryData.size();
+        expectedLength = binaryData.size();
     }
 };
 
@@ -42,7 +42,7 @@ TEST_F(FileUtilsFixture, WriteBinaryFileWorks)
     uint8_t data[8];
     ss.read(reinterpret_cast<char*>(data), sizeof(data));
     uint64_t length = huffman::io::read64BitNumber(data);
-    ASSERT_EQ(expextedLength, length);
+    ASSERT_EQ(expectedLength, length);
     std::vector<bool>::size_type i = 0;
     while (!ss.eof())
     {
@@ -62,7 +62,7 @@ TEST_F(FileUtilsFixture, ReadingBinaryFileWorks)
 {
     std::stringstream ss;
     huffman::io::writeBinaryFile(ss, binaryData);
-    std::vector<bool> actualData = huffman::io::readBinaryFile(ss, false);
+    common::BitStack actualData = huffman::io::readBinaryFile(ss, false);
     ASSERT_EQ(actualData.size(), binaryData.size());
     for (int i = 0; i < binaryData.size(); ++i)
     {

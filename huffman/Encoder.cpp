@@ -4,12 +4,9 @@
 #include <cassert>
 
 #include "io/FileUtils.h"
-#include "TreeNode.h"
-#include "HuffmanTree.h"
-
 namespace
 {
-    void writeTreeInBinary(huffman::types::handle_t rootHandle, const huffman::HuffmanTree &huffmanTree, std::vector<bool>& treeInBinary)
+    void writeTreeInBinary(huffman::types::handle_t rootHandle, const huffman::HuffmanTree &huffmanTree, common::BitStack& treeInBinary)
     {
         const huffman::TreeNode* root = huffmanTree.getNode(rootHandle);
         if (root->isLeaf())
@@ -48,12 +45,15 @@ huffman::Encoder::encodeData(const huffman::types::encode_table_t& encode_table,
             errorMessage << "Byte " << byte << "not found in encoding table.";
             throw std::invalid_argument(errorMessage.str());
         }
+        /*
         for (uint8_t i = 0; i < length; ++i)
         {
             int shiftAmount = length - 1 - i;
             uint32_t bit = (code & (1 << shiftAmount)) >> shiftAmount;
             encodedData_.push_back(bit == 1);
         }
+         */
+        encodedData_.push_back(code, length);
     }
 }
 
@@ -62,13 +62,13 @@ void huffman::Encoder::createHeader(const huffman::HuffmanTree& huffmanTree)
     writeTreeInBinary(huffmanTree.getRoot()->getHandle(), huffmanTree, headerData_);
 }
 
-const std::vector<bool>& huffman::Encoder::getHeaderData() const
+const common::BitStack& huffman::Encoder::getHeaderData() const
 {
     return headerData_;
 }
 
 
-const std::vector<bool>& huffman::Encoder::getEncodedData() const
+const common::BitStack& huffman::Encoder::getEncodedData() const
 {
     return encodedData_;
 }

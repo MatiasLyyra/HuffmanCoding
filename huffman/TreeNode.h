@@ -1,8 +1,6 @@
 #ifndef HUFFMANCODING_TREENODE_H
 #define HUFFMANCODING_TREENODE_H
 
-#include <memory>
-
 #include "Common.h"
 
 namespace huffman

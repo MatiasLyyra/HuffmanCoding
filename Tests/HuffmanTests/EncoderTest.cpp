@@ -29,7 +29,7 @@ TEST_F(EncoderFixture, EncodingWorks)
     bool expected[expectedLength] = {false, true, true, false, true, true, true, false, false, true, false, false, false, true,
                                      false, false, true};
     encoder.encodeData(encode_table, characters);
-    const std::vector<bool>& actual = encoder.getEncodedData();
+    const common::BitStack& actual = encoder.getEncodedData();
     ASSERT_EQ(expectedLength, actual.size());
     for (std::size_t i = 0; i < expectedLength ; ++i)
     {
@@ -41,8 +41,8 @@ TEST_F(EncoderFixture, HeaderDataIsCorrect)
 {
     huffman::HuffmanTree huffmanTree{testutils::createHuffmanTreeFromCharacters()};
     encoder.createHeader(huffmanTree);
-    const std::vector<bool>& actual = encoder.getHeaderData();
-    std::vector<bool> expected{testutils::getExpectedHuffmanTreeInBinary()};
+    const common::BitStack& actual = encoder.getHeaderData();
+    common::BitStack expected{testutils::getExpectedHuffmanTreeInBinary()};
     ASSERT_EQ(expected.size(), actual.size());
     for (std::vector<bool>::size_type i = 0; i < expected.size(); ++i)
     {

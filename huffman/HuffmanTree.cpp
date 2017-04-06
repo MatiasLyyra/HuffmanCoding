@@ -1,10 +1,10 @@
 #include "HuffmanTree.h"
 
+//TODO: Remove this include after PriorityQueue is implemented
 #include <queue>
 #include <ostream>
 #include <cassert>
 
-#include "TreeNode.h"
 #include "io/FileUtils.h"
 
 
@@ -30,7 +30,7 @@ huffman::HuffmanTree::HuffmanTree(const common::Vector<types::byte_t>& character
     }
 }
 
-huffman::HuffmanTree::HuffmanTree(const std::vector<bool>& treeInBinary) : root_(constants::empty_handle), nodes_{}
+huffman::HuffmanTree::HuffmanTree(const common::BitStack& treeInBinary) : root_(constants::empty_handle), nodes_{}
 {
     if (!treeInBinary.empty())
     {
@@ -107,7 +107,7 @@ huffman::HuffmanTree::~HuffmanTree()
 
 }
 
-huffman::types::handle_t huffman::HuffmanTree::readNodes(const std::vector<bool>& treeInBinary, uint64_t& index)
+huffman::types::handle_t huffman::HuffmanTree::readNodes(const common::BitStack& treeInBinary, uint64_t& index)
 {
     if (treeInBinary.at(index++))
     {

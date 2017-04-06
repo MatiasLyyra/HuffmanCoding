@@ -1,9 +1,7 @@
 #include "FileUtils.h"
 
 #include <fstream>
-#include <memory>
 #include <cassert>
-#include <Vector.h>
 
 
 uint64_t huffman::io::read64BitNumber(const uint8_t (&data)[8])
@@ -40,7 +38,7 @@ common::Vector<huffman::types::byte_t> huffman::io::readFile(std::istream& istre
     return common::Vector<types::byte_t>{buffer.get(), buffer.get() + fileSize * sizeof(types::byte_t)};
 }
 
-void huffman::io::writeBinaryFile(std::ostream& ostream, const std::vector<bool>& data)
+void huffman::io::writeBinaryFile(std::ostream& ostream, const common::BitStack& data)
 {
     uint64_t length = data.size();
     write64BitNumberToStream(length, ostream);
@@ -58,7 +56,7 @@ void huffman::io::writeBinaryFile(std::ostream& ostream, const std::vector<bool>
     }
 }
 
-std::vector<bool> huffman::io::readBinaryFile(std::istream& istream, bool ignoreHeader)
+common::BitStack huffman::io::readBinaryFile(std::istream& istream, bool ignoreHeader)
 {
     uint8_t data[8];
     istream.read(reinterpret_cast<char*>(&data[0]), sizeof(data));
@@ -73,8 +71,8 @@ std::vector<bool> huffman::io::readBinaryFile(std::istream& istream, bool ignore
         istream.read(reinterpret_cast<char*>(&data[0]), sizeof(data));
         length = read64BitNumber(data);
     }
-    std::vector<bool> encodedData;
-    encodedData.resize(length);
+    common::BitStack encodedData;
+    encodedData.reserve(length);
 
     for (uint64_t i = 0; i < length;)
     {
@@ -83,7 +81,7 @@ std::vector<bool> huffman::io::readBinaryFile(std::istream& istream, bool ignore
         for (int j = 0; j < constants::BITS_IN_BYTE && i < length; ++j, ++i)
         {
             bool value = (byte & (1 << (constants::BITS_IN_BYTE - 1 - j))) != 0;
-            encodedData[i] = value;
+            encodedData.push_back(value);
         }
     }
     return encodedData;
@@ -94,7 +92,7 @@ void huffman::io::writeFile(std::ostream& ostream, const common::Vector<huffman:
     ostream.write(reinterpret_cast<const char*>(data.begin()), data.size() * sizeof(types::byte_t));
 }
 
-void huffman::io::insertByte(huffman::types::byte_t byte, std::vector<bool>& vector)
+void huffman::io::insertByte(huffman::types::byte_t byte, common::BitStack& vector)
 {
     for (int i = 0; i < huffman::constants::BITS_IN_BYTE; ++i)
     {
@@ -104,7 +102,7 @@ void huffman::io::insertByte(huffman::types::byte_t byte, std::vector<bool>& vec
     }
 }
 
-huffman::types::byte_t huffman::io::readByte(const std::vector<bool>& vector, uint64_t start)
+huffman::types::byte_t huffman::io::readByte(const common::BitStack& vector, uint64_t start)
 {
     assert(start > 0 && start <= (vector.size() - huffman::constants::BITS_IN_BYTE));
     huffman::types::byte_t byte = 0;

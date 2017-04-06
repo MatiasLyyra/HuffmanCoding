@@ -1,10 +1,10 @@
 #ifndef HUFFMANCODING_TESTUTILS_H
 #define HUFFMANCODING_TESTUTILS_H
-#include <vector>
 #include <string>
 
-#include <huffman/Common.h>
-#include <common/Vector.h>
+#include "huffman/Common.h"
+#include "common/Vector.h"
+#include "common/BitStack.h"
 
 namespace huffman
 {
@@ -15,7 +15,7 @@ namespace testutils
 {
     huffman::HuffmanTree createHuffmanTreeFromCharacters();
     huffman::HuffmanTree createHuffmanTreeFromBinary();
-    std::vector<bool> getExpectedHuffmanTreeInBinary();
+    common::BitStack getExpectedHuffmanTreeInBinary();
     common::Vector<huffman::types::byte_t> convertStringToByteVector(const std::string& string);
 }
 
