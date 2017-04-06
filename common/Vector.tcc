@@ -150,9 +150,15 @@ void Vector<T>::pop_back() noexcept
 template <class T>
 void Vector<T>::clear() noexcept
 {
-    while (!empty())
+    size_type new_capacity = 16;
+    std::unique_ptr<char[]> tmp{new char[sizeof(T) * new_capacity]};
+    auto it = begin();
+    for (int i = size_ - 1; i >= 0; --i)
     {
-        pop_back();
+        it[i].~T();
     }
+    size_ = 0;
+    capacity_ = new_capacity;
+    std::swap(data_, tmp);
 }
 #endif //HUFFMANCODING_VECTOR_TPP
