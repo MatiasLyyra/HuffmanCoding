@@ -15,12 +15,21 @@ Vector<T>::Vector(iterator start, iterator end)
           capacity_(size_),
           data_(new char[sizeof(T) * capacity_])
 {
-    auto it_input = start;
-    auto it = begin();
-    for (int i = 0; i < size_; ++it_input, ++i)
+    if (std::is_fundamental<T>::value)
     {
-        new (&it[i]) T(*it_input);
+        auto it = begin();
+        std::memcpy(it, start, sizeof(T) * (end-start));
     }
+    else
+    {
+        auto it_input = start;
+        auto it = begin();
+        for (int i = 0; i < size_; ++it_input, ++i)
+        {
+            new (&it[i]) T(*it_input);
+        }
+    }
+
 }
 
 template <class T>

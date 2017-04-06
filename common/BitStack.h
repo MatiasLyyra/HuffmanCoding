@@ -28,6 +28,8 @@ namespace common
 
         bool clear() noexcept;
 
+        Vector<uint32_t>::size_type container_size() const noexcept;
+
         size_type size() const noexcept;
 
         size_type capacity() const noexcept;

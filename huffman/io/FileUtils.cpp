@@ -9,7 +9,7 @@ uint64_t huffman::io::read64BitNumber(const uint8_t (&data)[8])
     uint64_t number = 0;
     for (int i = 0; i < 8; ++i)
     {
-        number |= data[i] << (i * huffman::constants::BITS_IN_BYTE);
+        number |= static_cast<uint64_t>(data[i]) << (i * huffman::constants::BITS_IN_BYTE);
     }
     return number;
 }
@@ -20,8 +20,7 @@ void huffman::io::write64BitNumberToStream(uint64_t number, std::ostream& ostrea
 
     for (int i = 0; i < 8; ++i)
     {
-        data[i] = static_cast<uint8_t>((number & (0xff << (i * huffman::constants::BITS_IN_BYTE)))
-                >> i * huffman::constants::BITS_IN_BYTE);
+        data[i] = static_cast<uint8_t>(number >> (i * constants::BITS_IN_BYTE));
     }
     ostream.write(reinterpret_cast<char*>(&data[0]), sizeof(data));
 }
@@ -40,19 +39,23 @@ common::Vector<huffman::types::byte_t> huffman::io::readFile(std::istream& istre
 
 void huffman::io::writeBinaryFile(std::ostream& ostream, const common::BitStack& data)
 {
+    if (data.empty())
+    {
+        return;
+    }
     uint64_t length = data.size();
     write64BitNumberToStream(length, ostream);
-    for (uint64_t i = 0; i < length;)
+    types::byte_t bytes[4];
+    auto it = data.data();
+    std::size_t i = 0;
+    for (; i < data.container_size(); ++i)
     {
-        huffman::types::byte_t byte = 0;
-        for (uint8_t j = 0; j < constants::BITS_IN_BYTE && i < length; ++j, ++i)
-        {
-            if (data.at(i))
-            {
-                byte |= 1 << (constants::BITS_IN_BYTE - 1 - j);
-            }
-        }
-        ostream.write(reinterpret_cast<char*>(&byte), sizeof(types::byte_t));
+        uint32_t word = it[i];
+        bytes[0] = static_cast<types::byte_t>(word >> 24);
+        bytes[1] = static_cast<types::byte_t>(word >> 16);
+        bytes[2] = static_cast<types::byte_t>(word >> 8);
+        bytes[3] = static_cast<types::byte_t>(word);
+        ostream.write(reinterpret_cast<char*>(bytes), sizeof(types::byte_t) * 4);
     }
 }
 
@@ -61,28 +64,27 @@ common::BitStack huffman::io::readBinaryFile(std::istream& istream, bool ignoreH
     uint8_t data[8];
     istream.read(reinterpret_cast<char*>(&data[0]), sizeof(data));
     uint64_t length = read64BitNumber(data);
+    uint64_t dataSize = 1 + ((length - 1) / constants::BITS_IN_BYTE);
     if (ignoreHeader)
     {
         //Round length up to closest multiple of 8
-        uint64_t dataSize = (length + huffman::constants::BITS_IN_BYTE - 1 -
-                             (length + huffman::constants::BITS_IN_BYTE - 1) % huffman::constants::BITS_IN_BYTE) /
-                            huffman::constants::BITS_IN_BYTE;
         istream.seekg(dataSize, std::ios::cur);
         istream.read(reinterpret_cast<char*>(&data[0]), sizeof(data));
         length = read64BitNumber(data);
+        dataSize = 1 + ((length - 1) / constants::BITS_IN_BYTE);
     }
     common::BitStack encodedData;
     encodedData.reserve(length);
 
-    for (uint64_t i = 0; i < length;)
+    for (auto i = 0; i < dataSize; ++i)
     {
         uint8_t byte;
         istream.read(reinterpret_cast<char*>(&byte), sizeof(uint8_t));
-        for (int j = 0; j < constants::BITS_IN_BYTE && i < length; ++j, ++i)
-        {
-            bool value = (byte & (1 << (constants::BITS_IN_BYTE - 1 - j))) != 0;
-            encodedData.push_back(value);
-        }
+        encodedData.push_back(byte, constants::BITS_IN_BYTE);
+    }
+    while (encodedData.size() > length)
+    {
+        encodedData.pop_back();
     }
     return encodedData;
 }

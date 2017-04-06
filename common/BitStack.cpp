@@ -134,3 +134,8 @@ const uint32_t* common::BitStack::data() const noexcept
     return data_.begin();
 }
 
+common::Vector<uint32_t>::size_type common::BitStack::container_size() const noexcept
+{
+    return data_.size();
+}
+
