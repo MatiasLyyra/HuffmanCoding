@@ -4,6 +4,6 @@ Projekti "Aineopintojen harjoitustyö: Tietorakenteet ja algoritmit" varten, jon
 
 [**Määrittelydokumentti**](https://github.com/MatiasLyyra/HuffmanCoding/blob/master/dokumentaatio/Maarittelydokumentti.md)
 
-[**Viimeisin viikkoraportti**](https://github.com/MatiasLyyra/HuffmanCoding/blob/master/dokumentaatio/Viikkoraportti_2.md)
+[**Viimeisin viikkoraportti**](https://github.com/MatiasLyyra/HuffmanCoding/blob/master/dokumentaatio/Viikkoraportti_3.md)
 
 [**Yksikkötestien kattavuusraportti**](https://htmlpreview.github.io/?https://github.com/MatiasLyyra/HuffmanCoding/blob/master/dokumentaatio/coverage/index.html)

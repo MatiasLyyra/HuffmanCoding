@@ -31,18 +31,18 @@
             <td class="headerValue">coverage.info.cleaned</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">76</td>
-            <td class="headerCovTableEntry">96</td>
-            <td class="headerCovTableEntryMed">79.2 %</td>
+            <td class="headerCovTableEntry">88</td>
+            <td class="headerCovTableEntry">108</td>
+            <td class="headerCovTableEntryMed">81.5 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-03-24 14:02:12</td>
+            <td class="headerValue">2017-03-31 16:18:14</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntry">10</td>
-            <td class="headerCovTableEntry">13</td>
-            <td class="headerCovTableEntryMed">76.9 %</td>
+            <td class="headerCovTableEntry">12</td>
+            <td class="headerCovTableEntry">14</td>
+            <td class="headerCovTableEntryMed">85.7 %</td>
           </tr>
           <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
         </table>
@@ -65,187 +65,211 @@
 <span class="lineNum">       3 </span>            : #include &lt;queue&gt;
 <span class="lineNum">       4 </span>            : #include &lt;ostream&gt;
 <span class="lineNum">       5 </span>            : #include &lt;cassert&gt;
-<span class="lineNum">       6 </span>            : #include &lt;string&gt;
-<span class="lineNum">       7 </span>            : 
-<span class="lineNum">       8 </span>            : #include &quot;TreeNode.h&quot;
-<span class="lineNum">       9 </span>            : #include &quot;io/FileUtils.h&quot;
+<span class="lineNum">       6 </span>            : 
+<span class="lineNum">       7 </span>            : #include &quot;TreeNode.h&quot;
+<span class="lineNum">       8 </span>            : #include &quot;io/FileUtils.h&quot;
+<span class="lineNum">       9 </span>            : 
 <span class="lineNum">      10 </span>            : 
-<span class="lineNum">      11 </span>            : 
-<a name="12"><span class="lineNum">      12 </span>            : namespace</a>
-<span class="lineNum">      13 </span>            : {
-<span class="lineNum">      14 </span><span class="lineNoCov">          0 :     void printTreeRecursive(std::ostream&amp; ostream, const huffman::TreeNode&amp; root, std::string&amp; string)</span>
+<span class="lineNum">      11 </span>            : namespace
+<a name="12"><span class="lineNum">      12 </span>            : {</a>
+<span class="lineNum">      13 </span>            :     std::array&lt;unsigned, huffman::constants::CHARACTERS&gt;
+<span class="lineNum">      14 </span><span class="lineCov">          6 :     calculateCharacterFrequencies(const common::Vector&lt;huffman::types::byte_t&gt;&amp; characters)</span>
 <span class="lineNum">      15 </span>            :     {
-<span class="lineNum">      16 </span><span class="lineNoCov">          0 :         if (root.isLeaf())</span>
-<span class="lineNum">      17 </span>            :         {
-<span class="lineNum">      18 </span><span class="lineNoCov">          0 :             ostream &lt;&lt; string &lt;&lt; &quot; : &quot; &lt;&lt; root.getData() &lt;&lt; std::endl;</span>
-<span class="lineNum">      19 </span>            :         } else
-<span class="lineNum">      20 </span>            :         {
-<span class="lineNum">      21 </span><span class="lineNoCov">          0 :             assert(root.getLeftChild() != nullptr);</span>
-<span class="lineNum">      22 </span><span class="lineNoCov">          0 :             assert(root.getRightChild() != nullptr);</span>
-<span class="lineNum">      23 </span>            : 
-<span class="lineNum">      24 </span><span class="lineNoCov">          0 :             string += &quot;0&quot;;</span>
-<span class="lineNum">      25 </span><span class="lineNoCov">          0 :             printTreeRecursive(ostream, *root.getLeftChild(), string);</span>
-<span class="lineNum">      26 </span><span class="lineNoCov">          0 :             string.pop_back();</span>
-<span class="lineNum">      27 </span>            : 
-<span class="lineNum">      28 </span><span class="lineNoCov">          0 :             string += &quot;1&quot;;</span>
-<span class="lineNum">      29 </span><span class="lineNoCov">          0 :             printTreeRecursive(ostream, *root.getRightChild(), string);</span>
-<span class="lineNum">      30 </span><span class="lineNoCov">          0 :             string.pop_back();</span>
-<span class="lineNum">      31 </span>            : 
-<span class="lineNum">      32 </span>            :         }
-<a name="33"><span class="lineNum">      33 </span><span class="lineNoCov">          0 :     }</span></a>
-<span class="lineNum">      34 </span>            : 
-<span class="lineNum">      35 </span><span class="lineCov">         44 :     void collectCharacterCodes(huffman::types::encode_table_t&amp; encode_table, const huffman::TreeNode&amp; root,</span>
-<span class="lineNum">      36 </span>            :                                uint32_t code, uint8_t depth)
-<span class="lineNum">      37 </span>            :     {
-<span class="lineNum">      38 </span><span class="lineCov">         44 :         if (root.isLeaf())</span>
-<span class="lineNum">      39 </span>            :         {
-<span class="lineNum">      40 </span><span class="lineCov">         24 :             encode_table[root.getData()] = huffman::types::encode_entry_t{code, depth};</span>
-<span class="lineNum">      41 </span>            :         } else
-<span class="lineNum">      42 </span>            :         {
-<span class="lineNum">      43 </span><span class="lineCov">         20 :             uint32_t leftCode = code &lt;&lt; 1;</span>
-<span class="lineNum">      44 </span><span class="lineCov">         20 :             uint32_t rightCode = (code &lt;&lt; 1) + 1;</span>
-<span class="lineNum">      45 </span><span class="lineCov">         20 :             ++depth;</span>
+<span class="lineNum">      16 </span><span class="lineCov">          6 :         std::array&lt;unsigned, huffman::constants::CHARACTERS&gt; frequencies{};</span>
+<span class="lineNum">      17 </span><span class="lineCov">         90 :         for (auto it = characters.begin(); it != characters.end(); ++it)</span>
+<span class="lineNum">      18 </span>            :         {
+<span class="lineNum">      19 </span><span class="lineCov">         84 :             ++frequencies[*it];</span>
+<span class="lineNum">      20 </span>            :         }
+<span class="lineNum">      21 </span><span class="lineCov">          6 :         return frequencies;</span>
+<span class="lineNum">      22 </span>            :     }
+<a name="23"><span class="lineNum">      23 </span>            : }</a>
+<span class="lineNum">      24 </span>            : 
+<span class="lineNum">      25 </span><span class="lineCov">          9 : huffman::HuffmanTree::HuffmanTree(const common::Vector&lt;types::byte_t&gt;&amp; characters) : root_(constants::empty_handle), nodes_{}</span>
+<span class="lineNum">      26 </span>            : {
+<span class="lineNum">      27 </span><span class="lineCov">          9 :     if (!characters.empty())</span>
+<span class="lineNum">      28 </span>            :     {
+<span class="lineNum">      29 </span><span class="lineCov">          6 :         constructTree(characters);</span>
+<span class="lineNum">      30 </span>            :     }
+<a name="31"><span class="lineNum">      31 </span><span class="lineCov">          9 : }</span></a>
+<span class="lineNum">      32 </span>            : 
+<span class="lineNum">      33 </span><span class="lineCov">          6 : huffman::HuffmanTree::HuffmanTree(const std::vector&lt;bool&gt;&amp; treeInBinary) : root_(constants::empty_handle), nodes_{}</span>
+<span class="lineNum">      34 </span>            : {
+<span class="lineNum">      35 </span><span class="lineCov">          6 :     if (!treeInBinary.empty())</span>
+<span class="lineNum">      36 </span>            :     {
+<span class="lineNum">      37 </span><span class="lineCov">          4 :         uint64_t index = 0;</span>
+<span class="lineNum">      38 </span><span class="lineCov">          4 :         root_ = readNodes(treeInBinary, index);</span>
+<span class="lineNum">      39 </span>            :     }
+<a name="40"><span class="lineNum">      40 </span><span class="lineCov">          6 : }</span></a>
+<span class="lineNum">      41 </span>            : 
+<span class="lineNum">      42 </span><span class="lineCov">          6 : void huffman::HuffmanTree::constructTree(const common::Vector&lt;types::byte_t&gt;&amp; characters)</span>
+<span class="lineNum">      43 </span>            : {
+<span class="lineNum">      44 </span><span class="lineCov">          6 :     TreeNodeComparator comparator{*this};</span>
+<span class="lineNum">      45 </span><span class="lineCov">         12 :     std::priority_queue&lt;types::handle_t, std::vector&lt;types::handle_t&gt;, TreeNodeComparator&gt; queue(comparator);</span>
 <span class="lineNum">      46 </span>            : 
-<span class="lineNum">      47 </span><span class="lineCov">         20 :             assert(root.getLeftChild() != nullptr);</span>
-<span class="lineNum">      48 </span><span class="lineCov">         20 :             assert(root.getRightChild() != nullptr);</span>
-<span class="lineNum">      49 </span><span class="lineCov">         20 :             assert(depth &lt; huffman::constants::MAX_CODE_LENGTH);</span>
-<span class="lineNum">      50 </span>            : 
-<span class="lineNum">      51 </span><span class="lineCov">         20 :             collectCharacterCodes(encode_table, *root.getLeftChild(), leftCode, depth);</span>
-<span class="lineNum">      52 </span><span class="lineCov">         20 :             collectCharacterCodes(encode_table, *root.getRightChild(), rightCode, depth);</span>
-<span class="lineNum">      53 </span>            : 
-<span class="lineNum">      54 </span>            :         }
-<span class="lineNum">      55 </span><span class="lineCov">         44 :     }</span>
-<a name="56"><span class="lineNum">      56 </span>            : </a>
-<span class="lineNum">      57 </span>            :     std::array&lt;unsigned, huffman::constants::CHARACTERS&gt;
-<span class="lineNum">      58 </span><span class="lineCov">          5 :     calculateCharacterFrequencies(const std::vector&lt;huffman::types::byte_t&gt;&amp; characters)</span>
+<span class="lineNum">      47 </span><span class="lineCov">          6 :     auto frequencies = calculateCharacterFrequencies(characters);</span>
+<span class="lineNum">      48 </span><span class="lineCov">       1542 :     for (int i = 0; i &lt; constants::CHARACTERS; ++i)</span>
+<span class="lineNum">      49 </span>            :     {
+<span class="lineNum">      50 </span><span class="lineCov">       1536 :         if (frequencies[i] != 0)</span>
+<span class="lineNum">      51 </span>            :         {
+<span class="lineNum">      52 </span><span class="lineCov">         36 :             TreeNode leaf{getNextFreeHandle(), static_cast&lt;types::byte_t&gt;(i), frequencies[i], true};</span>
+<span class="lineNum">      53 </span><span class="lineCov">         36 :             nodes_.push_back(leaf);</span>
+<span class="lineNum">      54 </span><span class="lineCov">         36 :             queue.push(leaf.handle_);</span>
+<span class="lineNum">      55 </span>            :         }
+<span class="lineNum">      56 </span>            :     }
+<span class="lineNum">      57 </span>            : 
+<span class="lineNum">      58 </span><span class="lineCov">         66 :     while (queue.size() &gt; 1)</span>
 <span class="lineNum">      59 </span>            :     {
-<span class="lineNum">      60 </span><span class="lineCov">          5 :         std::array&lt;unsigned, huffman::constants::CHARACTERS&gt; frequencies{};</span>
-<span class="lineNum">      61 </span><span class="lineCov">         75 :         for (auto i : characters)</span>
-<span class="lineNum">      62 </span>            :         {
-<span class="lineNum">      63 </span><span class="lineCov">         70 :             ++frequencies[i];</span>
-<span class="lineNum">      64 </span>            :         }
-<span class="lineNum">      65 </span><span class="lineCov">          5 :         return frequencies;</span>
-<span class="lineNum">      66 </span>            :     }
-<span class="lineNum">      67 </span>            : 
-<span class="lineNum">      68 </span>            : 
-<a name="69"><span class="lineNum">      69 </span>            : }</a>
-<span class="lineNum">      70 </span>            : 
-<span class="lineNum">      71 </span><span class="lineCov">          7 : huffman::HuffmanTree::HuffmanTree(const std::vector&lt;types::byte_t&gt;&amp; characters) : root_(nullptr)</span>
-<span class="lineNum">      72 </span>            : {
-<span class="lineNum">      73 </span><span class="lineCov">          7 :     if (!characters.empty())</span>
-<span class="lineNum">      74 </span>            :     {
-<span class="lineNum">      75 </span><span class="lineCov">          5 :         constructTree(characters);</span>
-<span class="lineNum">      76 </span>            :     }
-<a name="77"><span class="lineNum">      77 </span><span class="lineCov">          7 : }</span></a>
-<span class="lineNum">      78 </span>            : 
-<span class="lineNum">      79 </span><span class="lineCov">          6 : huffman::HuffmanTree::HuffmanTree(const std::vector&lt;bool&gt;&amp; treeInBinary) : root_(nullptr)</span>
-<span class="lineNum">      80 </span>            : {
-<span class="lineNum">      81 </span><span class="lineCov">          6 :     if (!treeInBinary.empty())</span>
-<span class="lineNum">      82 </span>            :     {
-<span class="lineNum">      83 </span><span class="lineCov">          4 :         uint64_t index = 0;</span>
-<span class="lineNum">      84 </span><span class="lineCov">          4 :         TreeNode* root = readNodes(treeInBinary, index);</span>
-<span class="lineNum">      85 </span><span class="lineCov">          4 :         root_.reset(root);</span>
-<span class="lineNum">      86 </span>            :     }
-<a name="87"><span class="lineNum">      87 </span><span class="lineCov">          6 : }</span></a>
-<span class="lineNum">      88 </span>            : 
-<span class="lineNum">      89 </span><span class="lineCov">          5 : void huffman::HuffmanTree::constructTree(const std::vector&lt;types::byte_t&gt;&amp; characters)</span>
-<span class="lineNum">      90 </span>            : {
-<span class="lineNum">      91 </span>            : 
-<span class="lineNum">      92 </span><span class="lineCov">         10 :     std::priority_queue&lt;TreeNode*, std::vector&lt;TreeNode*&gt;, TreeNode::TreeNodeComparator&gt; queue;</span>
-<span class="lineNum">      93 </span>            : 
-<span class="lineNum">      94 </span><span class="lineCov">          5 :     auto frequencies = calculateCharacterFrequencies(characters);</span>
-<span class="lineNum">      95 </span><span class="lineCov">       1285 :     for (int i = 0; i &lt; constants::CHARACTERS; ++i)</span>
-<span class="lineNum">      96 </span>            :     {
-<span class="lineNum">      97 </span><span class="lineCov">       1280 :         if (frequencies[i] != 0)</span>
-<span class="lineNum">      98 </span>            :         {
-<span class="lineNum">      99 </span>            :             //TODO: Maybe use unique_ptr here instead of just raw pointers.
-<span class="lineNum">     100 </span><span class="lineCov">         30 :             TreeNode* leaf = new TreeNode{static_cast&lt;types::byte_t&gt;(i)};</span>
-<span class="lineNum">     101 </span><span class="lineCov">         30 :             leaf-&gt;isLeaf_ = true;</span>
-<span class="lineNum">     102 </span><span class="lineCov">         30 :             leaf-&gt;frequency_ = frequencies[i];</span>
-<span class="lineNum">     103 </span><span class="lineCov">         30 :             queue.push(leaf);</span>
-<span class="lineNum">     104 </span>            :         }
-<span class="lineNum">     105 </span>            :     }
-<span class="lineNum">     106 </span>            : 
-<span class="lineNum">     107 </span><span class="lineCov">         55 :     while (queue.size() &gt; 1)</span>
-<span class="lineNum">     108 </span>            :     {
-<span class="lineNum">     109 </span><span class="lineCov">         25 :         TreeNode* left = queue.top();</span>
-<span class="lineNum">     110 </span><span class="lineCov">         25 :         queue.pop();</span>
-<span class="lineNum">     111 </span><span class="lineCov">         25 :         TreeNode* right = queue.top();</span>
-<span class="lineNum">     112 </span><span class="lineCov">         25 :         queue.pop();</span>
-<span class="lineNum">     113 </span>            : 
-<span class="lineNum">     114 </span><span class="lineCov">         25 :         TreeNode* parent = new TreeNode;</span>
-<span class="lineNum">     115 </span><span class="lineCov">         25 :         parent-&gt;frequency_ = left-&gt;frequency_ + right-&gt;frequency_;</span>
-<span class="lineNum">     116 </span><span class="lineCov">         25 :         parent-&gt;left_.reset(left);</span>
-<span class="lineNum">     117 </span><span class="lineCov">         25 :         parent-&gt;right_.reset(right);</span>
-<span class="lineNum">     118 </span><span class="lineCov">         25 :         queue.push(parent);</span>
+<span class="lineNum">      60 </span><span class="lineCov">         30 :         TreeNode* left = &amp;nodes_[queue.top()];</span>
+<span class="lineNum">      61 </span><span class="lineCov">         30 :         queue.pop();</span>
+<span class="lineNum">      62 </span><span class="lineCov">         30 :         TreeNode* right = &amp;nodes_[queue.top()];</span>
+<span class="lineNum">      63 </span><span class="lineCov">         30 :         queue.pop();</span>
+<span class="lineNum">      64 </span>            : 
+<span class="lineNum">      65 </span><span class="lineCov">         30 :         TreeNode parent{getNextFreeHandle()};</span>
+<span class="lineNum">      66 </span><span class="lineCov">         30 :         parent.frequency_ = left-&gt;frequency_ + right-&gt;frequency_;</span>
+<span class="lineNum">      67 </span><span class="lineCov">         30 :         parent.left_ = left-&gt;handle_;</span>
+<span class="lineNum">      68 </span><span class="lineCov">         30 :         parent.right_ = right-&gt;handle_;</span>
+<span class="lineNum">      69 </span><span class="lineCov">         30 :         nodes_.push_back(parent);</span>
+<span class="lineNum">      70 </span><span class="lineCov">         30 :         queue.push(parent.handle_);</span>
+<span class="lineNum">      71 </span>            :     }
+<span class="lineNum">      72 </span><span class="lineCov">          6 :     root_ = queue.top();</span>
+<span class="lineNum">      73 </span><span class="lineCov">          6 :     queue.pop();</span>
+<a name="74"><span class="lineNum">      74 </span><span class="lineCov">          6 : }</span></a>
+<span class="lineNum">      75 </span>            : 
+<span class="lineNum">      76 </span><span class="lineNoCov">          0 : void huffman::HuffmanTree::printTree(std::ostream&amp; ostream) const</span>
+<span class="lineNum">      77 </span>            : {
+<span class="lineNum">      78 </span><span class="lineNoCov">          0 :     if (root_ == constants::empty_handle)</span>
+<span class="lineNum">      79 </span>            :     {
+<span class="lineNum">      80 </span><span class="lineNoCov">          0 :         return;</span>
+<span class="lineNum">      81 </span>            :     }
+<span class="lineNum">      82 </span><span class="lineNoCov">          0 :     std::string buffer;</span>
+<span class="lineNum">      83 </span><span class="lineNoCov">          0 :     printTreeRecursive(ostream, root_, buffer);</span>
+<a name="84"><span class="lineNum">      84 </span>            : }</a>
+<span class="lineNum">      85 </span>            : 
+<span class="lineNum">      86 </span><span class="lineCov">         42 : const huffman::TreeNode* huffman::HuffmanTree::getRoot() const</span>
+<span class="lineNum">      87 </span>            : {
+<span class="lineNum">      88 </span><span class="lineCov">         42 :     if (root_ == constants::empty_handle)</span>
+<span class="lineNum">      89 </span>            :     {
+<span class="lineNum">      90 </span><span class="lineNoCov">          0 :         return nullptr;</span>
+<span class="lineNum">      91 </span>            :     }
+<span class="lineNum">      92 </span><span class="lineCov">         42 :     return &amp;nodes_[root_];</span>
+<a name="93"><span class="lineNum">      93 </span>            : }</a>
+<span class="lineNum">      94 </span>            : 
+<span class="lineNum">      95 </span><span class="lineCov">          4 : huffman::types::encode_table_t huffman::HuffmanTree::constructEncodingTable() const</span>
+<span class="lineNum">      96 </span>            : {
+<span class="lineNum">      97 </span><span class="lineCov">          4 :     types::encode_table_t encode_table{};</span>
+<span class="lineNum">      98 </span><span class="lineCov">          4 :     if (root_ != constants::empty_handle)</span>
+<span class="lineNum">      99 </span>            :     {
+<span class="lineNum">     100 </span><span class="lineCov">          4 :         collectCharacterCodes(encode_table, root_, 0, 0);</span>
+<span class="lineNum">     101 </span>            :     }
+<span class="lineNum">     102 </span><span class="lineCov">          4 :     return encode_table;</span>
+<a name="103"><span class="lineNum">     103 </span>            : }</a>
+<span class="lineNum">     104 </span>            : 
+<span class="lineNum">     105 </span><span class="lineCov">         15 : huffman::HuffmanTree::~HuffmanTree()</span>
+<span class="lineNum">     106 </span>            : {
+<span class="lineNum">     107 </span>            : 
+<a name="108"><span class="lineNum">     108 </span><span class="lineCov">         15 : }</span></a>
+<span class="lineNum">     109 </span>            : 
+<span class="lineNum">     110 </span><span class="lineCov">         44 : huffman::types::handle_t huffman::HuffmanTree::readNodes(const std::vector&lt;bool&gt;&amp; treeInBinary, uint64_t&amp; index)</span>
+<span class="lineNum">     111 </span>            : {
+<span class="lineNum">     112 </span><span class="lineCov">         44 :     if (treeInBinary.at(index++))</span>
+<span class="lineNum">     113 </span>            :     {
+<span class="lineNum">     114 </span><span class="lineCov">         24 :         huffman::types::byte_t byte = huffman::io::readByte(treeInBinary, index);</span>
+<span class="lineNum">     115 </span><span class="lineCov">         24 :         index += huffman::constants::BITS_IN_BYTE;</span>
+<span class="lineNum">     116 </span><span class="lineCov">         24 :         TreeNode leaf{getNextFreeHandle(), byte, 0, true};</span>
+<span class="lineNum">     117 </span><span class="lineCov">         24 :         nodes_.push_back(leaf);</span>
+<span class="lineNum">     118 </span><span class="lineCov">         24 :         return leaf.handle_;</span>
 <span class="lineNum">     119 </span>            :     }
-<span class="lineNum">     120 </span><span class="lineCov">          5 :     TreeNode* root = queue.top();</span>
-<span class="lineNum">     121 </span><span class="lineCov">          5 :     queue.pop();</span>
-<span class="lineNum">     122 </span><span class="lineCov">          5 :     root_.reset(root);</span>
-<a name="123"><span class="lineNum">     123 </span><span class="lineCov">          5 : }</span></a>
-<span class="lineNum">     124 </span>            : 
-<span class="lineNum">     125 </span><span class="lineNoCov">          0 : void huffman::HuffmanTree::printTree(std::ostream&amp; ostream) const</span>
-<span class="lineNum">     126 </span>            : {
-<span class="lineNum">     127 </span><span class="lineNoCov">          0 :     if (root_ == nullptr)</span>
-<span class="lineNum">     128 </span>            :     {
-<span class="lineNum">     129 </span><span class="lineNoCov">          0 :         return;</span>
-<span class="lineNum">     130 </span>            :     }
-<span class="lineNum">     131 </span><span class="lineNoCov">          0 :     std::string buffer;</span>
-<span class="lineNum">     132 </span><span class="lineNoCov">          0 :     printTreeRecursive(ostream, *root_, buffer);</span>
-<a name="133"><span class="lineNum">     133 </span>            : }</a>
-<span class="lineNum">     134 </span>            : 
-<span class="lineNum">     135 </span><span class="lineCov">         39 : const huffman::TreeNode* huffman::HuffmanTree::getRoot() const</span>
-<span class="lineNum">     136 </span>            : {
-<span class="lineNum">     137 </span><span class="lineCov">         39 :     return root_.get();</span>
+<span class="lineNum">     120 </span><span class="lineCov">         20 :     auto left = readNodes(treeInBinary, index);</span>
+<span class="lineNum">     121 </span><span class="lineCov">         20 :     auto right = readNodes(treeInBinary, index);</span>
+<span class="lineNum">     122 </span>            : 
+<span class="lineNum">     123 </span><span class="lineCov">         20 :     TreeNode parent{getNextFreeHandle()};</span>
+<span class="lineNum">     124 </span><span class="lineCov">         20 :     parent.left_ = left;</span>
+<span class="lineNum">     125 </span><span class="lineCov">         20 :     parent.right_ = right;</span>
+<span class="lineNum">     126 </span><span class="lineCov">         20 :     nodes_.push_back(parent);</span>
+<span class="lineNum">     127 </span><span class="lineCov">         20 :     return parent.handle_;</span>
+<span class="lineNum">     128 </span>            : }
+<a name="129"><span class="lineNum">     129 </span>            : </a>
+<span class="lineNum">     130 </span>            : 
+<span class="lineNum">     131 </span><span class="lineCov">        488 : const huffman::TreeNode* huffman::HuffmanTree::getNode(huffman::types::handle_t handle) const</span>
+<span class="lineNum">     132 </span>            : {
+<span class="lineNum">     133 </span><span class="lineCov">        488 :     if (handle == constants::empty_handle)</span>
+<span class="lineNum">     134 </span>            :     {
+<span class="lineNum">     135 </span><span class="lineNoCov">          0 :         return nullptr;</span>
+<span class="lineNum">     136 </span>            :     }
+<span class="lineNum">     137 </span><span class="lineCov">        488 :     return &amp;nodes_[handle];</span>
 <a name="138"><span class="lineNum">     138 </span>            : }</a>
 <span class="lineNum">     139 </span>            : 
-<span class="lineNum">     140 </span><span class="lineCov">          4 : huffman::types::encode_table_t huffman::HuffmanTree::constructEncodingTable() const</span>
+<span class="lineNum">     140 </span><span class="lineCov">        110 : huffman::types::handle_t huffman::HuffmanTree::getNextFreeHandle()</span>
 <span class="lineNum">     141 </span>            : {
-<span class="lineNum">     142 </span><span class="lineCov">          4 :     types::encode_table_t encode_table{};</span>
-<span class="lineNum">     143 </span><span class="lineCov">          4 :     if (root_ != nullptr)</span>
-<span class="lineNum">     144 </span>            :     {
-<span class="lineNum">     145 </span><span class="lineCov">          4 :         collectCharacterCodes(encode_table, *root_, 0, 0);</span>
-<span class="lineNum">     146 </span>            :     }
-<span class="lineNum">     147 </span><span class="lineCov">          4 :     return encode_table;</span>
-<a name="148"><span class="lineNum">     148 </span>            : }</a>
-<span class="lineNum">     149 </span>            : 
-<span class="lineNum">     150 </span><span class="lineCov">         13 : huffman::HuffmanTree::~HuffmanTree()</span>
-<span class="lineNum">     151 </span>            : {
-<span class="lineNum">     152 </span>            : 
-<a name="153"><span class="lineNum">     153 </span><span class="lineCov">         13 : }</span></a>
-<span class="lineNum">     154 </span>            : 
-<span class="lineNum">     155 </span><span class="lineCov">         44 : huffman::TreeNode* huffman::HuffmanTree::readNodes(const std::vector&lt;bool&gt;&amp; treeInBinary, uint64_t&amp; index)</span>
-<span class="lineNum">     156 </span>            : {
-<span class="lineNum">     157 </span><span class="lineCov">         44 :     if (treeInBinary.at(index++))</span>
-<span class="lineNum">     158 </span>            :     {
-<span class="lineNum">     159 </span><span class="lineCov">         24 :         huffman::types::byte_t byte = huffman::io::readByte(treeInBinary, index);</span>
-<span class="lineNum">     160 </span><span class="lineCov">         24 :         index += huffman::constants::BITS_IN_BYTE;</span>
-<span class="lineNum">     161 </span><span class="lineCov">         24 :         TreeNode* leaf = new huffman::TreeNode{byte};</span>
-<span class="lineNum">     162 </span><span class="lineCov">         24 :         leaf-&gt;isLeaf_ = true;</span>
-<span class="lineNum">     163 </span><span class="lineCov">         24 :         return leaf;</span>
-<span class="lineNum">     164 </span>            :     }
-<span class="lineNum">     165 </span><span class="lineCov">         20 :     TreeNode* parent = new TreeNode;</span>
-<span class="lineNum">     166 </span><span class="lineCov">         20 :     TreeNode* left = readNodes(treeInBinary, index);</span>
-<span class="lineNum">     167 </span><span class="lineCov">         20 :     TreeNode* right = readNodes(treeInBinary, index);</span>
-<span class="lineNum">     168 </span><span class="lineCov">         20 :     parent-&gt;left_.reset(left);</span>
-<span class="lineNum">     169 </span><span class="lineCov">         20 :     parent-&gt;right_.reset(right);</span>
-<span class="lineNum">     170 </span><span class="lineCov">         20 :     return parent;</span>
-<a name="171"><span class="lineNum">     171 </span>            : }</a>
-<span class="lineNum">     172 </span>            : 
-<span class="lineNum">     173 </span><span class="lineNoCov">          0 : huffman::HuffmanTree::HuffmanTree(huffman::HuffmanTree&amp;&amp; huffmanTree) : root_(nullptr)</span>
-<span class="lineNum">     174 </span>            : {
-<span class="lineNum">     175 </span><span class="lineNoCov">          0 :     root_ = std::move(huffmanTree.root_);</span>
-<a name="176"><span class="lineNum">     176 </span><span class="lineNoCov">          0 : }</span></a>
-<span class="lineNum">     177 </span>            : 
-<span class="lineNum">     178 </span><span class="lineCov">          4 : huffman::HuffmanTree&amp; huffman::HuffmanTree::operator=(huffman::HuffmanTree&amp;&amp; other)</span>
-<span class="lineNum">     179 </span>            : {
-<span class="lineNum">     180 </span><span class="lineCov">          4 :     if (this != &amp;other)</span>
-<span class="lineNum">     181 </span>            :     {
-<span class="lineNum">     182 </span><span class="lineCov">          4 :         root_ = std::move(other.root_);</span>
-<span class="lineNum">     183 </span>            :     }
-<span class="lineNum">     184 </span><span class="lineCov">          4 : }</span>
+<span class="lineNum">     142 </span><span class="lineCov">        110 :     return static_cast&lt;types::handle_t&gt;(nodes_.size());</span>
+<a name="143"><span class="lineNum">     143 </span>            : }</a>
+<span class="lineNum">     144 </span>            : 
+<span class="lineNum">     145 </span><span class="lineCov">         44 : void huffman::HuffmanTree::collectCharacterCodes(huffman::types::encode_table_t&amp; encode_table,</span>
+<span class="lineNum">     146 </span>            :                                                  huffman::types::handle_t rootHandle,
+<span class="lineNum">     147 </span>            :                                                  uint32_t code, uint8_t depth) const
+<span class="lineNum">     148 </span>            : {
+<span class="lineNum">     149 </span><span class="lineCov">         44 :     const huffman::TreeNode* root = getNode(rootHandle);</span>
+<span class="lineNum">     150 </span><span class="lineCov">         44 :     if (root-&gt;isLeaf())</span>
+<span class="lineNum">     151 </span>            :     {
+<span class="lineNum">     152 </span><span class="lineCov">         24 :         encode_table[root-&gt;getData()] = huffman::types::encode_entry_t{code, depth};</span>
+<span class="lineNum">     153 </span>            :     } else
+<span class="lineNum">     154 </span>            :     {
+<span class="lineNum">     155 </span><span class="lineCov">         20 :         uint32_t leftCode = code &lt;&lt; 1;</span>
+<span class="lineNum">     156 </span><span class="lineCov">         20 :         uint32_t rightCode = (code &lt;&lt; 1) + 1;</span>
+<span class="lineNum">     157 </span><span class="lineCov">         20 :         ++depth;</span>
+<span class="lineNum">     158 </span>            : 
+<span class="lineNum">     159 </span><span class="lineCov">         20 :         assert(root-&gt;getLeftChildHandle() != constants::empty_handle);</span>
+<span class="lineNum">     160 </span><span class="lineCov">         20 :         assert(root-&gt;getRightChildHandle() != constants::empty_handle);</span>
+<span class="lineNum">     161 </span><span class="lineCov">         20 :         assert(depth &lt; huffman::constants::MAX_CODE_LENGTH);</span>
+<span class="lineNum">     162 </span>            : 
+<span class="lineNum">     163 </span><span class="lineCov">         20 :         collectCharacterCodes(encode_table, root-&gt;getLeftChildHandle(), leftCode, depth);</span>
+<span class="lineNum">     164 </span><span class="lineCov">         20 :         collectCharacterCodes(encode_table, root-&gt;getRightChildHandle(), rightCode, depth);</span>
+<span class="lineNum">     165 </span>            : 
+<span class="lineNum">     166 </span>            :     }
+<a name="167"><span class="lineNum">     167 </span><span class="lineCov">         44 : }</span></a>
+<span class="lineNum">     168 </span>            : 
+<span class="lineNum">     169 </span><span class="lineNoCov">          0 : void huffman::HuffmanTree::printTreeRecursive(std::ostream&amp; ostream, types::handle_t rootHandle,</span>
+<span class="lineNum">     170 </span>            :                                               std::string&amp; string) const
+<span class="lineNum">     171 </span>            : {
+<span class="lineNum">     172 </span><span class="lineNoCov">          0 :     const TreeNode* root = getNode(rootHandle);</span>
+<span class="lineNum">     173 </span><span class="lineNoCov">          0 :     if (root-&gt;isLeaf())</span>
+<span class="lineNum">     174 </span>            :     {
+<span class="lineNum">     175 </span><span class="lineNoCov">          0 :         ostream &lt;&lt; string &lt;&lt; &quot; : &quot; &lt;&lt; root-&gt;getData() &lt;&lt; std::endl;</span>
+<span class="lineNum">     176 </span>            :     }
+<span class="lineNum">     177 </span>            :     else
+<span class="lineNum">     178 </span>            :     {
+<span class="lineNum">     179 </span><span class="lineNoCov">          0 :         assert(root-&gt;getLeftChildHandle() != constants::empty_handle);</span>
+<span class="lineNum">     180 </span><span class="lineNoCov">          0 :         assert(root-&gt;getRightChildHandle() != constants::empty_handle);</span>
+<span class="lineNum">     181 </span>            : 
+<span class="lineNum">     182 </span><span class="lineNoCov">          0 :         string += &quot;0&quot;;</span>
+<span class="lineNum">     183 </span><span class="lineNoCov">          0 :         printTreeRecursive(ostream, root-&gt;getLeftChildHandle(), string);</span>
+<span class="lineNum">     184 </span><span class="lineNoCov">          0 :         string.pop_back();</span>
 <span class="lineNum">     185 </span>            : 
-<span class="lineNum">     186 </span>            : 
+<span class="lineNum">     186 </span><span class="lineNoCov">          0 :         string += &quot;1&quot;;</span>
+<span class="lineNum">     187 </span><span class="lineNoCov">          0 :         printTreeRecursive(ostream, root-&gt;getRightChildHandle(), string);</span>
+<span class="lineNum">     188 </span><span class="lineNoCov">          0 :         string.pop_back();</span>
+<span class="lineNum">     189 </span>            : 
+<span class="lineNum">     190 </span>            :     }
+<a name="191"><span class="lineNum">     191 </span><span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">     192 </span>            : 
+<span class="lineNum">     193 </span><span class="lineCov">        161 : bool huffman::HuffmanTree::TreeNodeComparator::operator()(const types::handle_t &amp;aHandle, const types::handle_t &amp;bHandle) const</span>
+<span class="lineNum">     194 </span>            : {
+<span class="lineNum">     195 </span><span class="lineCov">        161 :     const huffman::TreeNode* a = huffmanTree_.getNode(aHandle);</span>
+<span class="lineNum">     196 </span><span class="lineCov">        161 :     const huffman::TreeNode* b = huffmanTree_.getNode(bHandle);</span>
+<span class="lineNum">     197 </span><span class="lineCov">        161 :     if (a-&gt;getFrequency() &gt; b-&gt;getFrequency())</span>
+<span class="lineNum">     198 </span>            :     {
+<span class="lineNum">     199 </span><span class="lineCov">         37 :         return true;</span>
+<span class="lineNum">     200 </span>            :     }
+<span class="lineNum">     201 </span><span class="lineCov">        124 :     if (a-&gt;getFrequency() == b-&gt;getFrequency())</span>
+<span class="lineNum">     202 </span>            :     {
+<span class="lineNum">     203 </span><span class="lineCov">         33 :         if (a-&gt;getData() &gt; b-&gt;getData())</span>
+<span class="lineNum">     204 </span>            :         {
+<span class="lineNum">     205 </span><span class="lineCov">         25 :             return true;</span>
+<span class="lineNum">     206 </span>            :         }
+<span class="lineNum">     207 </span>            :     }
+<span class="lineNum">     208 </span><span class="lineCov">         99 :     return false;</span>
+<span class="lineNum">     209 </span>            : }
+<span class="lineNum">     210 </span>            : 
 </pre>
       </td>
     </tr>
