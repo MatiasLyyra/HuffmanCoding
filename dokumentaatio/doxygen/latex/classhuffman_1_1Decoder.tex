@@ -1,0 +1,75 @@
+\hypertarget{classhuffman_1_1Decoder}{}\section{huffman\+:\+:Decoder Class Reference}
+\label{classhuffman_1_1Decoder}\index{huffman\+::\+Decoder@{huffman\+::\+Decoder}}
+
+
+{\ttfamily \#include $<$Decoder.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classhuffman_1_1Decoder_a9a94a9ebfb922a8a21d7d9912e5032ed}{Decoder} ()
+\item 
+void \hyperlink{classhuffman_1_1Decoder_a7c8a8ed29b99c15e9ac92896e58e31d0}{decode\+Data} (const \hyperlink{classcommon_1_1BitStack}{common\+::\+Bit\+Stack} \&tree\+In\+Binary, const \hyperlink{classcommon_1_1BitStack}{common\+::\+Bit\+Stack} \&encoded\+Data)
+\item 
+const common\+::\+Vector$<$ \hyperlink{namespacehuffman_1_1types_a198fb2bbef1012ab1696124836c56f0d}{huffman\+::types\+::byte\+\_\+t} $>$ \& \hyperlink{classhuffman_1_1Decoder_ae850fc282ed2cf484f4a8888bc1f8763}{get\+Decoded\+Data} () const 
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class responsible for decoding given envcoded data. 
+
+Definition at line 16 of file Decoder.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{huffman\+::\+Decoder@{huffman\+::\+Decoder}!Decoder@{Decoder}}
+\index{Decoder@{Decoder}!huffman\+::\+Decoder@{huffman\+::\+Decoder}}
+\subsubsection[{\texorpdfstring{Decoder()}{Decoder()}}]{\setlength{\rightskip}{0pt plus 5cm}huffman\+::\+Decoder\+::\+Decoder (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classhuffman_1_1Decoder_a9a94a9ebfb922a8a21d7d9912e5032ed}{}\label{classhuffman_1_1Decoder_a9a94a9ebfb922a8a21d7d9912e5032ed}
+
+
+Definition at line 6 of file Decoder.\+cpp.
+
+
+
+\subsection{Member Function Documentation}
+\index{huffman\+::\+Decoder@{huffman\+::\+Decoder}!decode\+Data@{decode\+Data}}
+\index{decode\+Data@{decode\+Data}!huffman\+::\+Decoder@{huffman\+::\+Decoder}}
+\subsubsection[{\texorpdfstring{decode\+Data(const common\+::\+Bit\+Stack \&tree\+In\+Binary, const common\+::\+Bit\+Stack \&encoded\+Data)}{decodeData(const common::BitStack &treeInBinary, const common::BitStack &encodedData)}}]{\setlength{\rightskip}{0pt plus 5cm}void huffman\+::\+Decoder\+::decode\+Data (
+\begin{DoxyParamCaption}
+\item[{const {\bf common\+::\+Bit\+Stack} \&}]{tree\+In\+Binary, }
+\item[{const {\bf common\+::\+Bit\+Stack} \&}]{encoded\+Data}
+\end{DoxyParamCaption}
+)}\hypertarget{classhuffman_1_1Decoder_a7c8a8ed29b99c15e9ac92896e58e31d0}{}\label{classhuffman_1_1Decoder_a7c8a8ed29b99c15e9ac92896e58e31d0}
+Decodes the given encoded data. Decoded data can be read from \hyperlink{classhuffman_1_1Decoder_ae850fc282ed2cf484f4a8888bc1f8763}{get\+Decoded\+Data()}. 
+\begin{DoxyParams}{Parameters}
+{\em tree\+In\+Binary} & Binary representation of \hyperlink{classhuffman_1_1HuffmanTree}{Huffman\+Tree} \\
+\hline
+{\em encoded\+Data} & Encoded data which is decoded \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 11 of file Decoder.\+cpp.
+
+\index{huffman\+::\+Decoder@{huffman\+::\+Decoder}!get\+Decoded\+Data@{get\+Decoded\+Data}}
+\index{get\+Decoded\+Data@{get\+Decoded\+Data}!huffman\+::\+Decoder@{huffman\+::\+Decoder}}
+\subsubsection[{\texorpdfstring{get\+Decoded\+Data() const }{getDecodedData() const }}]{\setlength{\rightskip}{0pt plus 5cm}const common\+::\+Vector$<$ {\bf huffman\+::types\+::byte\+\_\+t} $>$ \& huffman\+::\+Decoder\+::get\+Decoded\+Data (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classhuffman_1_1Decoder_ae850fc282ed2cf484f4a8888bc1f8763}{}\label{classhuffman_1_1Decoder_ae850fc282ed2cf484f4a8888bc1f8763}
+
+
+Definition at line 29 of file Decoder.\+cpp.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{Decoder_8h}{Decoder.\+h}\item 
+\hyperlink{Decoder_8cpp}{Decoder.\+cpp}\end{DoxyCompactItemize}

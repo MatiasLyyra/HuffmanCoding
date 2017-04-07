@@ -1,0 +1,148 @@
+\hypertarget{classhuffman_1_1TreeNode}{}\section{huffman\+:\+:Tree\+Node Class Reference}
+\label{classhuffman_1_1TreeNode}\index{huffman\+::\+Tree\+Node@{huffman\+::\+Tree\+Node}}
+
+
+{\ttfamily \#include $<$Tree\+Node.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classhuffman_1_1TreeNode_a646d0926ef89e40457ecc763ed72b2b3}{Tree\+Node} (\hyperlink{namespacehuffman_1_1types_a41dc8ca07e19043152b0a5c8b5fec90b}{types\+::handle\+\_\+t} handle, \hyperlink{namespacehuffman_1_1types_a198fb2bbef1012ab1696124836c56f0d}{types\+::byte\+\_\+t} data=0, unsigned frequency=0, bool \hyperlink{classhuffman_1_1TreeNode_ae7f4f2f80c14fd5a75324ade5011c422}{is\+Leaf}=false)
+\item 
+\hyperlink{namespacehuffman_1_1types_a198fb2bbef1012ab1696124836c56f0d}{types\+::byte\+\_\+t} \hyperlink{classhuffman_1_1TreeNode_a3f873c80f09c1687024e93db059df7f9}{get\+Data} () const 
+\item 
+\hyperlink{namespacehuffman_1_1types_a41dc8ca07e19043152b0a5c8b5fec90b}{types\+::handle\+\_\+t} \hyperlink{classhuffman_1_1TreeNode_a1dd4d1c1f488a4456aff71bd88186504}{get\+Handle} () const 
+\item 
+\hyperlink{namespacehuffman_1_1types_a41dc8ca07e19043152b0a5c8b5fec90b}{types\+::handle\+\_\+t} \hyperlink{classhuffman_1_1TreeNode_ac3b06247d549478cd6ddefaa07bac996}{get\+Left\+Child\+Handle} () const 
+\item 
+\hyperlink{namespacehuffman_1_1types_a41dc8ca07e19043152b0a5c8b5fec90b}{types\+::handle\+\_\+t} \hyperlink{classhuffman_1_1TreeNode_a660cb585c478d66e2b1e7f601689bfdd}{get\+Right\+Child\+Handle} () const 
+\item 
+unsigned \hyperlink{classhuffman_1_1TreeNode_a8de84d3587bcd650528c4db96621a802}{get\+Frequency} () const 
+\item 
+bool \hyperlink{classhuffman_1_1TreeNode_ae7f4f2f80c14fd5a75324ade5011c422}{is\+Leaf} () const 
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classhuffman_1_1TreeNode_a062a9593db748950f1e31d49fd2cae41}{Huffman\+Tree}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Represents single node within Huffman tree. 
+
+Definition at line 11 of file Tree\+Node.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{huffman\+::\+Tree\+Node@{huffman\+::\+Tree\+Node}!Tree\+Node@{Tree\+Node}}
+\index{Tree\+Node@{Tree\+Node}!huffman\+::\+Tree\+Node@{huffman\+::\+Tree\+Node}}
+\subsubsection[{\texorpdfstring{Tree\+Node(types\+::handle\+\_\+t handle, types\+::byte\+\_\+t data=0, unsigned frequency=0, bool is\+Leaf=false)}{TreeNode(types::handle_t handle, types::byte_t data=0, unsigned frequency=0, bool isLeaf=false)}}]{\setlength{\rightskip}{0pt plus 5cm}huffman\+::\+Tree\+Node\+::\+Tree\+Node (
+\begin{DoxyParamCaption}
+\item[{{\bf types\+::handle\+\_\+t}}]{handle, }
+\item[{{\bf types\+::byte\+\_\+t}}]{data = {\ttfamily 0}, }
+\item[{unsigned}]{frequency = {\ttfamily 0}, }
+\item[{bool}]{is\+Leaf = {\ttfamily false}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [explicit]}}\hypertarget{classhuffman_1_1TreeNode_a646d0926ef89e40457ecc763ed72b2b3}{}\label{classhuffman_1_1TreeNode_a646d0926ef89e40457ecc763ed72b2b3}
+Constructs node based on given arguments. 
+\begin{DoxyParams}{Parameters}
+{\em handle} & Handle to this node. \\
+\hline
+{\em data} & Data that the node holds. Default is 0. \\
+\hline
+{\em frequency} & Frequency of the data. Default is 0. \\
+\hline
+{\em is\+Leaf} & Whether Node is leaf. Default is false. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 3 of file Tree\+Node.\+cpp.
+
+
+
+\subsection{Member Function Documentation}
+\index{huffman\+::\+Tree\+Node@{huffman\+::\+Tree\+Node}!get\+Data@{get\+Data}}
+\index{get\+Data@{get\+Data}!huffman\+::\+Tree\+Node@{huffman\+::\+Tree\+Node}}
+\subsubsection[{\texorpdfstring{get\+Data() const }{getData() const }}]{\setlength{\rightskip}{0pt plus 5cm}unsigned char huffman\+::\+Tree\+Node\+::get\+Data (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classhuffman_1_1TreeNode_a3f873c80f09c1687024e93db059df7f9}{}\label{classhuffman_1_1TreeNode_a3f873c80f09c1687024e93db059df7f9}
+
+
+Definition at line 13 of file Tree\+Node.\+cpp.
+
+\index{huffman\+::\+Tree\+Node@{huffman\+::\+Tree\+Node}!get\+Frequency@{get\+Frequency}}
+\index{get\+Frequency@{get\+Frequency}!huffman\+::\+Tree\+Node@{huffman\+::\+Tree\+Node}}
+\subsubsection[{\texorpdfstring{get\+Frequency() const }{getFrequency() const }}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int huffman\+::\+Tree\+Node\+::get\+Frequency (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classhuffman_1_1TreeNode_a8de84d3587bcd650528c4db96621a802}{}\label{classhuffman_1_1TreeNode_a8de84d3587bcd650528c4db96621a802}
+
+
+Definition at line 28 of file Tree\+Node.\+cpp.
+
+\index{huffman\+::\+Tree\+Node@{huffman\+::\+Tree\+Node}!get\+Handle@{get\+Handle}}
+\index{get\+Handle@{get\+Handle}!huffman\+::\+Tree\+Node@{huffman\+::\+Tree\+Node}}
+\subsubsection[{\texorpdfstring{get\+Handle() const }{getHandle() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf huffman\+::types\+::handle\+\_\+t} huffman\+::\+Tree\+Node\+::get\+Handle (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classhuffman_1_1TreeNode_a1dd4d1c1f488a4456aff71bd88186504}{}\label{classhuffman_1_1TreeNode_a1dd4d1c1f488a4456aff71bd88186504}
+
+
+Definition at line 38 of file Tree\+Node.\+cpp.
+
+\index{huffman\+::\+Tree\+Node@{huffman\+::\+Tree\+Node}!get\+Left\+Child\+Handle@{get\+Left\+Child\+Handle}}
+\index{get\+Left\+Child\+Handle@{get\+Left\+Child\+Handle}!huffman\+::\+Tree\+Node@{huffman\+::\+Tree\+Node}}
+\subsubsection[{\texorpdfstring{get\+Left\+Child\+Handle() const }{getLeftChildHandle() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf huffman\+::types\+::handle\+\_\+t} huffman\+::\+Tree\+Node\+::get\+Left\+Child\+Handle (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classhuffman_1_1TreeNode_ac3b06247d549478cd6ddefaa07bac996}{}\label{classhuffman_1_1TreeNode_ac3b06247d549478cd6ddefaa07bac996}
+
+
+Definition at line 18 of file Tree\+Node.\+cpp.
+
+\index{huffman\+::\+Tree\+Node@{huffman\+::\+Tree\+Node}!get\+Right\+Child\+Handle@{get\+Right\+Child\+Handle}}
+\index{get\+Right\+Child\+Handle@{get\+Right\+Child\+Handle}!huffman\+::\+Tree\+Node@{huffman\+::\+Tree\+Node}}
+\subsubsection[{\texorpdfstring{get\+Right\+Child\+Handle() const }{getRightChildHandle() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf huffman\+::types\+::handle\+\_\+t} huffman\+::\+Tree\+Node\+::get\+Right\+Child\+Handle (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classhuffman_1_1TreeNode_a660cb585c478d66e2b1e7f601689bfdd}{}\label{classhuffman_1_1TreeNode_a660cb585c478d66e2b1e7f601689bfdd}
+
+
+Definition at line 23 of file Tree\+Node.\+cpp.
+
+\index{huffman\+::\+Tree\+Node@{huffman\+::\+Tree\+Node}!is\+Leaf@{is\+Leaf}}
+\index{is\+Leaf@{is\+Leaf}!huffman\+::\+Tree\+Node@{huffman\+::\+Tree\+Node}}
+\subsubsection[{\texorpdfstring{is\+Leaf() const }{isLeaf() const }}]{\setlength{\rightskip}{0pt plus 5cm}bool huffman\+::\+Tree\+Node\+::is\+Leaf (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classhuffman_1_1TreeNode_ae7f4f2f80c14fd5a75324ade5011c422}{}\label{classhuffman_1_1TreeNode_ae7f4f2f80c14fd5a75324ade5011c422}
+
+
+Definition at line 33 of file Tree\+Node.\+cpp.
+
+
+
+\subsection{Friends And Related Function Documentation}
+\index{huffman\+::\+Tree\+Node@{huffman\+::\+Tree\+Node}!Huffman\+Tree@{Huffman\+Tree}}
+\index{Huffman\+Tree@{Huffman\+Tree}!huffman\+::\+Tree\+Node@{huffman\+::\+Tree\+Node}}
+\subsubsection[{\texorpdfstring{Huffman\+Tree}{HuffmanTree}}]{\setlength{\rightskip}{0pt plus 5cm}friend class {\bf Huffman\+Tree}\hspace{0.3cm}{\ttfamily [friend]}}\hypertarget{classhuffman_1_1TreeNode_a062a9593db748950f1e31d49fd2cae41}{}\label{classhuffman_1_1TreeNode_a062a9593db748950f1e31d49fd2cae41}
+
+
+Definition at line 14 of file Tree\+Node.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{TreeNode_8h}{Tree\+Node.\+h}\item 
+\hyperlink{TreeNode_8cpp}{Tree\+Node.\+cpp}\end{DoxyCompactItemize}

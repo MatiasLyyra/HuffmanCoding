@@ -1,0 +1,298 @@
+\hypertarget{classcommon_1_1BitStack}{}\section{common\+:\+:Bit\+Stack Class Reference}
+\label{classcommon_1_1BitStack}\index{common\+::\+Bit\+Stack@{common\+::\+Bit\+Stack}}
+
+
+{\ttfamily \#include $<$Bit\+Stack.\+h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \hyperlink{classcommon_1_1BitStack_a058742dc4b8474a7896e6ce27878f306}{size\+\_\+type} = std\+::size\+\_\+t
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classcommon_1_1BitStack_a83f7b486f331be745248aed1ec9364dc}{Bit\+Stack} ()
+\item 
+void \hyperlink{classcommon_1_1BitStack_a737771641c4db9bde300c7d5dc9a8441}{push\+\_\+back} (bool value)
+\item 
+void \hyperlink{classcommon_1_1BitStack_af60c2f933ee1611608895627a0ed18aa}{push\+\_\+back} (uint32\+\_\+t value, uint8\+\_\+t length)
+\item 
+void \hyperlink{classcommon_1_1BitStack_ab08e0113d282540f02ca08418b3a836d}{pop\+\_\+back} () noexcept
+\item 
+void \hyperlink{classcommon_1_1BitStack_af06daa8a793db638c175ce63d1eaf87a}{reserve} (\hyperlink{classcommon_1_1BitStack_a058742dc4b8474a7896e6ce27878f306}{size\+\_\+type} amount)
+\item 
+bool \hyperlink{classcommon_1_1BitStack_ac7a29aaf6738d1a6610a390c0529e911}{operator\mbox{[}$\,$\mbox{]}} (\hyperlink{classcommon_1_1BitStack_a058742dc4b8474a7896e6ce27878f306}{size\+\_\+type} index) const 
+\item 
+bool \hyperlink{classcommon_1_1BitStack_a038373df3ee2c1e81a9b9611184d9824}{at} (\hyperlink{classcommon_1_1BitStack_a058742dc4b8474a7896e6ce27878f306}{size\+\_\+type} index) const 
+\item 
+bool \hyperlink{classcommon_1_1BitStack_acf297b6ccb4213a1b1c9a01e2b253ee7}{top} () const 
+\item 
+bool \hyperlink{classcommon_1_1BitStack_a188d0ebee826c00d900db99ffc3c8e7a}{empty} () const noexcept
+\item 
+void \hyperlink{classcommon_1_1BitStack_a6bee6c6d8600a9ebef0eef56ec938b1d}{clear} () noexcept
+\item 
+Vector$<$ uint32\+\_\+t $>$\+::\hyperlink{classcommon_1_1BitStack_a058742dc4b8474a7896e6ce27878f306}{size\+\_\+type} \hyperlink{classcommon_1_1BitStack_ae9c4073dbca4c587a1ec9ae07b61d062}{container\+\_\+size} () const noexcept
+\item 
+\hyperlink{classcommon_1_1BitStack_a058742dc4b8474a7896e6ce27878f306}{size\+\_\+type} \hyperlink{classcommon_1_1BitStack_ae6c6288d46a78231ebe544f56be07f62}{size} () const noexcept
+\item 
+\hyperlink{classcommon_1_1BitStack_a058742dc4b8474a7896e6ce27878f306}{size\+\_\+type} \hyperlink{classcommon_1_1BitStack_a5f3f0ddfd5ffd8fec560d9e51169eb51}{capacity} () const noexcept
+\item 
+uint32\+\_\+t $\ast$ \hyperlink{classcommon_1_1BitStack_abe5eab2e2d3e83bd26f8082c0b03730a}{data} () noexcept
+\item 
+const uint32\+\_\+t $\ast$ \hyperlink{classcommon_1_1BitStack_aa2ab95aeba4a83cfb1d3cb160e63cc5e}{data} () const noexcept
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Stack data structure for holding binary data efficiently. 
+
+Definition at line 11 of file Bit\+Stack.\+h.
+
+
+
+\subsection{Member Typedef Documentation}
+\index{common\+::\+Bit\+Stack@{common\+::\+Bit\+Stack}!size\+\_\+type@{size\+\_\+type}}
+\index{size\+\_\+type@{size\+\_\+type}!common\+::\+Bit\+Stack@{common\+::\+Bit\+Stack}}
+\subsubsection[{\texorpdfstring{size\+\_\+type}{size_type}}]{\setlength{\rightskip}{0pt plus 5cm}using {\bf common\+::\+Bit\+Stack\+::size\+\_\+type} =  std\+::size\+\_\+t}\hypertarget{classcommon_1_1BitStack_a058742dc4b8474a7896e6ce27878f306}{}\label{classcommon_1_1BitStack_a058742dc4b8474a7896e6ce27878f306}
+
+
+Definition at line 14 of file Bit\+Stack.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{common\+::\+Bit\+Stack@{common\+::\+Bit\+Stack}!Bit\+Stack@{Bit\+Stack}}
+\index{Bit\+Stack@{Bit\+Stack}!common\+::\+Bit\+Stack@{common\+::\+Bit\+Stack}}
+\subsubsection[{\texorpdfstring{Bit\+Stack()}{BitStack()}}]{\setlength{\rightskip}{0pt plus 5cm}common\+::\+Bit\+Stack\+::\+Bit\+Stack (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classcommon_1_1BitStack_a83f7b486f331be745248aed1ec9364dc}{}\label{classcommon_1_1BitStack_a83f7b486f331be745248aed1ec9364dc}
+Constructs empty \hyperlink{classcommon_1_1BitStack}{Bit\+Stack} 
+
+Definition at line 3 of file Bit\+Stack.\+cpp.
+
+
+
+\subsection{Member Function Documentation}
+\index{common\+::\+Bit\+Stack@{common\+::\+Bit\+Stack}!at@{at}}
+\index{at@{at}!common\+::\+Bit\+Stack@{common\+::\+Bit\+Stack}}
+\subsubsection[{\texorpdfstring{at(size\+\_\+type index) const }{at(size_type index) const }}]{\setlength{\rightskip}{0pt plus 5cm}bool common\+::\+Bit\+Stack\+::at (
+\begin{DoxyParamCaption}
+\item[{{\bf size\+\_\+type}}]{index}
+\end{DoxyParamCaption}
+) const}\hypertarget{classcommon_1_1BitStack_a038373df3ee2c1e81a9b9611184d9824}{}\label{classcommon_1_1BitStack_a038373df3ee2c1e81a9b9611184d9824}
+Provides access to individual bit value in the stack 
+\begin{DoxyParams}{Parameters}
+{\em index} & Index of the bit \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Value of the bit 
+\end{DoxyReturn}
+
+
+Definition at line 101 of file Bit\+Stack.\+cpp.
+
+\index{common\+::\+Bit\+Stack@{common\+::\+Bit\+Stack}!capacity@{capacity}}
+\index{capacity@{capacity}!common\+::\+Bit\+Stack@{common\+::\+Bit\+Stack}}
+\subsubsection[{\texorpdfstring{capacity() const noexcept}{capacity() const noexcept}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf common\+::\+Bit\+Stack\+::size\+\_\+type} common\+::\+Bit\+Stack\+::capacity (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [noexcept]}}\hypertarget{classcommon_1_1BitStack_a5f3f0ddfd5ffd8fec560d9e51169eb51}{}\label{classcommon_1_1BitStack_a5f3f0ddfd5ffd8fec560d9e51169eb51}
+Capacity of the stack \begin{DoxyReturn}{Returns}
+Capacity of the stack. 
+\end{DoxyReturn}
+
+
+Definition at line 116 of file Bit\+Stack.\+cpp.
+
+\index{common\+::\+Bit\+Stack@{common\+::\+Bit\+Stack}!clear@{clear}}
+\index{clear@{clear}!common\+::\+Bit\+Stack@{common\+::\+Bit\+Stack}}
+\subsubsection[{\texorpdfstring{clear() noexcept}{clear() noexcept}}]{\setlength{\rightskip}{0pt plus 5cm}void common\+::\+Bit\+Stack\+::clear (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [noexcept]}}\hypertarget{classcommon_1_1BitStack_a6bee6c6d8600a9ebef0eef56ec938b1d}{}\label{classcommon_1_1BitStack_a6bee6c6d8600a9ebef0eef56ec938b1d}
+Clears the whole stack. 
+
+Definition at line 121 of file Bit\+Stack.\+cpp.
+
+\index{common\+::\+Bit\+Stack@{common\+::\+Bit\+Stack}!container\+\_\+size@{container\+\_\+size}}
+\index{container\+\_\+size@{container\+\_\+size}!common\+::\+Bit\+Stack@{common\+::\+Bit\+Stack}}
+\subsubsection[{\texorpdfstring{container\+\_\+size() const noexcept}{container_size() const noexcept}}]{\setlength{\rightskip}{0pt plus 5cm}common\+::\+Vector$<$ uint32\+\_\+t $>$\+::{\bf size\+\_\+type} common\+::\+Bit\+Stack\+::container\+\_\+size (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [noexcept]}}\hypertarget{classcommon_1_1BitStack_ae9c4073dbca4c587a1ec9ae07b61d062}{}\label{classcommon_1_1BitStack_ae9c4073dbca4c587a1ec9ae07b61d062}
+Returns the true size of the underlying container. \begin{DoxyReturn}{Returns}
+Size of the container. 
+\end{DoxyReturn}
+
+
+Definition at line 137 of file Bit\+Stack.\+cpp.
+
+\index{common\+::\+Bit\+Stack@{common\+::\+Bit\+Stack}!data@{data}}
+\index{data@{data}!common\+::\+Bit\+Stack@{common\+::\+Bit\+Stack}}
+\subsubsection[{\texorpdfstring{data() noexcept}{data() noexcept}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t $\ast$ common\+::\+Bit\+Stack\+::data (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [noexcept]}}\hypertarget{classcommon_1_1BitStack_abe5eab2e2d3e83bd26f8082c0b03730a}{}\label{classcommon_1_1BitStack_abe5eab2e2d3e83bd26f8082c0b03730a}
+Pointer to the data of the stack. \begin{DoxyReturn}{Returns}
+Pointer to the data. 
+\end{DoxyReturn}
+
+
+Definition at line 127 of file Bit\+Stack.\+cpp.
+
+\index{common\+::\+Bit\+Stack@{common\+::\+Bit\+Stack}!data@{data}}
+\index{data@{data}!common\+::\+Bit\+Stack@{common\+::\+Bit\+Stack}}
+\subsubsection[{\texorpdfstring{data() const noexcept}{data() const noexcept}}]{\setlength{\rightskip}{0pt plus 5cm}const uint32\+\_\+t $\ast$ common\+::\+Bit\+Stack\+::data (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [noexcept]}}\hypertarget{classcommon_1_1BitStack_aa2ab95aeba4a83cfb1d3cb160e63cc5e}{}\label{classcommon_1_1BitStack_aa2ab95aeba4a83cfb1d3cb160e63cc5e}
+Pointer to the data of the stack. \begin{DoxyReturn}{Returns}
+Pointer to the data. 
+\end{DoxyReturn}
+
+
+Definition at line 132 of file Bit\+Stack.\+cpp.
+
+\index{common\+::\+Bit\+Stack@{common\+::\+Bit\+Stack}!empty@{empty}}
+\index{empty@{empty}!common\+::\+Bit\+Stack@{common\+::\+Bit\+Stack}}
+\subsubsection[{\texorpdfstring{empty() const noexcept}{empty() const noexcept}}]{\setlength{\rightskip}{0pt plus 5cm}bool common\+::\+Bit\+Stack\+::empty (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [noexcept]}}\hypertarget{classcommon_1_1BitStack_a188d0ebee826c00d900db99ffc3c8e7a}{}\label{classcommon_1_1BitStack_a188d0ebee826c00d900db99ffc3c8e7a}
+Returns true if the stack is empty, otherwise false. \begin{DoxyReturn}{Returns}
+True if the stack is empty, otherwise false. 
+\end{DoxyReturn}
+
+
+Definition at line 106 of file Bit\+Stack.\+cpp.
+
+\index{common\+::\+Bit\+Stack@{common\+::\+Bit\+Stack}!operator\mbox{[}$\,$\mbox{]}@{operator[]}}
+\index{operator\mbox{[}$\,$\mbox{]}@{operator[]}!common\+::\+Bit\+Stack@{common\+::\+Bit\+Stack}}
+\subsubsection[{\texorpdfstring{operator[](size\+\_\+type index) const }{operator[](size_type index) const }}]{\setlength{\rightskip}{0pt plus 5cm}bool common\+::\+Bit\+Stack\+::operator\mbox{[}$\,$\mbox{]} (
+\begin{DoxyParamCaption}
+\item[{{\bf size\+\_\+type}}]{index}
+\end{DoxyParamCaption}
+) const}\hypertarget{classcommon_1_1BitStack_ac7a29aaf6738d1a6610a390c0529e911}{}\label{classcommon_1_1BitStack_ac7a29aaf6738d1a6610a390c0529e911}
+Provides access to individual bit value in the stack 
+\begin{DoxyParams}{Parameters}
+{\em index} & Index of the bit \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Value of the bit 
+\end{DoxyReturn}
+
+
+Definition at line 90 of file Bit\+Stack.\+cpp.
+
+\index{common\+::\+Bit\+Stack@{common\+::\+Bit\+Stack}!pop\+\_\+back@{pop\+\_\+back}}
+\index{pop\+\_\+back@{pop\+\_\+back}!common\+::\+Bit\+Stack@{common\+::\+Bit\+Stack}}
+\subsubsection[{\texorpdfstring{pop\+\_\+back() noexcept}{pop_back() noexcept}}]{\setlength{\rightskip}{0pt plus 5cm}void common\+::\+Bit\+Stack\+::pop\+\_\+back (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [noexcept]}}\hypertarget{classcommon_1_1BitStack_ab08e0113d282540f02ca08418b3a836d}{}\label{classcommon_1_1BitStack_ab08e0113d282540f02ca08418b3a836d}
+Removes the last bit in the stack. 
+
+Definition at line 75 of file Bit\+Stack.\+cpp.
+
+\index{common\+::\+Bit\+Stack@{common\+::\+Bit\+Stack}!push\+\_\+back@{push\+\_\+back}}
+\index{push\+\_\+back@{push\+\_\+back}!common\+::\+Bit\+Stack@{common\+::\+Bit\+Stack}}
+\subsubsection[{\texorpdfstring{push\+\_\+back(bool value)}{push_back(bool value)}}]{\setlength{\rightskip}{0pt plus 5cm}void common\+::\+Bit\+Stack\+::push\+\_\+back (
+\begin{DoxyParamCaption}
+\item[{bool}]{value}
+\end{DoxyParamCaption}
+)}\hypertarget{classcommon_1_1BitStack_a737771641c4db9bde300c7d5dc9a8441}{}\label{classcommon_1_1BitStack_a737771641c4db9bde300c7d5dc9a8441}
+Inserts value at the end of the stack. 
+\begin{DoxyParams}{Parameters}
+{\em value} & Value to insert. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 10 of file Bit\+Stack.\+cpp.
+
+\index{common\+::\+Bit\+Stack@{common\+::\+Bit\+Stack}!push\+\_\+back@{push\+\_\+back}}
+\index{push\+\_\+back@{push\+\_\+back}!common\+::\+Bit\+Stack@{common\+::\+Bit\+Stack}}
+\subsubsection[{\texorpdfstring{push\+\_\+back(uint32\+\_\+t value, uint8\+\_\+t length)}{push_back(uint32_t value, uint8_t length)}}]{\setlength{\rightskip}{0pt plus 5cm}void common\+::\+Bit\+Stack\+::push\+\_\+back (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{value, }
+\item[{uint8\+\_\+t}]{length}
+\end{DoxyParamCaption}
+)}\hypertarget{classcommon_1_1BitStack_af60c2f933ee1611608895627a0ed18aa}{}\label{classcommon_1_1BitStack_af60c2f933ee1611608895627a0ed18aa}
+Inserts values to the end of the stack. Parameter value is handled as a string of binary values. Length signifies how many bits of the value are included starting from the least significant bit. 
+\begin{DoxyParams}{Parameters}
+{\em value} & String of bits to insert \\
+\hline
+{\em length} & Amount of bits inserted starting from the least significant bit. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::illegal\+\_\+argument} & if length is zero or greater than 32. \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line 21 of file Bit\+Stack.\+cpp.
+
+\index{common\+::\+Bit\+Stack@{common\+::\+Bit\+Stack}!reserve@{reserve}}
+\index{reserve@{reserve}!common\+::\+Bit\+Stack@{common\+::\+Bit\+Stack}}
+\subsubsection[{\texorpdfstring{reserve(size\+\_\+type amount)}{reserve(size_type amount)}}]{\setlength{\rightskip}{0pt plus 5cm}void common\+::\+Bit\+Stack\+::reserve (
+\begin{DoxyParamCaption}
+\item[{{\bf size\+\_\+type}}]{amount}
+\end{DoxyParamCaption}
+)}\hypertarget{classcommon_1_1BitStack_af06daa8a793db638c175ce63d1eaf87a}{}\label{classcommon_1_1BitStack_af06daa8a793db638c175ce63d1eaf87a}
+Reserves space for at least specified amount of bits. 
+\begin{DoxyParams}{Parameters}
+{\em amount} & \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 85 of file Bit\+Stack.\+cpp.
+
+\index{common\+::\+Bit\+Stack@{common\+::\+Bit\+Stack}!size@{size}}
+\index{size@{size}!common\+::\+Bit\+Stack@{common\+::\+Bit\+Stack}}
+\subsubsection[{\texorpdfstring{size() const noexcept}{size() const noexcept}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf common\+::\+Bit\+Stack\+::size\+\_\+type} common\+::\+Bit\+Stack\+::size (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [noexcept]}}\hypertarget{classcommon_1_1BitStack_ae6c6288d46a78231ebe544f56be07f62}{}\label{classcommon_1_1BitStack_ae6c6288d46a78231ebe544f56be07f62}
+Size of the stack. \begin{DoxyReturn}{Returns}
+Size of the stack. 
+\end{DoxyReturn}
+
+
+Definition at line 111 of file Bit\+Stack.\+cpp.
+
+\index{common\+::\+Bit\+Stack@{common\+::\+Bit\+Stack}!top@{top}}
+\index{top@{top}!common\+::\+Bit\+Stack@{common\+::\+Bit\+Stack}}
+\subsubsection[{\texorpdfstring{top() const }{top() const }}]{\setlength{\rightskip}{0pt plus 5cm}bool common\+::\+Bit\+Stack\+::top (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classcommon_1_1BitStack_acf297b6ccb4213a1b1c9a01e2b253ee7}{}\label{classcommon_1_1BitStack_acf297b6ccb4213a1b1c9a01e2b253ee7}
+Returns the value of the bit on top of the stack \begin{DoxyReturn}{Returns}
+Value of the bit. 
+\end{DoxyReturn}
+
+
+Definition at line 142 of file Bit\+Stack.\+cpp.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{BitStack_8h}{Bit\+Stack.\+h}\item 
+\hyperlink{BitStack_8cpp}{Bit\+Stack.\+cpp}\end{DoxyCompactItemize}

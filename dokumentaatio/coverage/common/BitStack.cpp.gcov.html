@@ -1,0 +1,222 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - coverage.info.cleaned - common/BitStack.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">common</a> - BitStack.cpp<span style="font-size: 80%;"> (source / <a href="BitStack.cpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">coverage.info.cleaned</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">76</td>
+            <td class="headerCovTableEntry">78</td>
+            <td class="headerCovTableEntryHi">97.4 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2017-04-07 11:24:17</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">17</td>
+            <td class="headerCovTableEntry">18</td>
+            <td class="headerCovTableEntryHi">94.4 %</td>
+          </tr>
+          <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #include &quot;BitStack.h&quot;</a>
+<span class="lineNum">       2 </span>            : 
+<span class="lineNum">       3 </span><span class="lineCov">         36 : common::BitStack::BitStack()</span>
+<span class="lineNum">       4 </span>            :         : size_{0},
+<span class="lineNum">       5 </span><span class="lineCov">         36 :           data_{5, 0u}</span>
+<span class="lineNum">       6 </span>            : {
+<span class="lineNum">       7 </span>            : 
+<a name="8"><span class="lineNum">       8 </span><span class="lineCov">         36 : }</span></a>
+<span class="lineNum">       9 </span>            : 
+<span class="lineNum">      10 </span><span class="lineCov">        588 : void common::BitStack::push_back(bool value)</span>
+<span class="lineNum">      11 </span>            : {
+<span class="lineNum">      12 </span><span class="lineCov">        588 :     size_type index = size_ / BITS_IN_WORD;</span>
+<span class="lineNum">      13 </span><span class="lineCov">        588 :     uint32_t binary_data = data_[index];</span>
+<span class="lineNum">      14 </span><span class="lineCov">        588 :     uint32_t value_to_insert = value ? 1u : 0u;</span>
+<span class="lineNum">      15 </span><span class="lineCov">        588 :     binary_data |= value_to_insert &lt;&lt; (getIndexInWord(size_));</span>
+<span class="lineNum">      16 </span><span class="lineCov">        588 :     data_[index] = binary_data;</span>
+<span class="lineNum">      17 </span><span class="lineCov">        588 :     ++size_;</span>
+<span class="lineNum">      18 </span><span class="lineCov">        588 :     ensureCapacity();</span>
+<a name="19"><span class="lineNum">      19 </span><span class="lineCov">        588 : }</span></a>
+<span class="lineNum">      20 </span>            : 
+<span class="lineNum">      21 </span><span class="lineCov">         42 : void common::BitStack::push_back(uint32_t value, uint8_t length)</span>
+<span class="lineNum">      22 </span>            : {
+<span class="lineNum">      23 </span><span class="lineCov">         42 :     if (length &gt; BITS_IN_WORD || length == 0)</span>
+<span class="lineNum">      24 </span>            :     {
+<span class="lineNum">      25 </span><span class="lineCov">          1 :         throw std::invalid_argument(&quot;Invalid length&quot;);</span>
+<span class="lineNum">      26 </span>            :     }
+<span class="lineNum">      27 </span><span class="lineCov">         41 :     value = clearValue(value, length);</span>
+<span class="lineNum">      28 </span><span class="lineCov">         41 :     size_type available_bits = getIndexInWord(size_) + 1;</span>
+<span class="lineNum">      29 </span><span class="lineCov">         41 :     if (available_bits &lt; length)</span>
+<span class="lineNum">      30 </span>            :     {
+<span class="lineNum">      31 </span><span class="lineCov">          2 :         data_.push_back(0u);</span>
+<span class="lineNum">      32 </span><span class="lineCov">          2 :         size_type first_part_length = available_bits;</span>
+<span class="lineNum">      33 </span><span class="lineCov">          2 :         size_type second_part_length = length - first_part_length;</span>
+<span class="lineNum">      34 </span><span class="lineCov">          2 :         uint32_t first_part = (value &gt;&gt; second_part_length);</span>
+<span class="lineNum">      35 </span><span class="lineCov">          2 :         data_[size_/BITS_IN_WORD] |= first_part;</span>
+<span class="lineNum">      36 </span><span class="lineCov">          2 :         size_ += first_part_length;</span>
+<span class="lineNum">      37 </span>            : 
+<span class="lineNum">      38 </span><span class="lineCov">          2 :         uint32_t second_part = value &lt;&lt; (BITS_IN_WORD - second_part_length);</span>
+<span class="lineNum">      39 </span><span class="lineCov">          2 :         data_[size_/BITS_IN_WORD] = second_part;</span>
+<span class="lineNum">      40 </span><span class="lineCov">          2 :         size_ += second_part_length;</span>
+<span class="lineNum">      41 </span>            :     }
+<span class="lineNum">      42 </span>            :     else
+<span class="lineNum">      43 </span>            :     {
+<span class="lineNum">      44 </span><span class="lineCov">         39 :         uint32_t binary_data = value &lt;&lt; (available_bits - length);</span>
+<span class="lineNum">      45 </span><span class="lineCov">         39 :         data_[size_/BITS_IN_WORD] |= binary_data;</span>
+<span class="lineNum">      46 </span><span class="lineCov">         39 :         size_ += length;</span>
+<span class="lineNum">      47 </span>            :     }
+<span class="lineNum">      48 </span>            : 
+<span class="lineNum">      49 </span><span class="lineCov">         41 :     ensureCapacity();</span>
+<a name="50"><span class="lineNum">      50 </span><span class="lineCov">         41 : }</span></a>
+<span class="lineNum">      51 </span>            : 
+<span class="lineNum">      52 </span><span class="lineCov">         41 : uint32_t common::BitStack::clearValue(uint32_t value, uint8_t length)</span>
+<span class="lineNum">      53 </span>            : {
+<span class="lineNum">      54 </span><span class="lineCov">         41 :     if (length == BITS_IN_WORD)</span>
+<span class="lineNum">      55 </span>            :     {
+<span class="lineNum">      56 </span><span class="lineCov">         13 :         return value;</span>
+<span class="lineNum">      57 </span>            :     }
+<span class="lineNum">      58 </span><span class="lineCov">         28 :     uint32_t mask = (1u &lt;&lt; length) - 1u;</span>
+<span class="lineNum">      59 </span><span class="lineCov">         28 :     return value &amp; mask;</span>
+<a name="60"><span class="lineNum">      60 </span>            : }</a>
+<span class="lineNum">      61 </span>            : 
+<span class="lineNum">      62 </span><span class="lineCov">        629 : void common::BitStack::ensureCapacity()</span>
+<span class="lineNum">      63 </span>            : {
+<span class="lineNum">      64 </span><span class="lineCov">        629 :     if (size_/BITS_IN_WORD == data_.size())</span>
+<span class="lineNum">      65 </span>            :     {
+<span class="lineNum">      66 </span><span class="lineCov">          8 :         data_.push_back(0u);</span>
+<span class="lineNum">      67 </span>            :     }
+<a name="68"><span class="lineNum">      68 </span><span class="lineCov">        629 : }</span></a>
+<span class="lineNum">      69 </span>            : 
+<span class="lineNum">      70 </span><span class="lineCov">       2186 : common::BitStack::size_type common::BitStack::getIndexInWord(const size_type &amp;i) const</span>
+<span class="lineNum">      71 </span>            : {
+<span class="lineNum">      72 </span><span class="lineCov">       2186 :     return common::BitStack::BITS_IN_WORD - (i % common::BitStack::BITS_IN_WORD) - 1;</span>
+<a name="73"><span class="lineNum">      73 </span>            : }</a>
+<span class="lineNum">      74 </span>            : 
+<span class="lineNum">      75 </span><span class="lineCov">          8 : void common::BitStack::pop_back() noexcept</span>
+<span class="lineNum">      76 </span>            : {
+<span class="lineNum">      77 </span><span class="lineCov">          8 :     if (!empty())</span>
+<span class="lineNum">      78 </span>            :     {
+<span class="lineNum">      79 </span><span class="lineCov">          7 :         size_type bit_index = getIndexInWord(size_ - 1);</span>
+<span class="lineNum">      80 </span><span class="lineCov">          7 :         data_[size_/BITS_IN_WORD] &amp;= ~(1 &lt;&lt; bit_index);</span>
+<span class="lineNum">      81 </span><span class="lineCov">          7 :         --size_;</span>
+<span class="lineNum">      82 </span>            :     }
+<a name="83"><span class="lineNum">      83 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">      84 </span>            : 
+<span class="lineNum">      85 </span><span class="lineCov">          2 : void common::BitStack::reserve(common::BitStack::size_type amount)</span>
+<span class="lineNum">      86 </span>            : {
+<span class="lineNum">      87 </span><span class="lineCov">          2 :     data_.reserve(amount / BITS_IN_WORD + 1);</span>
+<a name="88"><span class="lineNum">      88 </span><span class="lineCov">          2 : }</span></a>
+<span class="lineNum">      89 </span>            : 
+<span class="lineNum">      90 </span><span class="lineCov">       1558 : bool common::BitStack::operator[](common::BitStack::size_type index) const</span>
+<span class="lineNum">      91 </span>            : {
+<span class="lineNum">      92 </span><span class="lineCov">       1558 :     if (empty() || index &gt;= size_)</span>
+<span class="lineNum">      93 </span>            :     {
+<span class="lineNum">      94 </span><span class="lineCov">          8 :         throw std::invalid_argument(&quot;Index out of bounds&quot;);</span>
+<span class="lineNum">      95 </span>            :     }
+<span class="lineNum">      96 </span><span class="lineCov">       1550 :     uint32_t binary_data = data_[index/BITS_IN_WORD];</span>
+<span class="lineNum">      97 </span><span class="lineCov">       1550 :     size_type bit_index = getIndexInWord(index);</span>
+<span class="lineNum">      98 </span><span class="lineCov">       1550 :     return (binary_data &amp; (1 &lt;&lt; bit_index)) != 0;</span>
+<a name="99"><span class="lineNum">      99 </span>            : }</a>
+<span class="lineNum">     100 </span>            : 
+<span class="lineNum">     101 </span><span class="lineCov">        969 : bool common::BitStack::at(common::BitStack::size_type index) const</span>
+<span class="lineNum">     102 </span>            : {
+<span class="lineNum">     103 </span><span class="lineCov">        969 :     return (*this)[index];</span>
+<a name="104"><span class="lineNum">     104 </span>            : }</a>
+<span class="lineNum">     105 </span>            : 
+<span class="lineNum">     106 </span><span class="lineCov">       1574 : bool common::BitStack::empty() const noexcept</span>
+<span class="lineNum">     107 </span>            : {
+<span class="lineNum">     108 </span><span class="lineCov">       1574 :     return size_ == 0;</span>
+<a name="109"><span class="lineNum">     109 </span>            : }</a>
+<span class="lineNum">     110 </span>            : 
+<span class="lineNum">     111 </span><span class="lineCov">        355 : common::BitStack::size_type common::BitStack::size() const noexcept</span>
+<span class="lineNum">     112 </span>            : {
+<span class="lineNum">     113 </span><span class="lineCov">        355 :     return size_;</span>
+<a name="114"><span class="lineNum">     114 </span>            : }</a>
+<span class="lineNum">     115 </span>            : 
+<span class="lineNum">     116 </span><span class="lineCov">          3 : common::BitStack::size_type common::BitStack::capacity() const noexcept</span>
+<span class="lineNum">     117 </span>            : {
+<span class="lineNum">     118 </span><span class="lineCov">          3 :     return data_.capacity() * BITS_IN_WORD;</span>
+<a name="119"><span class="lineNum">     119 </span>            : }</a>
+<span class="lineNum">     120 </span>            : 
+<span class="lineNum">     121 </span><span class="lineCov">          2 : void common::BitStack::clear() noexcept</span>
+<span class="lineNum">     122 </span>            : {
+<span class="lineNum">     123 </span><span class="lineCov">          2 :     size_ = 0;</span>
+<span class="lineNum">     124 </span><span class="lineCov">          2 :     data_.clear();</span>
+<a name="125"><span class="lineNum">     125 </span><span class="lineCov">          2 : }</span></a>
+<span class="lineNum">     126 </span>            : 
+<span class="lineNum">     127 </span><span class="lineNoCov">          0 : uint32_t* common::BitStack::data() noexcept</span>
+<span class="lineNum">     128 </span>            : {
+<span class="lineNum">     129 </span><span class="lineNoCov">          0 :     return data_.begin();</span>
+<a name="130"><span class="lineNum">     130 </span>            : }</a>
+<span class="lineNum">     131 </span>            : 
+<span class="lineNum">     132 </span><span class="lineCov">          2 : const uint32_t* common::BitStack::data() const noexcept</span>
+<span class="lineNum">     133 </span>            : {
+<span class="lineNum">     134 </span><span class="lineCov">          2 :     return data_.begin();</span>
+<a name="135"><span class="lineNum">     135 </span>            : }</a>
+<span class="lineNum">     136 </span>            : 
+<span class="lineNum">     137 </span><span class="lineCov">          6 : common::Vector&lt;uint32_t&gt;::size_type common::BitStack::container_size() const noexcept</span>
+<span class="lineNum">     138 </span>            : {
+<span class="lineNum">     139 </span><span class="lineCov">          6 :     return 1 + ((size_ - 1) / BITS_IN_WORD);</span>
+<a name="140"><span class="lineNum">     140 </span>            : }</a>
+<span class="lineNum">     141 </span>            : 
+<span class="lineNum">     142 </span><span class="lineCov">          3 : bool common::BitStack::top() const</span>
+<span class="lineNum">     143 </span>            : {
+<span class="lineNum">     144 </span><span class="lineCov">          3 :     return (*this)[size_ - 1];</span>
+<span class="lineNum">     145 </span>            : }
+<span class="lineNum">     146 </span>            : 
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.12</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>
