@@ -1,0 +1,11 @@
+<map id="BitStack.h" name="BitStack.h">
+<area shape="rect" id="node2" href="$Decoder_8h.html" title="Decoder.h" alt="" coords="20,80,103,107"/>
+<area shape="rect" id="node4" href="$HuffmanTree_8h.html" title="HuffmanTree.h" alt="" coords="195,80,304,107"/>
+<area shape="rect" id="node5" href="$Encoder_8h.html" title="Encoder.h" alt="" coords="126,155,207,181"/>
+<area shape="rect" id="node8" href="$FileUtils_8h.html" title="FileUtils.h" alt="" coords="329,80,410,107"/>
+<area shape="rect" id="node10" href="$BitStack_8cpp.html" title="BitStack.cpp" alt="" coords="434,80,531,107"/>
+<area shape="rect" id="node3" href="$Decoder_8cpp.html" title="Decoder.cpp" alt="" coords="5,155,101,181"/>
+<area shape="rect" id="node7" href="$HuffmanTree_8cpp.html" title="HuffmanTree.cpp" alt="" coords="232,155,355,181"/>
+<area shape="rect" id="node6" href="$Encoder_8cpp.html" title="Encoder.cpp" alt="" coords="291,229,386,256"/>
+<area shape="rect" id="node9" href="$FileUtils_8cpp.html" title="FileUtils.cpp" alt="" coords="379,155,474,181"/>
+</map>

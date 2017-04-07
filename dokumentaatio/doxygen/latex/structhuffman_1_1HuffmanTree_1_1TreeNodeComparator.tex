@@ -1,0 +1,79 @@
+\hypertarget{structhuffman_1_1HuffmanTree_1_1TreeNodeComparator}{}\section{huffman\+:\+:Huffman\+Tree\+:\+:Tree\+Node\+Comparator Struct Reference}
+\label{structhuffman_1_1HuffmanTree_1_1TreeNodeComparator}\index{huffman\+::\+Huffman\+Tree\+::\+Tree\+Node\+Comparator@{huffman\+::\+Huffman\+Tree\+::\+Tree\+Node\+Comparator}}
+
+
+{\ttfamily \#include $<$Huffman\+Tree.\+h$>$}
+
+
+
+Collaboration diagram for huffman\+:\+:Huffman\+Tree\+:\+:Tree\+Node\+Comparator\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=202pt]{structhuffman_1_1HuffmanTree_1_1TreeNodeComparator__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structhuffman_1_1HuffmanTree_1_1TreeNodeComparator_af7a98f1e7a01c6a239c13fc980fb0de7}{Tree\+Node\+Comparator} (const \hyperlink{classhuffman_1_1HuffmanTree}{huffman\+::\+Huffman\+Tree} \&huffman\+Tree)
+\item 
+bool \hyperlink{structhuffman_1_1HuffmanTree_1_1TreeNodeComparator_a24a7c95bd79dc7e189c2bed39ebece01}{operator()} (const \hyperlink{namespacehuffman_1_1types_a41dc8ca07e19043152b0a5c8b5fec90b}{huffman\+::types\+::handle\+\_\+t} \&a\+Handle, const \hyperlink{namespacehuffman_1_1types_a41dc8ca07e19043152b0a5c8b5fec90b}{huffman\+::types\+::handle\+\_\+t} \&b\+Handle) const 
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const \hyperlink{classhuffman_1_1HuffmanTree}{huffman\+::\+Huffman\+Tree} \& \hyperlink{structhuffman_1_1HuffmanTree_1_1TreeNodeComparator_a2631e58df1a28734ff72d75a68bc9d25}{huffman\+Tree\+\_\+}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Comparator used for determining order of the nodes when constructing the tree. Nodes are primarily ordered by frequency where lower frequency has higher priority. Nodes are secondarily ordered by the data where smaller data value has higher priority. 
+
+Definition at line 26 of file Huffman\+Tree.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{huffman\+::\+Huffman\+Tree\+::\+Tree\+Node\+Comparator@{huffman\+::\+Huffman\+Tree\+::\+Tree\+Node\+Comparator}!Tree\+Node\+Comparator@{Tree\+Node\+Comparator}}
+\index{Tree\+Node\+Comparator@{Tree\+Node\+Comparator}!huffman\+::\+Huffman\+Tree\+::\+Tree\+Node\+Comparator@{huffman\+::\+Huffman\+Tree\+::\+Tree\+Node\+Comparator}}
+\subsubsection[{\texorpdfstring{Tree\+Node\+Comparator(const huffman\+::\+Huffman\+Tree \&huffman\+Tree)}{TreeNodeComparator(const huffman::HuffmanTree &huffmanTree)}}]{\setlength{\rightskip}{0pt plus 5cm}huffman\+::\+Huffman\+Tree\+::\+Tree\+Node\+Comparator\+::\+Tree\+Node\+Comparator (
+\begin{DoxyParamCaption}
+\item[{const {\bf huffman\+::\+Huffman\+Tree} \&}]{huffman\+Tree}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{structhuffman_1_1HuffmanTree_1_1TreeNodeComparator_af7a98f1e7a01c6a239c13fc980fb0de7}{}\label{structhuffman_1_1HuffmanTree_1_1TreeNodeComparator_af7a98f1e7a01c6a239c13fc980fb0de7}
+
+
+Definition at line 28 of file Huffman\+Tree.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{huffman\+::\+Huffman\+Tree\+::\+Tree\+Node\+Comparator@{huffman\+::\+Huffman\+Tree\+::\+Tree\+Node\+Comparator}!operator()@{operator()}}
+\index{operator()@{operator()}!huffman\+::\+Huffman\+Tree\+::\+Tree\+Node\+Comparator@{huffman\+::\+Huffman\+Tree\+::\+Tree\+Node\+Comparator}}
+\subsubsection[{\texorpdfstring{operator()(const huffman\+::types\+::handle\+\_\+t \&a\+Handle, const huffman\+::types\+::handle\+\_\+t \&b\+Handle) const }{operator()(const huffman::types::handle_t &aHandle, const huffman::types::handle_t &bHandle) const }}]{\setlength{\rightskip}{0pt plus 5cm}bool huffman\+::\+Huffman\+Tree\+::\+Tree\+Node\+Comparator\+::operator() (
+\begin{DoxyParamCaption}
+\item[{const {\bf huffman\+::types\+::handle\+\_\+t} \&}]{a\+Handle, }
+\item[{const {\bf huffman\+::types\+::handle\+\_\+t} \&}]{b\+Handle}
+\end{DoxyParamCaption}
+) const}\hypertarget{structhuffman_1_1HuffmanTree_1_1TreeNodeComparator_a24a7c95bd79dc7e189c2bed39ebece01}{}\label{structhuffman_1_1HuffmanTree_1_1TreeNodeComparator_a24a7c95bd79dc7e189c2bed39ebece01}
+
+
+Definition at line 193 of file Huffman\+Tree.\+cpp.
+
+
+
+\subsection{Member Data Documentation}
+\index{huffman\+::\+Huffman\+Tree\+::\+Tree\+Node\+Comparator@{huffman\+::\+Huffman\+Tree\+::\+Tree\+Node\+Comparator}!huffman\+Tree\+\_\+@{huffman\+Tree\+\_\+}}
+\index{huffman\+Tree\+\_\+@{huffman\+Tree\+\_\+}!huffman\+::\+Huffman\+Tree\+::\+Tree\+Node\+Comparator@{huffman\+::\+Huffman\+Tree\+::\+Tree\+Node\+Comparator}}
+\subsubsection[{\texorpdfstring{huffman\+Tree\+\_\+}{huffmanTree_}}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf huffman\+::\+Huffman\+Tree}\& huffman\+::\+Huffman\+Tree\+::\+Tree\+Node\+Comparator\+::huffman\+Tree\+\_\+}\hypertarget{structhuffman_1_1HuffmanTree_1_1TreeNodeComparator_a2631e58df1a28734ff72d75a68bc9d25}{}\label{structhuffman_1_1HuffmanTree_1_1TreeNodeComparator_a2631e58df1a28734ff72d75a68bc9d25}
+
+
+Definition at line 31 of file Huffman\+Tree.\+h.
+
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{HuffmanTree_8h}{Huffman\+Tree.\+h}\item 
+\hyperlink{HuffmanTree_8cpp}{Huffman\+Tree.\+cpp}\end{DoxyCompactItemize}

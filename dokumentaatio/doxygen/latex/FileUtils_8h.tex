@@ -1,0 +1,48 @@
+\hypertarget{FileUtils_8h}{}\section{File\+Utils.\+h File Reference}
+\label{FileUtils_8h}\index{File\+Utils.\+h@{File\+Utils.\+h}}
+{\ttfamily \#include $<$iosfwd$>$}\\*
+{\ttfamily \#include \char`\"{}Vector.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Bit\+Stack.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}../\+Common.\+h\char`\"{}}\\*
+Include dependency graph for File\+Utils.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{FileUtils_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{FileUtils_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespacehuffman}{huffman}
+\item 
+ \hyperlink{namespacehuffman_1_1io}{huffman\+::io}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+common\+::\+Vector$<$ \hyperlink{namespacehuffman_1_1types_a198fb2bbef1012ab1696124836c56f0d}{huffman\+::types\+::byte\+\_\+t} $>$ \hyperlink{namespacehuffman_1_1io_a3dc9d3bd379dd95a993bff408092514a}{huffman\+::io\+::read\+File} (std\+::istream \&istream)
+\item 
+void \hyperlink{namespacehuffman_1_1io_a46774d6debc0d1318c44db613a700ab0}{huffman\+::io\+::write\+File} (std\+::ostream \&ostream, const common\+::\+Vector$<$ \hyperlink{namespacehuffman_1_1types_a198fb2bbef1012ab1696124836c56f0d}{huffman\+::types\+::byte\+\_\+t} $>$ \&data)
+\item 
+void \hyperlink{namespacehuffman_1_1io_a54d99edde92b3edabf312b6075a2e32e}{huffman\+::io\+::write\+Binary\+File} (std\+::ostream \&ostream, const \hyperlink{classcommon_1_1BitStack}{common\+::\+Bit\+Stack} \&data)
+\item 
+\hyperlink{classcommon_1_1BitStack}{common\+::\+Bit\+Stack} \hyperlink{namespacehuffman_1_1io_ada2a069d00c22f9fed6aab608d863276}{huffman\+::io\+::read\+Binary\+File} (std\+::istream \&istream, bool ignore\+Header)
+\item 
+uint64\+\_\+t \hyperlink{namespacehuffman_1_1io_a74c4d7967e01dff1bf9bc744be4caeb1}{huffman\+::io\+::read64\+Bit\+Number} (const uint8\+\_\+t(\&data)\mbox{[}8\mbox{]})
+\item 
+void \hyperlink{namespacehuffman_1_1io_ad2faf41d8e4c35955127f096b42f48e9}{huffman\+::io\+::write64\+Bit\+Number\+To\+Stream} (uint64\+\_\+t number, std\+::ostream \&ostream)
+\item 
+void \hyperlink{namespacehuffman_1_1io_ada1e15818c5ab806b890ad58a7c58270}{huffman\+::io\+::insert\+Byte} (\hyperlink{namespacehuffman_1_1types_a198fb2bbef1012ab1696124836c56f0d}{huffman\+::types\+::byte\+\_\+t} byte, \hyperlink{classcommon_1_1BitStack}{common\+::\+Bit\+Stack} \&vector)
+\item 
+\hyperlink{namespacehuffman_1_1types_a198fb2bbef1012ab1696124836c56f0d}{huffman\+::types\+::byte\+\_\+t} \hyperlink{namespacehuffman_1_1io_af34a00787e1294fb7b72c7d02d214875}{huffman\+::io\+::read\+Byte} (const \hyperlink{classcommon_1_1BitStack}{common\+::\+Bit\+Stack} \&vector, uint64\+\_\+t start)
+\end{DoxyCompactItemize}

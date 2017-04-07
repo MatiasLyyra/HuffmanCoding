@@ -1,0 +1,145 @@
+\hypertarget{classhuffman_1_1HuffmanTree}{}\section{huffman\+:\+:Huffman\+Tree Class Reference}
+\label{classhuffman_1_1HuffmanTree}\index{huffman\+::\+Huffman\+Tree@{huffman\+::\+Huffman\+Tree}}
+
+
+{\ttfamily \#include $<$Huffman\+Tree.\+h$>$}
+
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structhuffman_1_1HuffmanTree_1_1TreeNodeComparator}{Tree\+Node\+Comparator}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classhuffman_1_1HuffmanTree_ac7a0e15e098577075ed09dfdfbb7574d}{Huffman\+Tree} (const common\+::\+Vector$<$ \hyperlink{namespacehuffman_1_1types_a198fb2bbef1012ab1696124836c56f0d}{types\+::byte\+\_\+t} $>$ \&characters)
+\item 
+\hyperlink{classhuffman_1_1HuffmanTree_ac29dc870d49acc9c86f4bbba88466c24}{Huffman\+Tree} (const \hyperlink{classcommon_1_1BitStack}{common\+::\+Bit\+Stack} \&tree\+In\+Binary)
+\item 
+const \hyperlink{classhuffman_1_1TreeNode}{Tree\+Node} $\ast$ \hyperlink{classhuffman_1_1HuffmanTree_a0c962ba0de18315a0d8a9957cf05ce62}{get\+Node} (\hyperlink{namespacehuffman_1_1types_a41dc8ca07e19043152b0a5c8b5fec90b}{types\+::handle\+\_\+t} handle) const 
+\item 
+\hyperlink{classhuffman_1_1HuffmanTree_a5b8d06384d4bc6a69ba64d784576e112}{$\sim$\+Huffman\+Tree} ()
+\item 
+\hyperlink{namespacehuffman_1_1types_a2d111e21190970dfeb935ef0786973c0}{types\+::encode\+\_\+table\+\_\+t} \hyperlink{classhuffman_1_1HuffmanTree_ad1386a441f38495dce043e48d92b589d}{construct\+Encoding\+Table} () const 
+\item 
+void \hyperlink{classhuffman_1_1HuffmanTree_a3a39e931986f2f496450c8e8529bfb13}{print\+Tree} (std\+::ostream \&ostream) const 
+\item 
+const \hyperlink{classhuffman_1_1TreeNode}{Tree\+Node} $\ast$ \hyperlink{classhuffman_1_1HuffmanTree_a1a57f1570c185a7c41828ff198762723}{get\+Root} () const 
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class responsible for constructing and holding huffman tree. 
+
+Definition at line 17 of file Huffman\+Tree.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{huffman\+::\+Huffman\+Tree@{huffman\+::\+Huffman\+Tree}!Huffman\+Tree@{Huffman\+Tree}}
+\index{Huffman\+Tree@{Huffman\+Tree}!huffman\+::\+Huffman\+Tree@{huffman\+::\+Huffman\+Tree}}
+\subsubsection[{\texorpdfstring{Huffman\+Tree(const common\+::\+Vector$<$ types\+::byte\+\_\+t $>$ \&characters)}{HuffmanTree(const common::Vector< types::byte_t > &characters)}}]{\setlength{\rightskip}{0pt plus 5cm}huffman\+::\+Huffman\+Tree\+::\+Huffman\+Tree (
+\begin{DoxyParamCaption}
+\item[{const common\+::\+Vector$<$ {\bf types\+::byte\+\_\+t} $>$ \&}]{characters}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [explicit]}}\hypertarget{classhuffman_1_1HuffmanTree_ac7a0e15e098577075ed09dfdfbb7574d}{}\label{classhuffman_1_1HuffmanTree_ac7a0e15e098577075ed09dfdfbb7574d}
+Constructs huffman tree based on character frequencies in characters vector. 
+\begin{DoxyParams}{Parameters}
+{\em characters} & Character vector that is used to calculate character frequencies from. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 25 of file Huffman\+Tree.\+cpp.
+
+\index{huffman\+::\+Huffman\+Tree@{huffman\+::\+Huffman\+Tree}!Huffman\+Tree@{Huffman\+Tree}}
+\index{Huffman\+Tree@{Huffman\+Tree}!huffman\+::\+Huffman\+Tree@{huffman\+::\+Huffman\+Tree}}
+\subsubsection[{\texorpdfstring{Huffman\+Tree(const common\+::\+Bit\+Stack \&tree\+In\+Binary)}{HuffmanTree(const common::BitStack &treeInBinary)}}]{\setlength{\rightskip}{0pt plus 5cm}huffman\+::\+Huffman\+Tree\+::\+Huffman\+Tree (
+\begin{DoxyParamCaption}
+\item[{const {\bf common\+::\+Bit\+Stack} \&}]{tree\+In\+Binary}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [explicit]}}\hypertarget{classhuffman_1_1HuffmanTree_ac29dc870d49acc9c86f4bbba88466c24}{}\label{classhuffman_1_1HuffmanTree_ac29dc870d49acc9c86f4bbba88466c24}
+Constructs huffman tree from binary representation. Constructor expects the vector to contain 1/\+True for each leaf node followed by byte that contains the character of the node and 0/\+False for each parent/root node. Binary data has to be in pre-\/order for this to work correctly. 
+\begin{DoxyParams}{Parameters}
+{\em tree\+In\+Binary} & Huffman tree in binary representation. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 33 of file Huffman\+Tree.\+cpp.
+
+\index{huffman\+::\+Huffman\+Tree@{huffman\+::\+Huffman\+Tree}!````~Huffman\+Tree@{$\sim$\+Huffman\+Tree}}
+\index{````~Huffman\+Tree@{$\sim$\+Huffman\+Tree}!huffman\+::\+Huffman\+Tree@{huffman\+::\+Huffman\+Tree}}
+\subsubsection[{\texorpdfstring{$\sim$\+Huffman\+Tree()}{~HuffmanTree()}}]{\setlength{\rightskip}{0pt plus 5cm}huffman\+::\+Huffman\+Tree\+::$\sim$\+Huffman\+Tree (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classhuffman_1_1HuffmanTree_a5b8d06384d4bc6a69ba64d784576e112}{}\label{classhuffman_1_1HuffmanTree_a5b8d06384d4bc6a69ba64d784576e112}
+
+
+Definition at line 105 of file Huffman\+Tree.\+cpp.
+
+
+
+\subsection{Member Function Documentation}
+\index{huffman\+::\+Huffman\+Tree@{huffman\+::\+Huffman\+Tree}!construct\+Encoding\+Table@{construct\+Encoding\+Table}}
+\index{construct\+Encoding\+Table@{construct\+Encoding\+Table}!huffman\+::\+Huffman\+Tree@{huffman\+::\+Huffman\+Tree}}
+\subsubsection[{\texorpdfstring{construct\+Encoding\+Table() const }{constructEncodingTable() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf huffman\+::types\+::encode\+\_\+table\+\_\+t} huffman\+::\+Huffman\+Tree\+::construct\+Encoding\+Table (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classhuffman_1_1HuffmanTree_ad1386a441f38495dce043e48d92b589d}{}\label{classhuffman_1_1HuffmanTree_ad1386a441f38495dce043e48d92b589d}
+Constructs encoding table based on the current Huffman tree. \begin{DoxyReturn}{Returns}
+Encoding table 
+\end{DoxyReturn}
+
+
+Definition at line 95 of file Huffman\+Tree.\+cpp.
+
+\index{huffman\+::\+Huffman\+Tree@{huffman\+::\+Huffman\+Tree}!get\+Node@{get\+Node}}
+\index{get\+Node@{get\+Node}!huffman\+::\+Huffman\+Tree@{huffman\+::\+Huffman\+Tree}}
+\subsubsection[{\texorpdfstring{get\+Node(types\+::handle\+\_\+t handle) const }{getNode(types::handle_t handle) const }}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf huffman\+::\+Tree\+Node} $\ast$ huffman\+::\+Huffman\+Tree\+::get\+Node (
+\begin{DoxyParamCaption}
+\item[{{\bf types\+::handle\+\_\+t}}]{handle}
+\end{DoxyParamCaption}
+) const}\hypertarget{classhuffman_1_1HuffmanTree_a0c962ba0de18315a0d8a9957cf05ce62}{}\label{classhuffman_1_1HuffmanTree_a0c962ba0de18315a0d8a9957cf05ce62}
+
+
+Definition at line 131 of file Huffman\+Tree.\+cpp.
+
+\index{huffman\+::\+Huffman\+Tree@{huffman\+::\+Huffman\+Tree}!get\+Root@{get\+Root}}
+\index{get\+Root@{get\+Root}!huffman\+::\+Huffman\+Tree@{huffman\+::\+Huffman\+Tree}}
+\subsubsection[{\texorpdfstring{get\+Root() const }{getRoot() const }}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf huffman\+::\+Tree\+Node} $\ast$ huffman\+::\+Huffman\+Tree\+::get\+Root (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classhuffman_1_1HuffmanTree_a1a57f1570c185a7c41828ff198762723}{}\label{classhuffman_1_1HuffmanTree_a1a57f1570c185a7c41828ff198762723}
+Returns root of the tree or null if there is not one. \begin{DoxyReturn}{Returns}
+Root of the tree. 
+\end{DoxyReturn}
+
+
+Definition at line 86 of file Huffman\+Tree.\+cpp.
+
+\index{huffman\+::\+Huffman\+Tree@{huffman\+::\+Huffman\+Tree}!print\+Tree@{print\+Tree}}
+\index{print\+Tree@{print\+Tree}!huffman\+::\+Huffman\+Tree@{huffman\+::\+Huffman\+Tree}}
+\subsubsection[{\texorpdfstring{print\+Tree(std\+::ostream \&ostream) const }{printTree(std::ostream &ostream) const }}]{\setlength{\rightskip}{0pt plus 5cm}void huffman\+::\+Huffman\+Tree\+::print\+Tree (
+\begin{DoxyParamCaption}
+\item[{std\+::ostream \&}]{ostream}
+\end{DoxyParamCaption}
+) const}\hypertarget{classhuffman_1_1HuffmanTree_a3a39e931986f2f496450c8e8529bfb13}{}\label{classhuffman_1_1HuffmanTree_a3a39e931986f2f496450c8e8529bfb13}
+Prints characters\textquotesingle{} encoded representation to the specified stream. 
+\begin{DoxyParams}{Parameters}
+{\em ostream} & Stream to print to. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 76 of file Huffman\+Tree.\+cpp.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{HuffmanTree_8h}{Huffman\+Tree.\+h}\item 
+\hyperlink{HuffmanTree_8cpp}{Huffman\+Tree.\+cpp}\end{DoxyCompactItemize}

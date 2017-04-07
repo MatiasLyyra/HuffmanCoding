@@ -1,0 +1,111 @@
+\hypertarget{classhuffman_1_1Encoder}{}\section{huffman\+:\+:Encoder Class Reference}
+\label{classhuffman_1_1Encoder}\index{huffman\+::\+Encoder@{huffman\+::\+Encoder}}
+
+
+{\ttfamily \#include $<$Encoder.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classhuffman_1_1Encoder_a0017a3be4166156c5ba5c6a832338ae6}{Encoder} ()
+\item 
+void \hyperlink{classhuffman_1_1Encoder_abab95b6dd2ae173ec519ed532ad13cb4}{create\+Header} (const \hyperlink{classhuffman_1_1HuffmanTree}{huffman\+::\+Huffman\+Tree} \&huffman\+Tree)
+\item 
+void \hyperlink{classhuffman_1_1Encoder_a1c618dc3938974d1c01730bb4b4962e1}{encode\+Data} (const \hyperlink{namespacehuffman_1_1types_a2d111e21190970dfeb935ef0786973c0}{types\+::encode\+\_\+table\+\_\+t} \&encode\+\_\+table, const common\+::\+Vector$<$ \hyperlink{namespacehuffman_1_1types_a198fb2bbef1012ab1696124836c56f0d}{types\+::byte\+\_\+t} $>$ \&data)
+\item 
+const \hyperlink{classcommon_1_1BitStack}{common\+::\+Bit\+Stack} \& \hyperlink{classhuffman_1_1Encoder_a1f32db20577aca2079a93cacda12a513}{get\+Header\+Data} () const 
+\item 
+const \hyperlink{classcommon_1_1BitStack}{common\+::\+Bit\+Stack} \& \hyperlink{classhuffman_1_1Encoder_aab3e0873c34ae5e5920043633445ab66}{get\+Encoded\+Data} () const 
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class responsible for creating binary representation of the \hyperlink{classhuffman_1_1HuffmanTree}{Huffman\+Tree} and encoding messages. 
+
+Definition at line 18 of file Encoder.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{huffman\+::\+Encoder@{huffman\+::\+Encoder}!Encoder@{Encoder}}
+\index{Encoder@{Encoder}!huffman\+::\+Encoder@{huffman\+::\+Encoder}}
+\subsubsection[{\texorpdfstring{Encoder()}{Encoder()}}]{\setlength{\rightskip}{0pt plus 5cm}huffman\+::\+Encoder\+::\+Encoder (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classhuffman_1_1Encoder_a0017a3be4166156c5ba5c6a832338ae6}{}\label{classhuffman_1_1Encoder_a0017a3be4166156c5ba5c6a832338ae6}
+
+
+Definition at line 25 of file Encoder.\+cpp.
+
+
+
+\subsection{Member Function Documentation}
+\index{huffman\+::\+Encoder@{huffman\+::\+Encoder}!create\+Header@{create\+Header}}
+\index{create\+Header@{create\+Header}!huffman\+::\+Encoder@{huffman\+::\+Encoder}}
+\subsubsection[{\texorpdfstring{create\+Header(const huffman\+::\+Huffman\+Tree \&huffman\+Tree)}{createHeader(const huffman::HuffmanTree &huffmanTree)}}]{\setlength{\rightskip}{0pt plus 5cm}void huffman\+::\+Encoder\+::create\+Header (
+\begin{DoxyParamCaption}
+\item[{const {\bf huffman\+::\+Huffman\+Tree} \&}]{huffman\+Tree}
+\end{DoxyParamCaption}
+)}\hypertarget{classhuffman_1_1Encoder_abab95b6dd2ae173ec519ed532ad13cb4}{}\label{classhuffman_1_1Encoder_abab95b6dd2ae173ec519ed532ad13cb4}
+Creates binary representation of the \hyperlink{classhuffman_1_1HuffmanTree}{Huffman\+Tree}. Encoded tree can be read from \hyperlink{classhuffman_1_1Encoder_aab3e0873c34ae5e5920043633445ab66}{get\+Encoded\+Data()}. 
+\begin{DoxyParams}{Parameters}
+{\em huffman\+Tree} & \hyperlink{classhuffman_1_1HuffmanTree}{Huffman\+Tree}. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 60 of file Encoder.\+cpp.
+
+\index{huffman\+::\+Encoder@{huffman\+::\+Encoder}!encode\+Data@{encode\+Data}}
+\index{encode\+Data@{encode\+Data}!huffman\+::\+Encoder@{huffman\+::\+Encoder}}
+\subsubsection[{\texorpdfstring{encode\+Data(const types\+::encode\+\_\+table\+\_\+t \&encode\+\_\+table, const common\+::\+Vector$<$ types\+::byte\+\_\+t $>$ \&data)}{encodeData(const types::encode_table_t &encode_table, const common::Vector< types::byte_t > &data)}}]{\setlength{\rightskip}{0pt plus 5cm}void huffman\+::\+Encoder\+::encode\+Data (
+\begin{DoxyParamCaption}
+\item[{const {\bf types\+::encode\+\_\+table\+\_\+t} \&}]{encode\+\_\+table, }
+\item[{const common\+::\+Vector$<$ {\bf types\+::byte\+\_\+t} $>$ \&}]{data}
+\end{DoxyParamCaption}
+)}\hypertarget{classhuffman_1_1Encoder_a1c618dc3938974d1c01730bb4b4962e1}{}\label{classhuffman_1_1Encoder_a1c618dc3938974d1c01730bb4b4962e1}
+Encodes given data based on encoding table. Encoded data can be read with \hyperlink{classhuffman_1_1Encoder_aab3e0873c34ae5e5920043633445ab66}{get\+Encoded\+Data()}. 
+\begin{DoxyParams}{Parameters}
+{\em encode\+\_\+table} & Encode table that is used to encode the data. \\
+\hline
+{\em data} & Data to be encoded \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Throws} & std\+::invalid\+\_\+argument exception if character is encountered without proper value in encoding table i.\+e. any encode entry with length of zero. \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line 32 of file Encoder.\+cpp.
+
+\index{huffman\+::\+Encoder@{huffman\+::\+Encoder}!get\+Encoded\+Data@{get\+Encoded\+Data}}
+\index{get\+Encoded\+Data@{get\+Encoded\+Data}!huffman\+::\+Encoder@{huffman\+::\+Encoder}}
+\subsubsection[{\texorpdfstring{get\+Encoded\+Data() const }{getEncodedData() const }}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf common\+::\+Bit\+Stack} \& huffman\+::\+Encoder\+::get\+Encoded\+Data (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classhuffman_1_1Encoder_aab3e0873c34ae5e5920043633445ab66}{}\label{classhuffman_1_1Encoder_aab3e0873c34ae5e5920043633445ab66}
+
+
+Definition at line 71 of file Encoder.\+cpp.
+
+\index{huffman\+::\+Encoder@{huffman\+::\+Encoder}!get\+Header\+Data@{get\+Header\+Data}}
+\index{get\+Header\+Data@{get\+Header\+Data}!huffman\+::\+Encoder@{huffman\+::\+Encoder}}
+\subsubsection[{\texorpdfstring{get\+Header\+Data() const }{getHeaderData() const }}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf common\+::\+Bit\+Stack} \& huffman\+::\+Encoder\+::get\+Header\+Data (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classhuffman_1_1Encoder_a1f32db20577aca2079a93cacda12a513}{}\label{classhuffman_1_1Encoder_a1f32db20577aca2079a93cacda12a513}
+
+
+Definition at line 65 of file Encoder.\+cpp.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{Encoder_8h}{Encoder.\+h}\item 
+\hyperlink{Encoder_8cpp}{Encoder.\+cpp}\end{DoxyCompactItemize}
