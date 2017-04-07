@@ -150,7 +150,8 @@ void huffman::HuffmanTree::collectCharacterCodes(huffman::types::encode_table_t&
     if (root->isLeaf())
     {
         encode_table[root->getData()] = huffman::types::encode_entry_t{code, depth};
-    } else
+    }
+    else
     {
         uint32_t leftCode = code << 1;
         uint32_t rightCode = (code << 1) + 1;

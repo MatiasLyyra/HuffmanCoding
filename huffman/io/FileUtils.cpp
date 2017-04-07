@@ -2,7 +2,7 @@
 
 #include <fstream>
 #include <cassert>
-
+#define DATA_SIZE(size_in_bits) (size_in_bits + (32 - (size_in_bits % 32))) / 8
 
 uint64_t huffman::io::read64BitNumber(const uint8_t (&data)[8])
 {
@@ -48,7 +48,8 @@ void huffman::io::writeBinaryFile(std::ostream& ostream, const common::BitStack&
     types::byte_t bytes[4];
     auto it = data.data();
     std::size_t i = 0;
-    for (; i < data.container_size(); ++i)
+    auto containerSize = data.container_size();
+    for (; i < containerSize; ++i)
     {
         uint32_t word = it[i];
         bytes[0] = static_cast<types::byte_t>(word >> 24);
@@ -64,13 +65,13 @@ common::BitStack huffman::io::readBinaryFile(std::istream& istream, bool ignoreH
     uint8_t data[8];
     istream.read(reinterpret_cast<char*>(&data[0]), sizeof(data));
     uint64_t length = read64BitNumber(data);
-    uint64_t dataSize = 1 + ((length - 1) / constants::BITS_IN_BYTE);
+    uint64_t dataSize = DATA_SIZE(length);
     if (ignoreHeader)
     {
         istream.seekg(dataSize, std::ios::cur);
         istream.read(reinterpret_cast<char*>(&data[0]), sizeof(data));
         length = read64BitNumber(data);
-        dataSize = 1 + ((length - 1) / constants::BITS_IN_BYTE);
+        dataSize = DATA_SIZE(length);
     }
     common::BitStack encodedData;
     encodedData.reserve(length);
