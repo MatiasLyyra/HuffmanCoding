@@ -20,7 +20,7 @@ void common::BitStack::push_back(bool value)
 
 void common::BitStack::push_back(uint32_t value, uint8_t length)
 {
-    if (length > BITS_IN_WORD)
+    if (length > BITS_IN_WORD || length == 0)
     {
         throw std::invalid_argument("Invalid length");
     }
@@ -118,7 +118,7 @@ common::BitStack::size_type common::BitStack::capacity() const noexcept
     return data_.capacity() * BITS_IN_WORD;
 }
 
-bool common::BitStack::clear() noexcept
+void common::BitStack::clear() noexcept
 {
     size_ = 0;
     data_.clear();
@@ -136,6 +136,11 @@ const uint32_t* common::BitStack::data() const noexcept
 
 common::Vector<uint32_t>::size_type common::BitStack::container_size() const noexcept
 {
-    return data_.size();
+    return 1 + ((size_ - 1) / BITS_IN_WORD);
+}
+
+bool common::BitStack::top() const
+{
+    return (*this)[size_ - 1];
 }
 

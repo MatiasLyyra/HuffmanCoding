@@ -150,3 +150,12 @@ TEST_F(BitStackFixture, ReserveWorks)
     initiallyEmpty.reserve(500);
     ASSERT_TRUE(500 <= initiallyEmpty.capacity());
 }
+
+TEST_F(BitStackFixture, TopWorks)
+{
+    ASSERT_EQ(true, stackWithValues.top());
+    stackWithValues.pop_back();
+    ASSERT_EQ(false, stackWithValues.top());
+    stackWithValues.pop_back();
+    ASSERT_EQ(true, stackWithValues.top());
+}

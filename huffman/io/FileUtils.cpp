@@ -67,7 +67,6 @@ common::BitStack huffman::io::readBinaryFile(std::istream& istream, bool ignoreH
     uint64_t dataSize = 1 + ((length - 1) / constants::BITS_IN_BYTE);
     if (ignoreHeader)
     {
-        //Round length up to closest multiple of 8
         istream.seekg(dataSize, std::ios::cur);
         istream.read(reinterpret_cast<char*>(&data[0]), sizeof(data));
         length = read64BitNumber(data);
