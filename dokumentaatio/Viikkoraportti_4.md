@@ -1,6 +1,6 @@
 # Viikkoraportti 4
 
-Tällä viikolla itse projekti on edistynyt siihen vaiheseen, että ainoa puuttuva tietorakenne on prioriteettijono. BitStack tietorakenne on nyt valmis ja koodi käyttää sitä. Muu tällä viikolla käytetystä ajasta on kulunut dokumentointiin.
+Tällä viikolla itse projekti on edistynyt siihen vaiheeseen, että ainoa puuttuva tietorakenne on prioriteettijono. BitStack tietorakenne on nyt valmis ja koodi käyttää sitä. Muu tällä viikolla käytetystä ajasta on kulunut dokumentointiin.
 
 ### Tuntikirjanpito
 Päivä | Tunnit | Kuvaus
