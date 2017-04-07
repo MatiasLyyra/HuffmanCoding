@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-03-31 16:18:14</td>
+            <td class="headerValue">2017-04-07 11:24:17</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">12</td>
@@ -62,11 +62,11 @@
 <pre class="source">
 <a name="1"><span class="lineNum">       1 </span>            : #include &quot;HuffmanTree.h&quot;</a>
 <span class="lineNum">       2 </span>            : 
-<span class="lineNum">       3 </span>            : #include &lt;queue&gt;
-<span class="lineNum">       4 </span>            : #include &lt;ostream&gt;
-<span class="lineNum">       5 </span>            : #include &lt;cassert&gt;
-<span class="lineNum">       6 </span>            : 
-<span class="lineNum">       7 </span>            : #include &quot;TreeNode.h&quot;
+<span class="lineNum">       3 </span>            : //TODO: Remove this include after PriorityQueue is implemented
+<span class="lineNum">       4 </span>            : #include &lt;queue&gt;
+<span class="lineNum">       5 </span>            : #include &lt;ostream&gt;
+<span class="lineNum">       6 </span>            : #include &lt;cassert&gt;
+<span class="lineNum">       7 </span>            : 
 <span class="lineNum">       8 </span>            : #include &quot;io/FileUtils.h&quot;
 <span class="lineNum">       9 </span>            : 
 <span class="lineNum">      10 </span>            : 
@@ -92,7 +92,7 @@
 <span class="lineNum">      30 </span>            :     }
 <a name="31"><span class="lineNum">      31 </span><span class="lineCov">          9 : }</span></a>
 <span class="lineNum">      32 </span>            : 
-<span class="lineNum">      33 </span><span class="lineCov">          6 : huffman::HuffmanTree::HuffmanTree(const std::vector&lt;bool&gt;&amp; treeInBinary) : root_(constants::empty_handle), nodes_{}</span>
+<span class="lineNum">      33 </span><span class="lineCov">          6 : huffman::HuffmanTree::HuffmanTree(const common::BitStack&amp; treeInBinary) : root_(constants::empty_handle), nodes_{}</span>
 <span class="lineNum">      34 </span>            : {
 <span class="lineNum">      35 </span><span class="lineCov">          6 :     if (!treeInBinary.empty())</span>
 <span class="lineNum">      36 </span>            :     {
@@ -169,7 +169,7 @@
 <span class="lineNum">     107 </span>            : 
 <a name="108"><span class="lineNum">     108 </span><span class="lineCov">         15 : }</span></a>
 <span class="lineNum">     109 </span>            : 
-<span class="lineNum">     110 </span><span class="lineCov">         44 : huffman::types::handle_t huffman::HuffmanTree::readNodes(const std::vector&lt;bool&gt;&amp; treeInBinary, uint64_t&amp; index)</span>
+<span class="lineNum">     110 </span><span class="lineCov">         44 : huffman::types::handle_t huffman::HuffmanTree::readNodes(const common::BitStack&amp; treeInBinary, uint64_t&amp; index)</span>
 <span class="lineNum">     111 </span>            : {
 <span class="lineNum">     112 </span><span class="lineCov">         44 :     if (treeInBinary.at(index++))</span>
 <span class="lineNum">     113 </span>            :     {

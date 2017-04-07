@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-03-31 16:18:14</td>
+            <td class="headerValue">2017-04-07 11:24:17</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -63,53 +63,54 @@
 <a name="1"><span class="lineNum">       1 </span>            : #ifndef HUFFMANCODING_ENCODER_H</a>
 <span class="lineNum">       2 </span>            : #define HUFFMANCODING_ENCODER_H
 <span class="lineNum">       3 </span>            : 
-<span class="lineNum">       4 </span>            : #include &lt;vector&gt;
-<span class="lineNum">       5 </span>            : #include &lt;string&gt;
-<span class="lineNum">       6 </span>            : 
+<span class="lineNum">       4 </span>            : #include &lt;string&gt;
+<span class="lineNum">       5 </span>            : 
+<span class="lineNum">       6 </span>            : #include &quot;BitStack.h&quot;
 <span class="lineNum">       7 </span>            : #include &quot;Vector.h&quot;
 <span class="lineNum">       8 </span>            : #include &quot;Common.h&quot;
 <span class="lineNum">       9 </span>            : #include &quot;HuffmanTree.h&quot;
-<span class="lineNum">      10 </span>            : namespace huffman
-<span class="lineNum">      11 </span>            : {
-<span class="lineNum">      12 </span>            :     class TreeNode;
-<span class="lineNum">      13 </span>            : 
-<span class="lineNum">      14 </span>            :     /**
-<a name="15"><span class="lineNum">      15 </span>            :      * Class responsible for creating binary representation of the HuffmanTree and encoding messages.</a>
-<span class="lineNum">      16 </span>            :      */
-<span class="lineNum">      17 </span><span class="lineCov">          3 :     class Encoder</span>
-<span class="lineNum">      18 </span>            :     {
-<span class="lineNum">      19 </span>            : 
-<span class="lineNum">      20 </span>            :     public:
-<span class="lineNum">      21 </span>            :         Encoder();
-<span class="lineNum">      22 </span>            : 
-<span class="lineNum">      23 </span>            :         /**
-<span class="lineNum">      24 </span>            :          * Creates binary representation of the HuffmanTree. Encoded tree can be read from getEncodedData().
-<span class="lineNum">      25 </span>            :          * @param huffmanTree HuffmanTree.
-<span class="lineNum">      26 </span>            :          */
-<span class="lineNum">      27 </span>            :         void createHeader(const huffman::HuffmanTree&amp; huffmanTree);
-<span class="lineNum">      28 </span>            : 
-<span class="lineNum">      29 </span>            :         /**
-<span class="lineNum">      30 </span>            :          * Encodes given data based on encoding table. Encoded data can be read with getEncodedData().
-<span class="lineNum">      31 </span>            :          * @param encode_table Encode table that is used to encode the data.
-<span class="lineNum">      32 </span>            :          * @param data Data to be encoded
-<span class="lineNum">      33 </span>            :          * @throw Throws std::invalid_argument exception if character is encountered without proper value in encoding table
-<span class="lineNum">      34 </span>            :          * i.e. any encode entry with length of zero.
-<span class="lineNum">      35 </span>            :          */
-<span class="lineNum">      36 </span>            :         void encodeData(const types::encode_table_t&amp; encode_table, const common::Vector&lt;types::byte_t&gt;&amp; data);
-<span class="lineNum">      37 </span>            : 
-<span class="lineNum">      38 </span>            :         const std::vector&lt;bool&gt;&amp; getHeaderData() const;
-<span class="lineNum">      39 </span>            : 
-<span class="lineNum">      40 </span>            :         const std::vector&lt;bool&gt;&amp; getEncodedData() const;
-<span class="lineNum">      41 </span>            : 
+<span class="lineNum">      10 </span>            : 
+<span class="lineNum">      11 </span>            : namespace huffman
+<span class="lineNum">      12 </span>            : {
+<span class="lineNum">      13 </span>            :     class TreeNode;
+<span class="lineNum">      14 </span>            : 
+<span class="lineNum">      15 </span>            :     /**
+<a name="16"><span class="lineNum">      16 </span>            :      * Class responsible for creating binary representation of the HuffmanTree and encoding messages.</a>
+<span class="lineNum">      17 </span>            :      */
+<span class="lineNum">      18 </span><span class="lineCov">          3 :     class Encoder</span>
+<span class="lineNum">      19 </span>            :     {
+<span class="lineNum">      20 </span>            : 
+<span class="lineNum">      21 </span>            :     public:
+<span class="lineNum">      22 </span>            :         Encoder();
+<span class="lineNum">      23 </span>            : 
+<span class="lineNum">      24 </span>            :         /**
+<span class="lineNum">      25 </span>            :          * Creates binary representation of the HuffmanTree. Encoded tree can be read from getEncodedData().
+<span class="lineNum">      26 </span>            :          * @param huffmanTree HuffmanTree.
+<span class="lineNum">      27 </span>            :          */
+<span class="lineNum">      28 </span>            :         void createHeader(const huffman::HuffmanTree&amp; huffmanTree);
+<span class="lineNum">      29 </span>            : 
+<span class="lineNum">      30 </span>            :         /**
+<span class="lineNum">      31 </span>            :          * Encodes given data based on encoding table. Encoded data can be read with getEncodedData().
+<span class="lineNum">      32 </span>            :          * @param encode_table Encode table that is used to encode the data.
+<span class="lineNum">      33 </span>            :          * @param data Data to be encoded
+<span class="lineNum">      34 </span>            :          * @throw Throws std::invalid_argument exception if character is encountered without proper value in encoding table
+<span class="lineNum">      35 </span>            :          * i.e. any encode entry with length of zero.
+<span class="lineNum">      36 </span>            :          */
+<span class="lineNum">      37 </span>            :         void encodeData(const types::encode_table_t&amp; encode_table, const common::Vector&lt;types::byte_t&gt;&amp; data);
+<span class="lineNum">      38 </span>            : 
+<span class="lineNum">      39 </span>            :         const common::BitStack&amp; getHeaderData() const;
+<span class="lineNum">      40 </span>            : 
+<span class="lineNum">      41 </span>            :         const common::BitStack&amp; getEncodedData() const;
 <span class="lineNum">      42 </span>            : 
-<span class="lineNum">      43 </span>            :     private:
-<span class="lineNum">      44 </span>            :         std::vector&lt;bool&gt; headerData_;
-<span class="lineNum">      45 </span>            :         std::vector&lt;bool&gt; encodedData_;
-<span class="lineNum">      46 </span>            :     };
-<span class="lineNum">      47 </span>            : }
-<span class="lineNum">      48 </span>            : 
+<span class="lineNum">      43 </span>            : 
+<span class="lineNum">      44 </span>            :     private:
+<span class="lineNum">      45 </span>            :         common::BitStack headerData_;
+<span class="lineNum">      46 </span>            :         common::BitStack encodedData_;
+<span class="lineNum">      47 </span>            :     };
+<span class="lineNum">      48 </span>            : }
 <span class="lineNum">      49 </span>            : 
-<span class="lineNum">      50 </span>            : #endif //HUFFMANCODING_ENCODER_H
+<span class="lineNum">      50 </span>            : 
+<span class="lineNum">      51 </span>            : #endif //HUFFMANCODING_ENCODER_H
 </pre>
       </td>
     </tr>
