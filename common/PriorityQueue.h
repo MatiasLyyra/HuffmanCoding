@@ -34,14 +34,14 @@ namespace common
             return data_.front();
         }
 
-        void push_back(const_reference value)
+        void push(const_reference value)
         {
             data_.push_back(value);
             size_type index = data_.size() - 1;
             while (!is_root(index))
             {
                 size_type parent_index = parent(index);
-                if (compare_(data_[index], data_[parent_index]))
+                if (compare_(data_[parent_index], data_[index]))
                 {
                     swap_elements(index, parent_index);
                     index = parent_index;
@@ -68,6 +68,11 @@ namespace common
             return data_;
         }
 
+        size_type size() const noexcept
+        {
+            return data_.size();
+        }
+
     private:
         void heapify(size_type index)
         {
@@ -78,10 +83,10 @@ namespace common
                 size_type smaller = left_index;
                 if (right_index < data_.size())
                 {
-                    smaller = compare_(data_[left_index], data_[right_index]) ? left_index : right_index;
+                    smaller = compare_(data_[left_index], data_[right_index]) ? right_index : left_index;
                 }
 
-                if (compare_(data_[smaller], data_[index]))
+                if (compare_(data_[index], data_[smaller]))
                 {
                     swap_elements(smaller, index);
                     index = smaller;

@@ -1,12 +1,10 @@
 #include "HuffmanTree.h"
 
-//TODO: Remove this include after PriorityQueue is implemented
-#include <queue>
 #include <ostream>
 #include <cassert>
 
 #include "io/FileUtils.h"
-
+#include "common/PriorityQueue.h"
 
 namespace
 {
@@ -42,7 +40,7 @@ huffman::HuffmanTree::HuffmanTree(const common::BitStack& treeInBinary) : root_(
 void huffman::HuffmanTree::constructTree(const common::Vector<types::byte_t>& characters)
 {
     TreeNodeComparator comparator{*this};
-    std::priority_queue<types::handle_t, std::vector<types::handle_t>, TreeNodeComparator> queue(comparator);
+    common::PriorityQueue<types::handle_t, TreeNodeComparator> queue(comparator);
 
     auto frequencies = calculateCharacterFrequencies(characters);
     for (int i = 0; i < constants::CHARACTERS; ++i)
