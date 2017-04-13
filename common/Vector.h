@@ -14,9 +14,9 @@ namespace common
     public:
         using size_type = std::size_t;
         using iterator = T*;
-        using const_iterator = const T*;
+        using const_iterator = T const*;
         using reference = T&;
-        using const_reference = const T&;
+        using const_reference = T const&;
 
         /**
          * Constructs empty vector
@@ -28,8 +28,9 @@ namespace common
          * @param size Size of the vector
          * @param defaultValue Value that is used to initialize the elements in the vector
          */
-        explicit Vector(size_type size, T const& defaultValue = T{});
-        Vector(Vector<T> const &other);
+        explicit Vector(size_type size, const_reference defaultValue = T{});
+
+        Vector(Vector<T> const& other);
 
         /**
          * Constructs vector from values in the iterator range
@@ -37,13 +38,18 @@ namespace common
          * @param end Ending point of the iterator range (exclusive)
          */
         Vector(iterator start, iterator end);
+
         Vector<T>& operator=(Vector<T> other);
-        Vector(Vector<T> &&other) = default;
-        Vector<T>& operator=(Vector<T> &&other) = default;
+
+        Vector(Vector<T>&& other) = default;
+
+        Vector<T>& operator=(Vector<T>&& other) = default;
+
         ~Vector()
         {
             clear();
         }
+
         /**
          * Allocates space for elements to fit at lest specified number of elements. Reallocation only happens if
          * specified capacity is larger than the current capacity.
@@ -55,13 +61,19 @@ namespace common
          * Swaps the contents of another vector with this Vector.
          * @param other Other vector used for swapping.
          */
-        void swap(Vector<T> &other) noexcept;
+        friend void swap(Vector<T>& a, Vector<T>& b)
+        {
+            using std::swap;
+            swap(a.size_, b.size_);
+            swap(a.capacity_, b.capacity_);
+            swap(a.data_, b.data_);
+        }
 
         /**
          * Pushes specified value to the end of the vector.
          * @param value Value to push back.
          */
-        void push_back(T const &value);
+        void push_back(const_reference value);
 
         /**
          * Removes the last element in the vector.
@@ -73,7 +85,7 @@ namespace common
          * @param position Index to insert element into.
          * @param value Value to insert.
          */
-        void insert(size_type position, T const& value);
+        void insert(size_type position, const_reference value);
 
         /**
          * Inserts n amount of values to the vector at specified location and shifts other values.
@@ -81,7 +93,7 @@ namespace common
          * @param n Amount of values to insert
          * @param value Value to insert.
          */
-        void insert(size_type position, size_type n, T const& value);
+        void insert(size_type position, size_type n, const_reference value);
 
         /**
          * Copies values from another vector to the end of this vector.
@@ -89,14 +101,14 @@ namespace common
          * @param start Starting index of the other vector (inclusive)
          * @param end Ending index of the other vector (exlusive)
          */
-        void insert(Vector<T> const &other, size_type start, size_type end);
+        void insert(Vector<T> const& other, size_type start, size_type end);
 
         /**
          * Removes all elements in the vector.
          */
         void clear() noexcept;
 
-        reference operator[] (size_type index)
+        reference operator[](size_type index)
         {
             if (empty() || index >= size_)
             {
@@ -106,7 +118,7 @@ namespace common
             return it[index];
         }
 
-        const_reference operator[] (size_type index) const
+        const_reference operator[](size_type index) const
         {
             if (empty() || index >= size_)
             {

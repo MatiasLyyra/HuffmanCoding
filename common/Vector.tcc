@@ -1,5 +1,5 @@
-#ifndef HUFFMANCODING_VECTOR_TPP
-#define HUFFMANCODING_VECTOR_TPP
+#ifndef HUFFMANCODING_VECTOR_TCC
+#define HUFFMANCODING_VECTOR_TCC
 
 template <class T>
 Vector<T>::Vector()
@@ -61,7 +61,7 @@ Vector<T>::Vector(Vector<T> const& other)
 template <class T>
 Vector<T>& Vector<T>::operator=(Vector<T> other)
 {
-    swap(other);
+    swap(*this, other);
     return *this;
 }
 
@@ -75,7 +75,7 @@ void Vector<T>::reserve(size_type capacity)
         iterator old_it = reinterpret_cast<iterator>(data_.get());
         iterator tmp_it = reinterpret_cast<iterator>(tmp.get());
 
-        for (int i = 0; i < size_; ++i)
+        for (auto i = 0u; i < size_; ++i)
         {
             new (&tmp_it[i]) T(old_it[i]);
         }
@@ -83,19 +83,11 @@ void Vector<T>::reserve(size_type capacity)
         std::swap(capacity_, new_capacity);
         std::swap(data_, tmp);
 
-        for (int i = 0; i < size_; ++i)
+        for (auto i = 0u; i < size_; ++i)
         {
             old_it[size_ - 1 - i].~T();
         }
     }
-}
-
-template <class T>
-void Vector<T>::swap(Vector<T> &other) noexcept
-{
-    std::swap(size_, other.size_);
-    std::swap(capacity_, other.capacity_);
-    std::swap(data_, other.data_);
 }
 
 template <class T>
@@ -115,7 +107,7 @@ void Vector<T>::insert(size_type position, size_type n, T const& value)
     }
     tmp.insert((*this), position, size_);
 
-    swap(tmp);
+    swap(*this, tmp);
 }
 template <class T>
 void Vector<T>::insert(Vector<T> const &other, size_type start, size_type end)
@@ -170,4 +162,4 @@ void Vector<T>::clear() noexcept
     capacity_ = new_capacity;
     std::swap(data_, tmp);
 }
-#endif //HUFFMANCODING_VECTOR_TPP
+#endif //HUFFMANCODING_VECTOR_TCC
