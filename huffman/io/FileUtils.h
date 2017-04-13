@@ -3,8 +3,8 @@
 
 #include <iosfwd>
 
-#include "Vector.h"
-#include "BitStack.h"
+#include "common/Vector.h"
+#include "common/BitStack.h"
 #include "../Common.h"
 
 namespace huffman

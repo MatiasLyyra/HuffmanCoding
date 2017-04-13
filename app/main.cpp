@@ -4,12 +4,12 @@
 #include <cstring>
 #include <chrono>
 
-#include "Vector.h"
-#include "Common.h"
+#include "common/Vector.h"
+#include "huffman/Common.h"
 #include "io/FileUtils.h"
-#include "HuffmanTree.h"
-#include "Encoder.h"
-#include "Decoder.h"
+#include "huffman/HuffmanTree.h"
+#include "huffman/Encoder.h"
+#include "huffman/Decoder.h"
 
 void encode(const std::string &inPath, const std::string &outPath, bool printTimes);
 void decode(const std::string &inPath, const std::string &outPath, bool printTimes);
@@ -53,6 +53,8 @@ void encode(const std::string &inPath, const std::string &outPath, bool printTim
     time = std::chrono::system_clock::now();
     huffman::HuffmanTree huffmanTree{file};
     auto huffmanTreeBuildingTime = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::system_clock::now() - time);
+
+    huffmanTree.printTree(std::cout);
 
     time = std::chrono::system_clock::now();
     huffman::Encoder encoder;

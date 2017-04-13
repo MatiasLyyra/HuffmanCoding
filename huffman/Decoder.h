@@ -1,8 +1,8 @@
 #ifndef HUFFMANCODING_DECODER_H
 #define HUFFMANCODING_DECODER_H
 
-#include "BitStack.h"
-#include "Vector.h"
+#include "common/BitStack.h"
+#include "common/Vector.h"
 
 #include "Common.h"
 

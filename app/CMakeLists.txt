@@ -1,11 +1,11 @@
 project(HuffmanCodingApp)
-
+include_directories(${CMAKE_SOURCE_DIR})
 if (CMAKE_BUILD_TYPE STREQUAL "Release")
     set(COMPILE_FLAGS "${COMPILE_FLAGS} -O3")
 endif ()
 
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
-    set(COMPILE_FLAGS "${COMPILE_FLAGS} -Og")
+    #set(COMPILE_FLAGS "${COMPILE_FLAGS} -Og")
 endif ()
 
 set(COMPILE_FLAGS "${COMPILE_FLAGS} -g -Wall -Wextra -Werror -m64")

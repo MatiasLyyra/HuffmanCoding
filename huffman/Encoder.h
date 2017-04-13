@@ -3,8 +3,8 @@
 
 #include <string>
 
-#include "BitStack.h"
-#include "Vector.h"
+#include "common/BitStack.h"
+#include "common/Vector.h"
 #include "Common.h"
 #include "HuffmanTree.h"
 
