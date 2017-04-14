@@ -75,7 +75,86 @@ Aikavaativuus "calculateCharacterFrequencies" funktiolla on O(n), jossa n on cha
 
 ### Pakkaaminen
 
+```
+function writeTreeInBinary(root, huffmanTree, treeInBinary)
+    if root->isLeaf()
+        treeInBinary.push_back(true)
+        insertByte(root.getData(), treeInBinary)
+    else
+        treeInBinary.push_back(false)
+        writeTreeInBinary(root.getLeftChildHandle(), huffmanTree, treeInBinary)
+        writeTreeInBinary(root.getRightChildHandle(), huffmanTree, treeInBinary)
+    endif
+endfunction
+
+function collectCharacterCodes(encode_table, root, code, depth)
+    if root.isLeaf()
+        //Handle special case where there is only one character
+        if depth == 0
+            depth = 1
+        endif
+        encode_table[root.getData()] = pair(code, depth)
+    else
+        uint leftCode = code << 1
+        uint rightCode = (code << 1) + 1
+        ++depth
+
+        collectCharacterCodes(encode_table, root.getLeftChildHandle(), leftCode, depth)
+        collectCharacterCodes(encode_table, root.getRightChildHandle(), rightCode, depth)
+    endif
+endfunction
+
+function encodeData(encode_table, data)
+    BinaryVector encodedData
+    for each byte in data
+        encode_entry = encode_table[byte]
+        code = encode_entry.first
+        length = encode_entry.second
+        encodedData.push_back(code, length)
+    endfor
+    return encodedData
+endfunction
+```
+Funktion "writeTreeInBinary" aikavaativuus on selvästi (jokaisessa solmussa vieraillaan vain kerran) O(k), jossa k on erilaisten merkkien määrä. "insertByte" on vakioaikainen funktio, joka sijoittaa 8 bittiä taulukon loppuun.
+
+Funktio "collectCharacterCodes" on erittäin samanlainen kuin "writeTreeInBinary" ja aikavaativuus on myöskin O(k). Lopuksi data pakataan pakkaustaulukon avulla funktiossa "encodeData". Siinä jokainen merkki/tavu käydään läpi ja tallennetaan "encodedData" taulukkoon, jolloin aikavaativuus on O(n), jossa n on merkkien määrä datassa. Kokonaisuudessaan aikavaativuus on O(n + k). Tilavaativuus on myöskin koko pakkauksen ajalla O(n + k) pakatun datan ja pakkaustaulukon takia.
+
 ### Purkaminen
+
+```
+function readNodes(treeInBinary, index)
+    if treeInBinary[index++] == 1
+        byte = readByte(treeInBinary, index)
+        index += 8
+        TreeNode leaf(byte)
+        return leaf
+    endif
+
+    TreeNode parent
+    parent.left = readNodes(treeInBinary, index)
+    parent.right = readNodes(treeInBinary, index)
+
+    return parent
+endfunction
+
+function decodeData(treeInBinary, encodedData)
+    HuffmanTree = readNodes(treeInBinary, 0)
+    Vector decodedData
+    TreeNode current
+    for i in range 0 -> encodedData.size()
+        current = huffmanTree.getRoot()
+        //Handling special case with only one character
+        i += current.isLeaf() ? 1 : 0
+        while !current->isLeaf() and i < encodedData.size()
+            current = encodedData[i] == 1 ? current.getRightChild() : current.getLeftChild()
+            ++i
+        endwhile
+        decodedData.push_back(current.getData())
+    endfor
+    return decodedData
+endfunction
+```
+Funktion "readNodes" jokainen solmu Huffman puun solmu käydään kertaalleen läpi, joten aikavaativuus on O(k), jossa k on erilaisten merkkien määrä. "readByte" on vakioaikainen funktio, joka lukee seuraavat kahdeksan bittiä taulukosta. "decodeData"-funktiossa jokainen merkki datassa käydään läpi for-silmukassa. Pahimmassa tapauksessa lehtisolmu löytyy puun korkeuden verran solmuja läpikäytyä. Tällöin siis aikavaativuus on yhteensä O(nh + k), jossa n on merkkien määrä datassa ja h on Huffman puun korkeus.
 
 ## Parannusehdotukset
 
