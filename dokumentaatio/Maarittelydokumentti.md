@@ -20,7 +20,7 @@ Henkilökohtainen tavoitteeni on oppia lisää ohjelmien toteutuksesta C++ kiele
 
 ## Aikavaativuudet
 
-Ohjelman toiminta voidaan jakaa kolmeen eri vaiheeseen: Huffman puun rakentaminen, pakkaus ja purkaminen.
+Ohjelman toiminta voidaan jakaa kolmeen eri vaiheeseen: Huffman puun rakentaminen, pakkaus ja purkaminen. Eri merkkien määrä tulee vaikuttaamaan todennäköisesti huomattavasti vähemmän kokonaisuudessaan algoritmien ajankäyttöön kuin itse merkkien määrä. Tämä johtuu mahdollisten eri merkkien vähäisestä määrästä 256 kpl verrattuna mielivaltaiseen määrään merkkejä. 
 
 ### Huffman puun rakentaminen
 
@@ -34,7 +34,7 @@ Pakkausta varten Huffman puu pitää käydä läpi syvyyssuuntaisella haulla. Jo
 
 ### Purkaminen
 
-Purkamisessa syötteestä luetaan bittejä yksi kerrallaan ja liikutaan puussa niiden mukaan, kunnes lehtisolmu löytyy. Symbolin löytyminen puusta vois siis vaihdella lähes vakioaikaisesta aina symbolien määrään saakka. Pahimmassa tapauksessa aikavaativuus on O(nh), jossa n syötteessä olevien symbolien määrä ja h Huffman puun korkeus. Tilavaativuus on O(n) puretun datan tallentamisen takia.
+Purkamisessa syötteestä luetaan bittejä yksi kerrallaan ja liikutaan puussa niiden mukaan, kunnes lehtisolmu löytyy. Symbolin löytyminen puusta vois siis vaihdella lähes vakioaikaisesta aina puun korkeuteen saakka. Puu pitää myös muuttaa käytettävään muotoon pakkauksen jäljiltä, jonka aikavaativuus on O(k), jossa k on eri merkkien määrä. Pahimmassa tapauksessa purkamisessa aikavaativuus on O(nh), jossa n syötteessä olevien symbolien määrä ja h Huffman puun korkeus. Yhteensä aikavaativuus on siis O(nh + k). Tilavaativuus on O(n + k) puretun datan tallentamisen ja Huffman puun rakentamisen takia.
 
 ## Ohjelman käyttö ja syötteet
 
