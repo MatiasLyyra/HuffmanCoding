@@ -42,17 +42,9 @@ huffman::Encoder::encodeData(const huffman::types::encode_table_t& encode_table,
         {
             encodedData_.clear();
             std::ostringstream errorMessage;
-            errorMessage << "Byte " << byte << "not found in encoding table.";
+            errorMessage << "Byte '" << byte << "' not found in encoding table.";
             throw std::invalid_argument(errorMessage.str());
         }
-        /*
-        for (uint8_t i = 0; i < length; ++i)
-        {
-            int shiftAmount = length - 1 - i;
-            uint32_t bit = (code & (1 << shiftAmount)) >> shiftAmount;
-            encodedData_.push_back(bit == 1);
-        }
-         */
         encodedData_.push_back(code, length);
     }
 }

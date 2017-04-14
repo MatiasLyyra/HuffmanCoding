@@ -7,6 +7,11 @@
 
 namespace common
 {
+    /**
+     * PriorityQueue implementation using binary heap.
+     * @tparam T Type of the element to store.
+     * @tparam Compare Comparison function that is used to order elements.
+     */
     template<class T, class Compare = std::less<T>>
     class PriorityQueue
     {
@@ -20,20 +25,30 @@ namespace common
         explicit PriorityQueue(Compare const& compare = Compare())
                 : compare_{compare},
                   data_{}
+        {}
 
-        {
-        }
-
+        /**
+         * Returns the top of the priority queue
+         * @return Top of the priority queue
+         */
         reference top() noexcept
         {
             return data_.front();
         }
 
+        /**
+         * Returns the top of the priority queue
+         * @return Top of the priority queue
+         */
         const_reference top() const noexcept
         {
             return data_.front();
         }
 
+        /**
+         * Pushes given value to the queue.
+         * @param value Value to push in to the queue
+         */
         void push(const_reference value)
         {
             data_.push_back(value);
@@ -53,6 +68,9 @@ namespace common
             }
         }
 
+        /**
+         * Removes the top of the queue.
+         */
         void pop()
         {
             if (!data_.empty())
@@ -63,11 +81,19 @@ namespace common
             }
         }
 
+        /**
+         * Provides immutable access to the underlying container.
+         * @return Underlying container.
+         */
         Vector<T> const& data() const noexcept
         {
             return data_;
         }
 
+        /**
+         * Returns size of the queue.
+         * @return Size of the queue.
+         */
         size_type size() const noexcept
         {
             return data_.size();
