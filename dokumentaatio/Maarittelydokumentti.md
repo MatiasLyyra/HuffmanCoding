@@ -34,7 +34,7 @@ Pakkausta varten Huffman puu pitää käydä läpi syvyyssuuntaisella haulla. Jo
 
 ### Purkaminen
 
-Purkamisessa syötteestä luetaan bittejä yksi kerrallaan ja liikutaan puussa niiden mukaan, kunnes lehtisolmu löytyy. Symbolin löytyminen puusta vois siis vaihdella lähes vakioaikaisesta aina symbolien määrään saakka. Jos oletetaan, että symboli löytyy keskimäärin ajassa O(log k) niin koko syötteen purkamisessa kuluu siis O(n log k) aika, jossa n syötteessä olevien symbolien määrä ja k erilaisten symbolien määrä. Tilavaativuus on O(n) puretun datan tallentamisen takia.
+Purkamisessa syötteestä luetaan bittejä yksi kerrallaan ja liikutaan puussa niiden mukaan, kunnes lehtisolmu löytyy. Symbolin löytyminen puusta vois siis vaihdella lähes vakioaikaisesta aina symbolien määrään saakka. Pahimmassa tapauksessa aikavaativuus on O(nh), jossa n syötteessä olevien symbolien määrä ja h Huffman puun korkeus. Tilavaativuus on O(n) puretun datan tallentamisen takia.
 
 ## Ohjelman käyttö ja syötteet
 
