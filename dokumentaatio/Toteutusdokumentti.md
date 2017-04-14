@@ -121,6 +121,41 @@ Funktio "collectCharacterCodes" on erittäin samanlainen kuin "writeTreeInBinary
 
 ### Purkaminen
 
+```
+function readNodes(treeInBinary, index)
+    if treeInBinary[index++] == 1
+        byte = readByte(treeInBinary, index)
+        index += 8
+        TreeNode leaf(byte)
+        return leaf
+    endif
+
+    TreeNode parent
+    parent.left = readNodes(treeInBinary, index)
+    parent.right = readNodes(treeInBinary, index)
+
+    return parent
+endfunction
+
+function decodeData(treeInBinary, encodedData)
+    HuffmanTree = readNodes(treeInBinary, 0)
+    Vector decodedData
+    TreeNode current
+    for i in range 0 -> encodedData.size()
+        current = huffmanTree.getRoot()
+        //Handling special case with only one character
+        i += current.isLeaf() ? 1 : 0
+        while !current->isLeaf() and i < encodedData.size()
+            current = encodedData[i] == 1 ? current.getRightChild() : current.getLeftChild()
+            ++i
+        endwhile
+        decodedData.push_back(current.getData())
+    endfor
+    return decodedData
+endfunction
+```
+Funktion "readNodes" jokainen solmu Huffman puun solmu käydään kertaalleen läpi, joten aikavaativuus on O(k), jossa k on erilaisten merkkien määrä. "readByte" on vakioaikainen funktio, joka lukee seuraavat kahdeksan bittiä taulukosta. "decodeData"-funktiossa jokainen merkki datassa käydään läpi for-silmukassa. Pahimmassa tapauksessa lehtisolmu löytyy puun korkeuden verran solmuja läpikäytyä. Tällöin siis aikavaativuus on yhteensä O(nh + k), jossa n on merkkien määrä datassa ja h on Huffman puun korkeus.
+
 ## Parannusehdotukset
 
 Tiedon purkaminen on huomattavasti hitaampaa verrattuna tiedon pakkaamiseen. Purkamista voisi mahdollisesti nopeuttaa käyttämällä hakutaulukkoa. Toinen parannusmahdollisuus olisi sisällyttää pakattuun tiedostoon tarkistussumma, jolla tiedoston eheys voitaisiin tarkistaa ennen purkamista.
