@@ -147,6 +147,11 @@ void huffman::HuffmanTree::collectCharacterCodes(huffman::types::encode_table_t&
     const huffman::TreeNode* root = getNode(rootHandle);
     if (root->isLeaf())
     {
+        //Handle special case where there is only one character
+        if (depth == 0)
+        {
+            depth = 1;
+        }
         encode_table[root->getData()] = huffman::types::encode_entry_t{code, depth};
     }
     else

@@ -15,6 +15,8 @@ void huffman::Decoder::decodeData(const common::BitStack& treeInBinary, const co
     for (uint64_t i = 0; i < encodedData.size();)
     {
         current = huffmanTree.getRoot();
+        //Handling special case with only one character
+        i += current->isLeaf() ? 1 : 0;
         while (!current->isLeaf() && i < encodedData.size())
         {
             current = encodedData.at(i) ? huffmanTree.getNode(current->getRightChildHandle()) : huffmanTree.getNode(
