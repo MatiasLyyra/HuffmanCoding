@@ -30,7 +30,7 @@ Yhteensä siis koko rakentamiseen kuluu O(n + k log k) verran aikaa. Tilavaativu
 
 ### Pakkaus
 
-Pakkausta varten Huffman puu pitää käydä läpi syvyyssuuntaisella haulla. Jokainen solmu käsitellään vain kerran, joten aikavaativuus on O(k), jossa k on erilaisten symbolien määrä. Tämän jälkeen pakkausta varten symbolin koodi löytyy vakioajassa. Pakkaus tapahtuu siis ajassa O(k + n), jossa n on käsiteltävien symbolien määrä. Tilavaativuus on O(k + n) pakkaukseen käytettävän taulukon takia ja tuloksena olevan pakatun datan takia.
+Pakkausta varten Huffman puu pitää käydä läpi syvyyssuuntaisella haulla. Jokainen solmu käsitellään vain kerran, joten aikavaativuus on O(k), jossa k on erilaisten symbolien määrä. Tämän jälkeen pakkausta varten symbolin koodi löytyy vakioajassa. Itse puu pitää myös muuttaa tallennettavaan muotoon. Tämän aikavaativuus on O(k), jokaisessa puun solmussa tulee käydä yhden kerran. Pakkaus tapahtuu siis ajassa O(k + n), jossa n on käsiteltävien symbolien määrä. Tilavaativuus on O(k + n) pakkaukseen käytettävän taulukon takia ja tuloksena olevan pakatun datan takia.
 
 ### Purkaminen
 
