@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-04-07 11:24:17</td>
+            <td class="headerValue">2017-04-21 00:18:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">7</td>
@@ -62,39 +62,39 @@
 <pre class="source">
 <a name="1"><span class="lineNum">       1 </span>            : #include &quot;TreeNode.h&quot;</a>
 <span class="lineNum">       2 </span>            : 
-<span class="lineNum">       3 </span><span class="lineCov">        117 : huffman::TreeNode::TreeNode(types::handle_t handle, types::byte_t data, unsigned frequency, bool isLeaf)</span>
+<span class="lineNum">       3 </span><span class="lineCov">        106 : huffman::TreeNode::TreeNode(types::handle_t handle, types::byte_t data, unsigned frequency, bool isLeaf)</span>
 <span class="lineNum">       4 </span>            :         : handle_(handle),
 <span class="lineNum">       5 </span>            :           data_(data),
 <span class="lineNum">       6 </span>            :           left_(constants::empty_handle),
 <span class="lineNum">       7 </span>            :           right_(constants::empty_handle),
 <span class="lineNum">       8 </span>            :           frequency_(frequency),
-<span class="lineNum">       9 </span><span class="lineCov">        117 :           isLeaf_(isLeaf)</span>
+<span class="lineNum">       9 </span><span class="lineCov">        106 :           isLeaf_(isLeaf)</span>
 <span class="lineNum">      10 </span>            : {
-<a name="11"><span class="lineNum">      11 </span><span class="lineCov">        117 : }</span></a>
+<a name="11"><span class="lineNum">      11 </span><span class="lineCov">        106 : }</span></a>
 <span class="lineNum">      12 </span>            : 
-<span class="lineNum">      13 </span><span class="lineCov">        165 : unsigned char huffman::TreeNode::getData() const</span>
+<span class="lineNum">      13 </span><span class="lineCov">        179 : unsigned char huffman::TreeNode::getData() const</span>
 <span class="lineNum">      14 </span>            : {
-<span class="lineNum">      15 </span><span class="lineCov">        165 :     return data_;</span>
+<span class="lineNum">      15 </span><span class="lineCov">        179 :     return data_;</span>
 <a name="16"><span class="lineNum">      16 </span>            : }</a>
 <span class="lineNum">      17 </span>            : 
-<span class="lineNum">      18 </span><span class="lineCov">        107 : huffman::types::handle_t huffman::TreeNode::getLeftChildHandle() const</span>
+<span class="lineNum">      18 </span><span class="lineCov">         97 : huffman::types::handle_t huffman::TreeNode::getLeftChildHandle() const</span>
 <span class="lineNum">      19 </span>            : {
-<span class="lineNum">      20 </span><span class="lineCov">        107 :     return left_;</span>
+<span class="lineNum">      20 </span><span class="lineCov">         97 :     return left_;</span>
 <a name="21"><span class="lineNum">      21 </span>            : }</a>
 <span class="lineNum">      22 </span>            : 
-<span class="lineNum">      23 </span><span class="lineCov">        111 : huffman::types::handle_t huffman::TreeNode::getRightChildHandle() const</span>
+<span class="lineNum">      23 </span><span class="lineCov">        101 : huffman::types::handle_t huffman::TreeNode::getRightChildHandle() const</span>
 <span class="lineNum">      24 </span>            : {
-<span class="lineNum">      25 </span><span class="lineCov">        111 :     return right_;</span>
+<span class="lineNum">      25 </span><span class="lineCov">        101 :     return right_;</span>
 <a name="26"><span class="lineNum">      26 </span>            : }</a>
 <span class="lineNum">      27 </span>            : 
-<span class="lineNum">      28 </span><span class="lineCov">        593 : unsigned int huffman::TreeNode::getFrequency() const</span>
+<span class="lineNum">      28 </span><span class="lineCov">        511 : unsigned int huffman::TreeNode::getFrequency() const</span>
 <span class="lineNum">      29 </span>            : {
-<span class="lineNum">      30 </span><span class="lineCov">        593 :     return frequency_;</span>
+<span class="lineNum">      30 </span><span class="lineCov">        511 :     return frequency_;</span>
 <a name="31"><span class="lineNum">      31 </span>            : }</a>
 <span class="lineNum">      32 </span>            : 
-<span class="lineNum">      33 </span><span class="lineCov">        182 : bool huffman::TreeNode::isLeaf() const</span>
+<span class="lineNum">      33 </span><span class="lineCov">        207 : bool huffman::TreeNode::isLeaf() const</span>
 <span class="lineNum">      34 </span>            : {
-<span class="lineNum">      35 </span><span class="lineCov">        182 :     return isLeaf_;</span>
+<span class="lineNum">      35 </span><span class="lineCov">        207 :     return isLeaf_;</span>
 <a name="36"><span class="lineNum">      36 </span>            : }</a>
 <span class="lineNum">      37 </span>            : 
 <span class="lineNum">      38 </span><span class="lineCov">         11 : huffman::types::handle_t huffman::TreeNode::getHandle() const</span>

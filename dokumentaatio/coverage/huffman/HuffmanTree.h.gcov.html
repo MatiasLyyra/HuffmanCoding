@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-04-07 11:24:17</td>
+            <td class="headerValue">2017-04-21 00:18:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">2</td>
@@ -66,8 +66,8 @@
 <span class="lineNum">       4 </span>            : #include &lt;iosfwd&gt;
 <span class="lineNum">       5 </span>            : #include &lt;cstdint&gt;
 <span class="lineNum">       6 </span>            : 
-<span class="lineNum">       7 </span>            : #include &quot;Vector.h&quot;
-<span class="lineNum">       8 </span>            : #include &quot;BitStack.h&quot;
+<span class="lineNum">       7 </span>            : #include &quot;common/Vector.h&quot;
+<span class="lineNum">       8 </span>            : #include &quot;common/BitStack.h&quot;
 <span class="lineNum">       9 </span>            : #include &quot;Common.h&quot;
 <span class="lineNum">      10 </span>            : #include &quot;TreeNode.h&quot;
 <span class="lineNum">      11 </span>            : 
@@ -87,8 +87,8 @@
 <span class="lineNum">      25 </span>            :          */
 <a name="26"><span class="lineNum">      26 </span>            :         struct TreeNodeComparator</a>
 <span class="lineNum">      27 </span>            :         {
-<span class="lineNum">      28 </span><span class="lineCov">          7 :             TreeNodeComparator(const huffman::HuffmanTree&amp; huffmanTree) : huffmanTree_(huffmanTree)</span>
-<span class="lineNum">      29 </span><span class="lineCov">          7 :             {}</span>
+<span class="lineNum">      28 </span><span class="lineCov">          6 :             TreeNodeComparator(const huffman::HuffmanTree&amp; huffmanTree) : huffmanTree_(huffmanTree)</span>
+<span class="lineNum">      29 </span><span class="lineCov">          6 :             {}</span>
 <span class="lineNum">      30 </span>            :             bool operator()(const huffman::types::handle_t &amp;aHandle, const huffman::types::handle_t &amp;bHandle) const;
 <span class="lineNum">      31 </span>            :             const huffman::HuffmanTree&amp; huffmanTree_;
 <span class="lineNum">      32 </span>            :         };
