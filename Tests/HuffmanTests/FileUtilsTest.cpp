@@ -40,8 +40,7 @@ TEST_F(FileUtilsFixture, WriteBinaryFileWorks)
         binaryData.push_back(false);
     }
     uint8_t data[8];
-    ss.read(reinterpret_cast<char*>(data), sizeof(data));
-    uint64_t length = huffman::io::read64BitNumber(data);
+    uint64_t length = huffman::io::readUint64(ss);
     ASSERT_EQ(expectedLength, length);
     std::vector<bool>::size_type i = 0;
     while (!ss.eof())
@@ -61,7 +60,7 @@ TEST_F(FileUtilsFixture, WriteBinaryFileWorks)
 TEST_F(FileUtilsFixture, ReadingBinaryFileWorks)
 {
     std::stringstream ss;
-    huffman::io::writeBinaryFile(ss, binaryData);
+    huffman::io::writeBinaryFile(ss, binaryData, true);
     common::BitStack actualData = huffman::io::readBinaryFile(ss, false);
     ASSERT_EQ(actualData.size(), binaryData.size());
     for (int i = 0; i < binaryData.size(); ++i)

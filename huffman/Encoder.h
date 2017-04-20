@@ -31,8 +31,6 @@ namespace huffman
          * Encodes given data based on encoding table. Encoded data can be read with getEncodedData().
          * @param encode_table Encode table that is used to encode the data.
          * @param data Data to be encoded
-         * @throw Throws std::invalid_argument exception if character is encountered without proper value in encoding table
-         * i.e. any encode entry with length of zero.
          */
         void encodeData(const types::encode_table_t& encode_table, const common::Vector<types::byte_t>& data);
 

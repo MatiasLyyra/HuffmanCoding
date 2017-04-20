@@ -4,8 +4,10 @@
 #include <cassert>
 #define DATA_SIZE(size_in_bits) (size_in_bits + (32 - (size_in_bits % 32))) / 8
 
-uint64_t huffman::io::read64BitNumber(const uint8_t (&data)[8])
+uint64_t huffman::io::readUint64(std::istream& istream)
 {
+    uint8_t data[8];
+    istream.read(reinterpret_cast<char*>(data), sizeof(data));
     uint64_t number = 0;
     for (int i = 0; i < 8; ++i)
     {
@@ -14,7 +16,7 @@ uint64_t huffman::io::read64BitNumber(const uint8_t (&data)[8])
     return number;
 }
 
-void huffman::io::write64BitNumberToStream(uint64_t number, std::ostream& ostream)
+void huffman::io::writeUint64(uint64_t number, std::ostream& ostream)
 {
     uint8_t data[8];
 
@@ -22,7 +24,7 @@ void huffman::io::write64BitNumberToStream(uint64_t number, std::ostream& ostrea
     {
         data[i] = static_cast<uint8_t>(number >> (i * constants::BITS_IN_BYTE));
     }
-    ostream.write(reinterpret_cast<char*>(&data[0]), sizeof(data));
+    ostream.write(reinterpret_cast<char*>(data), sizeof(data));
 }
 
 common::Vector<huffman::types::byte_t> huffman::io::readFile(std::istream& istream)
@@ -33,23 +35,22 @@ common::Vector<huffman::types::byte_t> huffman::io::readFile(std::istream& istre
     istream.seekg(0, std::ios::beg);
 
     std::unique_ptr<types::byte_t[]> buffer{new unsigned char[fileSize]};
-    istream.read(reinterpret_cast<char*>(&buffer.get()[0]), fileSize * sizeof(types::byte_t));
+    istream.read(reinterpret_cast<char*>(buffer.get()), fileSize * sizeof(types::byte_t));
     return common::Vector<types::byte_t>{buffer.get(), buffer.get() + fileSize * sizeof(types::byte_t)};
 }
 
-void huffman::io::writeBinaryFile(std::ostream& ostream, const common::BitStack& data)
+void huffman::io::writeBinaryFile(std::ostream& ostream, const common::BitStack& data, bool magicNumber)
 {
-    if (data.empty())
+    if (magicNumber)
     {
-        return;
+        writeMagicNumber(ostream);
     }
     uint64_t length = data.size();
-    write64BitNumberToStream(length, ostream);
-    types::byte_t bytes[4];
+    writeUint64(length, ostream);
     auto it = data.data();
-    std::size_t i = 0;
     auto containerSize = data.container_size();
-    for (; i < containerSize; ++i)
+    types::byte_t bytes[4];
+    for (std::size_t i = 0; i < containerSize; ++i)
     {
         uint32_t word = it[i];
         bytes[0] = static_cast<types::byte_t>(word >> 24);
@@ -62,18 +63,21 @@ void huffman::io::writeBinaryFile(std::ostream& ostream, const common::BitStack&
 
 common::BitStack huffman::io::readBinaryFile(std::istream& istream, bool ignoreHeader)
 {
+    bool validMagicNumber = verifyMagicNumber(istream);
+    if (!validMagicNumber)
+    {
+        throw std::invalid_argument("Invalid file. Magic number does not match.");
+    }
     uint8_t data[8];
-    istream.read(reinterpret_cast<char*>(&data[0]), sizeof(data));
-    uint64_t length = read64BitNumber(data);
+    uint64_t length = readUint64(istream);
+    common::BitStack encodedData;
     uint64_t dataSize = DATA_SIZE(length);
     if (ignoreHeader)
     {
         istream.seekg(dataSize, std::ios::cur);
-        istream.read(reinterpret_cast<char*>(&data[0]), sizeof(data));
-        length = read64BitNumber(data);
+        length = readUint64(istream);
         dataSize = DATA_SIZE(length);
     }
-    common::BitStack encodedData;
     encodedData.reserve(length);
 
     for (auto i = 0; i < dataSize; ++i)
@@ -116,4 +120,15 @@ huffman::types::byte_t huffman::io::readByte(const common::BitStack& vector, uin
         }
     }
     return byte;
+}
+
+bool huffman::io::verifyMagicNumber(std::istream& istream)
+{
+    uint64_t magicNumber = readUint64(istream);
+    return magicNumber == constants::MAGIG_NUMBER;
+}
+
+void huffman::io::writeMagicNumber(std::ostream& ostream)
+{
+    writeUint64(constants::MAGIG_NUMBER, ostream);
 }

@@ -8,14 +8,19 @@ namespace huffman
     namespace constants
     {
         /**
+         * Magic number for identifying encoded files.
+         */
+        static constexpr uint64_t MAGIG_NUMBER = 0x45311e06bdb91029;
+
+        /**
          * Number of different possible characters.
          */
-        constexpr unsigned CHARACTERS = 256;
+        static constexpr unsigned CHARACTERS = 256;
 
         /**
          * Maximum length of the encoded character code
          */
-        constexpr unsigned MAX_CODE_LENGTH = 32;
+        static constexpr unsigned MAX_CODE_LENGTH = 32;
         static constexpr unsigned char BITS_IN_BYTE = 8;
         static constexpr int empty_handle = -1;
     }

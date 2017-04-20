@@ -30,13 +30,14 @@ namespace huffman
          * @param ostream Stream to write to.
          * @param data Data that is written to the stream.
          */
-        void writeBinaryFile(std::ostream& ostream, const common::BitStack& data);
+        void writeBinaryFile(std::ostream& ostream, const common::BitStack& data, bool magicNumber = false);
 
         /**
          * Reads data from the stream to vector containing bool values.
          * @param istream Stream to read from.
          * @param ignoreHeader Ignore the header data i.e. usually the HuffmanTree data and read the actual data
          * @return Data read from the stream
+         * @throw std::invalid_argument if huffman::constants::MAGIC_NUMBER is not found from the start of the stream
          */
         common::BitStack readBinaryFile(std::istream& istream, bool ignoreHeader);
 
@@ -46,7 +47,7 @@ namespace huffman
          * @param data Eight bytes that represent 64-bit number
          * @return Unsigned 64-bit number
          */
-        uint64_t read64BitNumber(const uint8_t (& data)[8]);
+        uint64_t readUint64(std::istream& istream);
 
         /**
          * Writes 64-bit number to the specified stream as individual bytes. The first byte in the stream represents
@@ -54,7 +55,7 @@ namespace huffman
          * @param number 64-bit number that is written to the stream.
          * @param ostream Stream that is written to.
          */
-        void write64BitNumberToStream(uint64_t number, std::ostream& ostream);
+        void writeUint64(uint64_t number, std::ostream& ostream);
 
         /**
          * Inserts byte to the vector as binary values.
@@ -70,6 +71,19 @@ namespace huffman
          * @return Byte read from the vector
          */
         huffman::types::byte_t readByte(const common::BitStack& vector, uint64_t start);
+
+        /**
+         * Verifies that the magic read from the stream matches to huffman::constants::MAGIC_NUMBER.
+         * @param istream Stream to read from.
+         * @return True if the magic number matches, otherwise false.
+         */
+        bool verifyMagicNumber(std::istream& istream);
+
+        /**
+         * Writes huffman::constants::MAGIC_NUMBER to the stream.
+         * @param ostream Stream to write to.
+         */
+        void writeMagicNumber(std::ostream& ostream);
     }
 }
 

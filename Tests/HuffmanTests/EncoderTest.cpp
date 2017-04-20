@@ -49,13 +49,3 @@ TEST_F(EncoderFixture, HeaderDataIsCorrect)
         ASSERT_EQ(expected.at(i), expected.at(i));
     }
 }
-
-TEST_F(EncoderFixture, InvalidDataThrowsExecption)
-{
-    huffman::HuffmanTree huffmanTree{testutils::createHuffmanTreeFromCharacters()};
-    huffman::types::encode_table_t encode_table = huffmanTree.constructEncodingTable();
-    std::string message = "aelcauaBb";
-    common::Vector<huffman::types::byte_t> characters{testutils::convertStringToByteVector(message)};
-    ASSERT_THROW(encoder.encodeData(encode_table, characters), std::invalid_argument);
-    ASSERT_EQ(0, encoder.getEncodedData().size());
-}

@@ -38,20 +38,17 @@ huffman::Encoder::encodeData(const huffman::types::encode_table_t& encode_table,
         types::encode_entry_t encode_entry = encode_table[byte];
         uint32_t code = encode_entry.first;
         uint8_t length = encode_entry.second;
-        if (length == 0)
-        {
-            encodedData_.clear();
-            std::ostringstream errorMessage;
-            errorMessage << "Byte '" << byte << "' not found in encoding table.";
-            throw std::invalid_argument(errorMessage.str());
-        }
+        assert(length != 0);
         encodedData_.push_back(code, length);
     }
 }
 
 void huffman::Encoder::createHeader(const huffman::HuffmanTree& huffmanTree)
 {
-    writeTreeInBinary(huffmanTree.getRoot()->getHandle(), huffmanTree, headerData_);
+    if (huffmanTree.getRoot() != nullptr)
+    {
+        writeTreeInBinary(huffmanTree.getRoot()->getHandle(), huffmanTree, headerData_);
+    }
 }
 
 const common::BitStack& huffman::Encoder::getHeaderData() const

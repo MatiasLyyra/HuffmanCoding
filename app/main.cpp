@@ -13,6 +13,9 @@
 
 #include "TimeResults.h"
 
+#define TIME_DURATION(FIRST) std::chrono::duration_cast<std::chrono::nanoseconds>(\
+            std::chrono::system_clock::now() - FIRST)
+
 EncodingResult encode(const std::string& inPath, const std::string& outPath, bool printTree);
 
 DecodingResults decode(const std::string& inPath, const std::string& outPath);
@@ -24,7 +27,10 @@ void printEncodingTimes(const EncodingResult& result);
 void printDecodingTimes(const DecodingResults& result);
 
 static constexpr int MIN_PARAMETERS = 6;
-static std::string HELP_MESSAGE = "Encoding: HuffmanCoding encode -in <file> -out <file2> (-v) (-tree)\nDecoding: HuffmanCoding decode -in <file> -out <file2> (-v)";
+
+static std::string HELP_MESSAGE =
+"Encoding: HuffmanCoding encode -in <file> -out <file2> (-v) (-tree)\n\
+Decoding: HuffmanCoding decode -in <file> -out <file2> (-v)";
 
 std::string inPath, outPath;
 bool encoding = true;
@@ -37,8 +43,7 @@ int main(int argc, char** argv)
     if (!parseParameters(argc, argv))
     {
         std::cerr << "Invalid parameters" << std::endl << HELP_MESSAGE << std::endl;
-    }
-    else
+    } else
     {
         int count = std::max(1, benchmark);
         DecodingResults decodingResults;
@@ -79,7 +84,7 @@ int main(int argc, char** argv)
             encodingResult.total /= count;
             printEncodingTimes(encodingResult);
         }
-        if (verbose && decodingResults.success  && !encoding)
+        if (verbose && decodingResults.success && !encoding)
         {
             decodingResults.fileHeaderRead /= count;
             decodingResults.fileDataRead /= count;
@@ -95,21 +100,21 @@ int main(int argc, char** argv)
 
 void printDecodingTimes(const DecodingResults& result)
 {
-    std::cout << "Header reading:\t" << result.fileHeaderRead << " microseconds" << std::endl;
-    std::cout << "Data reading:\t" << result.fileDataRead << " microseconds" << std::endl;
-    std::cout << "Decoding:\t" << result.decoding << " microseconds" << std::endl;
-    std::cout << "Write time:\t" << result.fileWrite << " microseconds" << std::endl;
-    std::cout << "Total:\t\t" << result.total << " microseconds" << std::endl;
+    std::cout << "Header reading:\t" << result.fileHeaderRead << " nanoseconds" << std::endl;
+    std::cout << "Data reading:\t" << result.fileDataRead << " nanoseconds" << std::endl;
+    std::cout << "Decoding:\t" << result.decoding << " nanoseconds" << std::endl;
+    std::cout << "Write time:\t" << result.fileWrite << " nanoseconds" << std::endl;
+    std::cout << "Total:\t\t" << result.total << " nanoseconds" << std::endl;
 }
 
 void printEncodingTimes(const EncodingResult& result)
 {
-    std::cout << "File reading:\t\t" << result.fileReading << " microseconds""" << std::endl;
-    std::cout << "HuffmanTree building:\t" << result.huffmanTreeBuilding << " microseconds" << std::endl;
-    std::cout << "Encoding:\t\t" << result.encoding << " microseconds" << std::endl;
-    std::cout << "Writing header:\t\t" << result.headerWrite << " microseconds" << std::endl;
-    std::cout << "Writing data:\t\t" << result.encodedDataWrite << " microseconds" << std::endl;
-    std::cout << "Total:\t\t\t" << result.total << " microseconds" << std::endl;
+    std::cout << "File reading:\t\t" << result.fileReading << " nanoseconds" << std::endl;
+    std::cout << "HuffmanTree building:\t" << result.huffmanTreeBuilding << " nanoseconds" << std::endl;
+    std::cout << "Encoding:\t\t" << result.encoding << " nanoseconds" << std::endl;
+    std::cout << "Writing header:\t\t" << result.headerWrite << " nanoseconds" << std::endl;
+    std::cout << "Writing data:\t\t" << result.encodedDataWrite << " nanoseconds" << std::endl;
+    std::cout << "Total:\t\t\t" << result.total << " nanoseconds" << std::endl;
 }
 
 bool parseParameters(int argc, char* const* argv)
@@ -144,8 +149,7 @@ bool parseParameters(int argc, char* const* argv)
         } else if (strcmp(argv[i], "-tree") == 0)
         {
             printTree = true;
-        }
-        else if (strcmp(argv[i], "-benchmark") == 0)
+        } else if (strcmp(argv[i], "-benchmark") == 0)
         {
             benchmark = atoi(argv[++i]);
         } else
@@ -169,18 +173,17 @@ EncodingResult encode(const std::string& inPath, const std::string& outPath, boo
 
     auto time = std::chrono::system_clock::now();
     common::Vector<huffman::types::byte_t> file{huffman::io::readFile(ifstream)};
-    auto readingTime = std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::system_clock::now() - time);
+    auto readingTime = TIME_DURATION(time);
 
     time = std::chrono::system_clock::now();
     huffman::HuffmanTree huffmanTree{file};
-    auto huffmanTreeBuildingTime = std::chrono::duration_cast<std::chrono::nanoseconds>(
-            std::chrono::system_clock::now() - time);
+    auto huffmanTreeBuildingTime = TIME_DURATION(time);
 
     time = std::chrono::system_clock::now();
     huffman::Encoder encoder;
     encoder.createHeader(huffmanTree);
     encoder.encodeData(huffmanTree.constructEncodingTable(), file);
-    auto encodingTime = std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::system_clock::now() - time);
+    auto encodingTime = TIME_DURATION(time);
 
     std::ofstream ofstream{outPath, std::ios::binary | std::ios::out};
     if (!ofstream.is_open())
@@ -190,9 +193,8 @@ EncodingResult encode(const std::string& inPath, const std::string& outPath, boo
     }
 
     time = std::chrono::system_clock::now();
-    huffman::io::writeBinaryFile(ofstream, encoder.getHeaderData());
-    auto headerWriteTime = std::chrono::duration_cast<std::chrono::nanoseconds>(
-            std::chrono::system_clock::now() - time);
+    huffman::io::writeBinaryFile(ofstream, encoder.getHeaderData(), true);
+    auto headerWriteTime = TIME_DURATION(time);
 
     ofstream.close();
     ofstream.open(outPath, std::ios::binary | std::ios::out | std::ios::app);
@@ -203,8 +205,7 @@ EncodingResult encode(const std::string& inPath, const std::string& outPath, boo
     }
     time = std::chrono::system_clock::now();
     huffman::io::writeBinaryFile(ofstream, encoder.getEncodedData());
-    auto encodedDataWriteTime = std::chrono::duration_cast<std::chrono::nanoseconds>(
-            std::chrono::system_clock::now() - time);
+    auto encodedDataWriteTime = TIME_DURATION(time);
 
     if (printTree)
     {
@@ -233,29 +234,39 @@ DecodingResults decode(const std::string& inPath, const std::string& outPath)
         std::cerr << "Couldn't open file: " << inPath << std::endl;
         return result;
     }
+    std::chrono::time_point<std::chrono::system_clock, std::chrono::nanoseconds> time;
+    std::chrono::nanoseconds headerReadTime, dataReadTime;
+    common::BitStack encodedTree, encodedData;
+    try
+    {
+        time = std::chrono::system_clock::now();
+        encodedTree = huffman::io::readBinaryFile(ifstream, false);
+        headerReadTime = TIME_DURATION(time);
 
-    auto time = std::chrono::system_clock::now();
-    common::BitStack encodedTree{huffman::io::readBinaryFile(ifstream, false)};
-    auto headerReadTime = std::chrono::duration_cast<std::chrono::nanoseconds>(
-            std::chrono::system_clock::now() - time);
+        ifstream.seekg(0, std::ios::beg);
 
-    ifstream.close();
+        time = std::chrono::system_clock::now();
+        encodedData = huffman::io::readBinaryFile(ifstream, true);
+        dataReadTime = TIME_DURATION(time);
+    }
+    catch (std::invalid_argument &e)
+    {
+        std::cerr << e.what() << std::endl;
+        return result;
+    }
+    /*ifstream.close();
     ifstream.open(inPath, std::ios::binary | std::ios::in);
     if (!ifstream.is_open())
     {
         std::cerr << "Couldn't open file: " << inPath << std::endl;
         return result;
-    }
-
-    time = std::chrono::system_clock::now();
-    common::BitStack encodedData{huffman::io::readBinaryFile(ifstream, true)};
-    auto dataReadTime = std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::system_clock::now() - time);
+    }*/
 
     huffman::Decoder decoder;
 
     time = std::chrono::system_clock::now();
     decoder.decodeData(encodedTree, encodedData);
-    auto decodingTime = std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::system_clock::now() - time);
+    auto decodingTime = TIME_DURATION(time);
 
     std::ofstream ofstream{outPath, std::ios::binary | std::ios::out};
     if (!ofstream.is_open())
@@ -265,7 +276,7 @@ DecodingResults decode(const std::string& inPath, const std::string& outPath)
     }
     time = std::chrono::system_clock::now();
     huffman::io::writeFile(ofstream, decoder.getDecodedData());
-    auto fileWriteTime = std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::system_clock::now() - time);
+    auto fileWriteTime = TIME_DURATION(time);
 
     result.fileHeaderRead = headerReadTime.count();
     result.fileDataRead = dataReadTime.count();

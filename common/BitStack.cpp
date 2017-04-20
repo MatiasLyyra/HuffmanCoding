@@ -136,7 +136,7 @@ const uint32_t* common::BitStack::data() const noexcept
 
 common::Vector<uint32_t>::size_type common::BitStack::container_size() const noexcept
 {
-    return 1 + ((size_ - 1) / BITS_IN_WORD);
+    return size_ > 0 ? 1 + ((size_ - 1) / BITS_IN_WORD) : 0;
 }
 
 bool common::BitStack::top() const
