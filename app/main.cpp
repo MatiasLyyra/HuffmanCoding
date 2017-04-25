@@ -13,8 +13,8 @@
 
 #include "TimeResults.h"
 
-#define TIME_DURATION(FIRST) std::chrono::duration_cast<std::chrono::nanoseconds>(\
-            std::chrono::system_clock::now() - FIRST)
+#define TIME_DURATION(TIME) std::chrono::duration_cast<std::chrono::nanoseconds>(\
+            std::chrono::system_clock::now() - TIME)
 
 EncodingResult encode(const std::string& inPath, const std::string& outPath, bool printTree);
 
@@ -28,9 +28,7 @@ void printDecodingTimes(const DecodingResults& result);
 
 static constexpr int MIN_PARAMETERS = 6;
 
-static std::string HELP_MESSAGE =
-        "Encoding: HuffmanCoding encode -in <file> -out <file2> (-v) (-tree)\n\
-Decoding: HuffmanCoding decode -in <file> -out <file2> (-v)";
+static std::string HELP_MESSAGE = "Encoding: HuffmanCoding encode -in <file> -out <file2> (-v) (-tree)\nDecoding: HuffmanCoding decode -in <file> -out <file2> (-v)";
 
 std::string inPath, outPath;
 bool encoding = true;
@@ -141,11 +139,11 @@ bool parseParameters(int argc, char* const* argv)
 
     for (int i = 2; i < argc; ++i)
     {
-        if (strcmp(argv[i], "-in") == 0)
+        if (strcmp(argv[i], "-in") == 0 && (i + 1) < argc)
         {
             inPath = argv[++i];
         }
-        else if (strcmp(argv[i], "-out") == 0)
+        else if (strcmp(argv[i], "-out") == 0 && (i + 1) < argc)
         {
             outPath = argv[++i];
         }
