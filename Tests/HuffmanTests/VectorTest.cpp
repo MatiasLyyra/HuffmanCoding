@@ -2,7 +2,8 @@
 #include <common/Vector.h>
 #include <huffman/TreeNode.h>
 
-class VectorFixture : public ::testing::Test
+class VectorFixture :
+        public ::testing::Test
 {
 public:
     VectorFixture()
@@ -11,6 +12,7 @@ public:
               treeNodeVector{}
     {
     }
+
 protected:
     virtual void TearDown()
     {
@@ -21,6 +23,7 @@ protected:
     {
 
     }
+
     common::Vector<int> intVector;
     common::Vector<int> initiallyEmpty;
     common::Vector<huffman::TreeNode> treeNodeVector;
@@ -32,7 +35,7 @@ TEST_F(VectorFixture, ConstructorWorks)
     common::Vector<huffman::TreeNode> vector{4, huffman::TreeNode{0}};
     ASSERT_EQ(4, vector.size());
     huffman::TreeNode treeNode{0};
-    for (auto it = vector.begin(); it != vector.end() ; ++it)
+    for (auto it = vector.begin(); it != vector.end(); ++it)
     {
         ASSERT_EQ(treeNode.getHandle(), it->getHandle());
         ASSERT_EQ(treeNode.getData(), it->getData());

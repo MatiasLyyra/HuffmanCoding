@@ -4,7 +4,8 @@
 #include "huffman/Decoder.h"
 #include "TestUtils.h"
 
-class DecoderFixture : public ::testing::Test
+class DecoderFixture :
+        public ::testing::Test
 {
 public:
     huffman::Decoder decoder;

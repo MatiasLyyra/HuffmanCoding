@@ -2,6 +2,7 @@
 
 #include <fstream>
 #include <cassert>
+
 #define DATA_SIZE(size_in_bits) (size_in_bits + (32 - (size_in_bits % 32))) / 8
 
 uint64_t huffman::io::readUint64(std::istream& istream)

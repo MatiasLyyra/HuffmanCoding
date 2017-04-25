@@ -20,7 +20,8 @@ namespace
     }
 }
 
-huffman::HuffmanTree::HuffmanTree(const common::Vector<types::byte_t>& characters) : root_(constants::empty_handle), nodes_{}
+huffman::HuffmanTree::HuffmanTree(const common::Vector<types::byte_t>& characters) : root_(constants::empty_handle),
+                                                                                     nodes_{}
 {
     if (!characters.empty())
     {
@@ -194,7 +195,8 @@ void huffman::HuffmanTree::printTreeRecursive(std::ostream& ostream, types::hand
     }
 }
 
-bool huffman::HuffmanTree::TreeNodeComparator::operator()(const types::handle_t &aHandle, const types::handle_t &bHandle) const
+bool huffman::HuffmanTree::TreeNodeComparator::operator()(const types::handle_t& aHandle,
+                                                          const types::handle_t& bHandle) const
 {
     const huffman::TreeNode* a = huffmanTree_.getNode(aHandle);
     const huffman::TreeNode* b = huffmanTree_.getNode(bHandle);

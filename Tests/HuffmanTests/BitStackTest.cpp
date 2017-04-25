@@ -1,7 +1,8 @@
 #include <gtest/gtest.h>
 #include <common/BitStack.h>
 
-class BitStackFixture : public ::testing::Test
+class BitStackFixture :
+        public ::testing::Test
 {
 public:
     BitStackFixture()
@@ -23,6 +24,7 @@ public:
         stackWithValues.push_back(true);
         stackWithValues.push_back(5, 3);
     }
+
     common::BitStack initiallyEmpty;
     common::BitStack stackWithValues;
 };

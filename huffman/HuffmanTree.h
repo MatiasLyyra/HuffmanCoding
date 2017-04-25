@@ -18,18 +18,21 @@ namespace huffman
     {
 
     public:
-         /**
-         * Comparator used for determining order of the nodes when constructing the tree. Nodes are primarily ordered
-         * by frequency where lower frequency has higher priority. Nodes are secondarily ordered by the data where
-         * smaller data value has higher priority.
-         */
+        /**
+        * Comparator used for determining order of the nodes when constructing the tree. Nodes are primarily ordered
+        * by frequency where lower frequency has higher priority. Nodes are secondarily ordered by the data where
+        * smaller data value has higher priority.
+        */
         struct TreeNodeComparator
         {
             TreeNodeComparator(const huffman::HuffmanTree& huffmanTree) : huffmanTree_(huffmanTree)
             {}
-            bool operator()(const huffman::types::handle_t &aHandle, const huffman::types::handle_t &bHandle) const;
+
+            bool operator()(const huffman::types::handle_t& aHandle, const huffman::types::handle_t& bHandle) const;
+
             const huffman::HuffmanTree& huffmanTree_;
         };
+
         /**
          * Constructs huffman tree based on character frequencies in characters vector.
          * @param characters Character vector that is used to calculate character frequencies from.

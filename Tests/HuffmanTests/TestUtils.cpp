@@ -17,6 +17,7 @@ huffman::HuffmanTree testutils::createHuffmanTreeFromBinary()
     huffman::HuffmanTree tree{getExpectedHuffmanTreeInBinary()};
     return tree;
 }
+
 common::BitStack testutils::getExpectedHuffmanTreeInBinary()
 {
     common::BitStack treeInBinary;
@@ -54,6 +55,7 @@ common::BitStack testutils::getExpectedHuffmanTreeInBinary()
     huffman::io::insertByte('c', treeInBinary);
     return treeInBinary;
 }
+
 common::Vector<huffman::types::byte_t> testutils::convertStringToByteVector(const std::string& string)
 {
     common::Vector<huffman::types::byte_t> characters;

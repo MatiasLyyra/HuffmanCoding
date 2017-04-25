@@ -32,17 +32,17 @@ void common::BitStack::push_back(uint32_t value, uint8_t length)
         size_type first_part_length = available_bits;
         size_type second_part_length = length - first_part_length;
         uint32_t first_part = (value >> second_part_length);
-        data_[size_/BITS_IN_WORD] |= first_part;
+        data_[size_ / BITS_IN_WORD] |= first_part;
         size_ += first_part_length;
 
         uint32_t second_part = value << (BITS_IN_WORD - second_part_length);
-        data_[size_/BITS_IN_WORD] = second_part;
+        data_[size_ / BITS_IN_WORD] = second_part;
         size_ += second_part_length;
     }
     else
     {
         uint32_t binary_data = value << (available_bits - length);
-        data_[size_/BITS_IN_WORD] |= binary_data;
+        data_[size_ / BITS_IN_WORD] |= binary_data;
         size_ += length;
     }
 
@@ -61,13 +61,13 @@ uint32_t common::BitStack::clearValue(uint32_t value, uint8_t length)
 
 void common::BitStack::ensureCapacity()
 {
-    if (size_/BITS_IN_WORD == data_.size())
+    if (size_ / BITS_IN_WORD == data_.size())
     {
         data_.push_back(0u);
     }
 }
 
-common::BitStack::size_type common::BitStack::getIndexInWord(const size_type &i) const
+common::BitStack::size_type common::BitStack::getIndexInWord(const size_type& i) const
 {
     return common::BitStack::BITS_IN_WORD - (i % common::BitStack::BITS_IN_WORD) - 1;
 }
@@ -77,7 +77,7 @@ void common::BitStack::pop_back() noexcept
     if (!empty())
     {
         size_type bit_index = getIndexInWord(size_ - 1);
-        data_[size_/BITS_IN_WORD] &= ~(1 << bit_index);
+        data_[size_ / BITS_IN_WORD] &= ~(1 << bit_index);
         --size_;
     }
 }
@@ -93,7 +93,7 @@ bool common::BitStack::operator[](common::BitStack::size_type index) const
     {
         throw std::invalid_argument("Index out of bounds");
     }
-    uint32_t binary_data = data_[index/BITS_IN_WORD];
+    uint32_t binary_data = data_[index / BITS_IN_WORD];
     size_type bit_index = getIndexInWord(index);
     return (binary_data & (1 << bit_index)) != 0;
 }

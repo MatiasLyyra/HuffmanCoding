@@ -5,13 +5,15 @@
 #include "TestUtils.h"
 
 
-class FileUtilsFixture : public ::testing::Test
+class FileUtilsFixture :
+        public ::testing::Test
 {
 public:
     common::BitStack binaryData;
     common::BitStack::size_type expectedLength;
 protected:
-    virtual void SetUp() {
+    virtual void SetUp()
+    {
         binaryData = testutils::getExpectedHuffmanTreeInBinary();
         expectedLength = binaryData.size();
     }
@@ -22,7 +24,7 @@ TEST(FileUtils, ReadFileWorks)
     std::string message = "Hello, World!";
     std::istringstream iss{message};
     common::Vector<huffman::types::byte_t> characters{huffman::io::readFile(iss)};
-    huffman::types::byte_t expected[13] = {'H', 'e', 'l', 'l', 'o', ',', ' ', 'W', 'o', 'r', 'l', 'd','!'};
+    huffman::types::byte_t expected[13] = {'H', 'e', 'l', 'l', 'o', ',', ' ', 'W', 'o', 'r', 'l', 'd', '!'};
     ASSERT_EQ(13, characters.size());
     for (int i = 0; i < 13; ++i)
     {
@@ -46,7 +48,7 @@ TEST_F(FileUtilsFixture, WriteBinaryFileWorks)
     while (!ss.eof())
     {
         uint8_t expected = 0;
-        for (int j = (huffman::constants::BITS_IN_BYTE - 1); j >= 0 && i < binaryData.size() ; --j, ++i)
+        for (int j = (huffman::constants::BITS_IN_BYTE - 1); j >= 0 && i < binaryData.size(); --j, ++i)
         {
             if (binaryData.at(i))
                 expected |= 1 << j;

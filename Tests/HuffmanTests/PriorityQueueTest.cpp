@@ -3,7 +3,7 @@
 
 #include "common/Vector.h"
 
-template <class T, class Compare = std::less<T>>
+template<class T, class Compare = std::less<T>>
 bool isVectorHeap(const common::Vector<T>& vectorToTest, Compare compare = Compare(), std::size_t i = 0)
 {
     if (i >= (vectorToTest.size() / 2))

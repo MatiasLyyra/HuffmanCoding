@@ -3,18 +3,22 @@
 #include "gtest/gtest.h"
 #include "TestUtils.h"
 
-class EncoderFixture : public ::testing::Test
+class EncoderFixture :
+        public ::testing::Test
 {
 
 public:
 
-    virtual void TearDown() {
+    virtual void TearDown()
+    {
 
     }
 
-    virtual void SetUp() {
+    virtual void SetUp()
+    {
 
     }
+
     huffman::Encoder encoder;
 };
 
@@ -26,12 +30,13 @@ TEST_F(EncoderFixture, EncodingWorks)
     std::string message = "aecaaBb";
     common::Vector<huffman::types::byte_t> characters{testutils::convertStringToByteVector(message)};
     std::size_t expectedLength = 17;
-    bool expected[expectedLength] = {false, true, true, false, true, true, true, false, false, true, false, false, false, true,
+    bool expected[expectedLength] = {false, true, true, false, true, true, true, false, false, true, false, false,
+                                     false, true,
                                      false, false, true};
     encoder.encodeData(encode_table, characters);
     const common::BitStack& actual = encoder.getEncodedData();
     ASSERT_EQ(expectedLength, actual.size());
-    for (std::size_t i = 0; i < expectedLength ; ++i)
+    for (std::size_t i = 0; i < expectedLength; ++i)
     {
         ASSERT_EQ(expected[i], actual.at(i));
     }

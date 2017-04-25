@@ -29,7 +29,7 @@ void printDecodingTimes(const DecodingResults& result);
 static constexpr int MIN_PARAMETERS = 6;
 
 static std::string HELP_MESSAGE =
-"Encoding: HuffmanCoding encode -in <file> -out <file2> (-v) (-tree)\n\
+        "Encoding: HuffmanCoding encode -in <file> -out <file2> (-v) (-tree)\n\
 Decoding: HuffmanCoding decode -in <file> -out <file2> (-v)";
 
 std::string inPath, outPath;
@@ -43,7 +43,8 @@ int main(int argc, char** argv)
     if (!parseParameters(argc, argv))
     {
         std::cerr << "Invalid parameters" << std::endl << HELP_MESSAGE << std::endl;
-    } else
+    }
+    else
     {
         int count = std::max(1, benchmark);
         DecodingResults decodingResults;
@@ -63,7 +64,8 @@ int main(int argc, char** argv)
                 encodingResult.encodedDataWrite += result.encodedDataWrite;
                 encodingResult.total += result.total;
                 encodingResult.success = encodingResult.success && result.success;
-            } else
+            }
+            else
             {
                 auto result = decode(inPath, outPath);
                 decodingResults.fileHeaderRead += result.fileHeaderRead;
@@ -127,10 +129,12 @@ bool parseParameters(int argc, char* const* argv)
     if (strcmp(argv[1], "encode") == 0)
     {
         encoding = true;
-    } else if (strcmp(argv[1], "decode") == 0)
+    }
+    else if (strcmp(argv[1], "decode") == 0)
     {
         encoding = false;
-    } else
+    }
+    else
     {
         return false;
     }
@@ -140,19 +144,24 @@ bool parseParameters(int argc, char* const* argv)
         if (strcmp(argv[i], "-in") == 0)
         {
             inPath = argv[++i];
-        } else if (strcmp(argv[i], "-out") == 0)
+        }
+        else if (strcmp(argv[i], "-out") == 0)
         {
             outPath = argv[++i];
-        } else if (strcmp(argv[i], "-v") == 0)
+        }
+        else if (strcmp(argv[i], "-v") == 0)
         {
             verbose = true;
-        } else if (strcmp(argv[i], "-tree") == 0)
+        }
+        else if (strcmp(argv[i], "-tree") == 0)
         {
             printTree = true;
-        } else if (strcmp(argv[i], "-benchmark") == 0)
+        }
+        else if (strcmp(argv[i], "-benchmark") == 0)
         {
             benchmark = atoi(argv[++i]);
-        } else
+        }
+        else
         {
             return false;
         }
@@ -249,18 +258,11 @@ DecodingResults decode(const std::string& inPath, const std::string& outPath)
         encodedData = huffman::io::readBinaryFile(ifstream, true);
         dataReadTime = TIME_DURATION(time);
     }
-    catch (std::invalid_argument &e)
+    catch (std::invalid_argument& e)
     {
         std::cerr << e.what() << std::endl;
         return result;
     }
-    /*ifstream.close();
-    ifstream.open(inPath, std::ios::binary | std::ios::in);
-    if (!ifstream.is_open())
-    {
-        std::cerr << "Couldn't open file: " << inPath << std::endl;
-        return result;
-    }*/
 
     huffman::Decoder decoder;
 

@@ -1,19 +1,21 @@
 #include "Encoder.h"
 
-#include <sstream>
 #include <cassert>
 
 #include "io/FileUtils.h"
+
 namespace
 {
-    void writeTreeInBinary(huffman::types::handle_t rootHandle, const huffman::HuffmanTree &huffmanTree, common::BitStack& treeInBinary)
+    void writeTreeInBinary(huffman::types::handle_t rootHandle, const huffman::HuffmanTree& huffmanTree,
+                           common::BitStack& treeInBinary)
     {
         const huffman::TreeNode* root = huffmanTree.getNode(rootHandle);
         if (root->isLeaf())
         {
             treeInBinary.push_back(true);
             huffman::io::insertByte(root->getData(), treeInBinary);
-        } else
+        }
+        else
         {
             treeInBinary.push_back(false);
             writeTreeInBinary(root->getLeftChildHandle(), huffmanTree, treeInBinary);
@@ -29,7 +31,8 @@ huffman::Encoder::Encoder()
 }
 
 void
-huffman::Encoder::encodeData(const huffman::types::encode_table_t& encode_table, const common::Vector<types::byte_t>& data)
+huffman::Encoder::encodeData(const huffman::types::encode_table_t& encode_table,
+                             const common::Vector<types::byte_t>& data)
 {
     assert(encode_table.size() == constants::CHARACTERS);
 

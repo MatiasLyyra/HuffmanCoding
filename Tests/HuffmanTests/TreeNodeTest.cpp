@@ -1,7 +1,8 @@
 #include "gtest/gtest.h"
 #include "huffman/TreeNode.h"
 
-class TreeNodeFixture : public ::testing::Test
+class TreeNodeFixture :
+        public ::testing::Test
 {
 public:
     TreeNodeFixture()
