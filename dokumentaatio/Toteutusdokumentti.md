@@ -24,7 +24,7 @@ Decoder - Luokan tehtävänä on purkaa sille annettu data, käyttäen Huffman p
 
 ### Pakatun tiedoston rakenne
 
-Pakattu tiedosto koostuu kahdesta osasta: Huffman puu binäärimuodossa ja itse pakattu data. Kumpaakin osaa edeltää 64-bittinen etumerkitön kokonaisluku little-endian muodossa, joka kertoo sitä seuraavan osan pituuden biteissä. Puu on tallennettu esijärjestyksessä siten, että 0/False merkitsee jokaista solmua, jolla on lapsisolmuja, ja 1/True jokaista lehtisolmua. Lehtisolmua seuraa 8 bittiä, joka kertoo kyseisen lehtisolmun datan.
+Pakattu tiedosto koostuu kolmesta osasta: taikanumero, Huffman puu binäärimuodossa ja itse pakattu data. Kumpaakin jälkimmäistä osaa edeltää 64-bittinen etumerkitön kokonaisluku big-endian muodossa, joka kertoo sitä seuraavan osan pituuden biteissä. Taikanumero sijaitsee heti tiedoston alussa ja on myös tallennettu big-endian muodossa. Puu on tallennettu esijärjestyksessä siten, että 0/False merkitsee jokaista solmua, jolla on lapsisolmuja, ja 1/True jokaista lehtisolmua. Lehtisolmua seuraa 8 bittiä, joka kertoo kyseisen lehtisolmun datan.
 
 ## Aika ja tilavaativuudet
 
