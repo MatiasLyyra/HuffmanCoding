@@ -28,7 +28,7 @@ void printDecodingTimes(const DecodingResults& result);
 
 static constexpr int MIN_PARAMETERS = 6;
 
-static std::string HELP_MESSAGE = "Encoding: HuffmanCoding encode -in <file> -out <file2> (-v) (-tree)\nDecoding: HuffmanCoding decode -in <file> -out <file2> (-v)";
+static std::string HELP_MESSAGE = "Usage: HuffmanCoding (encode | decode) -in <in_file> -out <out_file> [-v] [-tree] [-benchmark count]";
 
 std::string inPath, outPath;
 bool encoding = true;
@@ -155,7 +155,7 @@ bool parseParameters(int argc, char* const* argv)
         {
             printTree = true;
         }
-        else if (strcmp(argv[i], "-benchmark") == 0)
+        else if (strcmp(argv[i], "-benchmark") == 0 && (i + 1) < argc)
         {
             benchmark = atoi(argv[++i]);
         }
