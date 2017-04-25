@@ -2,6 +2,8 @@
 #include <sstream>
 
 #include "huffman/io/FileUtils.h"
+#include "huffman/HuffmanTree.h"
+#include "huffman/Encoder.h"
 #include "TestUtils.h"
 
 
@@ -88,5 +90,54 @@ TEST(FileUtils, WritingFileWorks)
         huffman::types::byte_t actual;
         ss.read(reinterpret_cast<char*>(&actual), sizeof(huffman::types::byte_t));
         ASSERT_EQ(characters[i], actual);
+    }
+}
+
+TEST(FileUtils, MagicNumberIsWrittenToStream)
+{
+    std::stringstream ss;
+    common::BitStack bitStack;
+    huffman::io::writeBinaryFile(ss, bitStack, true);
+    ss.seekg(0, std::ios::beg);
+    uint64_t magicNumber = huffman::io::readUint64(ss);
+    ASSERT_EQ(huffman::constants::MAGIG_NUMBER, magicNumber);
+}
+
+TEST(FileUtils, InvalidMagicNumberCausesError)
+{
+    std::stringstream ss;
+    ss << "aaaaaaaaaaaaaaaaaaaaaaa";
+    ss.seekg(0, std::ios::beg);
+    ASSERT_THROW(huffman::io::readBinaryFile(ss, true), std::invalid_argument);
+}
+
+TEST(FileUtils, CorrectMagicNumberDoesNotCauseError)
+{
+    std::stringstream ss;
+    huffman::io::writeUint64(huffman::constants::MAGIG_NUMBER, ss);
+    ss.seekg(0, std::ios::beg);
+    ASSERT_NO_THROW(huffman::io::readBinaryFile(ss, true));
+}
+
+TEST(FileUtils, IgnoreHeaderWorks)
+{
+    auto vector = testutils::convertStringToByteVector("Hello, World!");
+    huffman::HuffmanTree huffmanTree{vector};
+    huffman::Encoder encoder;
+    encoder.encodeData(huffmanTree.constructEncodingTable(), vector);
+    encoder.createHeader(huffmanTree);
+
+    std::stringstream ss;
+    huffman::io::writeBinaryFile(ss, encoder.getHeaderData(), true);
+    ss.seekg(0, std::ios::beg);
+    huffman::io::writeBinaryFile(ss, encoder.getEncodedData());
+    ss.seekg(0, std::ios::beg);
+
+    auto encodedData = huffman::io::readBinaryFile(ss, true);
+
+    ASSERT_EQ(encoder.getEncodedData().size(), encodedData.size());
+    for (int i = 0; i < encoder.getEncodedData().size(); ++i)
+    {
+        ASSERT_EQ(encoder.getEncodedData()[i], encodedData[i]);
     }
 }
