@@ -1,6 +1,6 @@
 # Testausdokumentti
 
-Pakkauksen ja sen tehokkuuden testaamisessa käytettiin kolmea erilaista tekstityyppiä: pelkkää A-kirjainta sisältävää, englanninkielistä tekstiä ja sattumanvaraisesti generoituja merkkejä (merkitty kuvaajissa ja taulukoissa "A", "English" ja "Random"). Tehokkuutta testattiin kuudella eri kirjain määrällä: 10000, 100000, 200000, 300000, 400000 ja 500000.
+Pakkauksen ja sen tehokkuuden testaamisessa käytettiin kolmea erilaista tekstityyppiä: pelkkää A-kirjainta sisältävää, englanninkielistä tekstiä ja sattumanvaraisesti generoituja merkkejä (merkitty kuvaajissa ja taulukoissa "A", "Englanti" ja "Random"). Tehokkuutta testattiin kuudella eri kirjain määrällä: 10000, 100000, 200000, 300000, 400000 ja 500000.
 
 Englannin kielisenä tekstinä käytettiin: [The Legends Of King Arthur And His Knights](http://www.gutenberg.org/cache/epub/12753/pg12753.txt), josta otettiin testeissä mainitun verran määrän kirjaimia mukaan alusta laskien.
 
@@ -14,8 +14,8 @@ Tekstityyppi (kirjainten määrä) | Alkuperäinen koko | Pakattu koko
 -------------------| ----------------- | ------------
 A (10000) | 10 000 tavua | 1 272 tavua
 A (500000) | 500 000 tavua | 62 520 tavua
-English (10000) | 10 000 tavua | 6 180 tavua
-English (500000) | 500 000 tavua | 279 612 tavua
+Englanti (10000) | 10 000 tavua | 6 180 tavua
+Englanti (500000) | 500 000 tavua | 279 612 tavua
 Random (10000) | 10 000 tavua | 10 336 tavua
 Random (500000) | 500 000 tavua | 500 336 tavua
 
