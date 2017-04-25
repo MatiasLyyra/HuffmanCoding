@@ -23,6 +23,8 @@ Yhtä merkkiä sisältävän tiedon pakkaaminen on oletetusti tehokasta, koska p
 
 ## Tehokkuuden testaus
 
+Tiedostot pakattiin/purettiin 5000 kertaa peräkkäin. Tämän ajan keskiarvoa käytettiin tuloksena. Ohjelma käännettiin GCC:n optiolla ``-O3 -g -Wall -Wextra -Werror -m64``
+
 ### Huffman Puun rakentaminen
 
 ![HuffmanTreeBuildingDiagram](kuvat/BuildingHuffmanTreeDiagram.png)
