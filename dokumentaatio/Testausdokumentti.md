@@ -8,6 +8,15 @@ Englannin kielisenä tekstinä käytettiin: [The Legends Of King Arthur And His 
 
 Projektissa on käytössä Google Test -ohjelmistokehys, jonka avulla koodin teknistä toimivuutta testataan. Testien kattavuudet ovat nähtävissä [täältä](https://htmlpreview.github.io/?https://github.com/MatiasLyyra/HuffmanCoding/blob/master/dokumentaatio/coverage/index.html).
 
+Yksikkötestit voidaan ajaa projektin juuresta esimerkiksi:
+```
+mkdir build
+cd build
+cmake ..
+make runHuffmanTests
+Tests/HuffmanTests/runHuffmanTests
+```
+
 ## Pakkauksen testaus
 
 Tekstityyppi (kirjainten määrä) | Alkuperäinen koko | Pakattu koko
