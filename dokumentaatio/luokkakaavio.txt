@@ -1,0 +1,10 @@
+@startuml
+class TreeNode
+class HuffmanTree
+class Encoder
+class Decoder
+
+HuffmanTree *-- "*" TreeNode
+Encoder ..|> HuffmanTree
+Decoder ..|> HuffmanTree
+@enduml

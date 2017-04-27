@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-04-21 00:18:07</td>
+            <td class="headerValue">2017-04-27 23:42:56</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">43</td>
@@ -107,10 +107,10 @@
 <span class="lineNum">      45 </span>            : 
 <a name="46"><span class="lineNum">      46 </span>            :         Vector&lt;T&gt;&amp; operator=(Vector&lt;T&gt;&amp;&amp; other) = default;</a>
 <span class="lineNum">      47 </span>            : 
-<span class="lineNum">      48 </span><span class="lineCov">        114 :         ~Vector()</span>
+<span class="lineNum">      48 </span><span class="lineCov">        122 :         ~Vector()</span>
 <span class="lineNum">      49 </span>            :         {
-<span class="lineNum">      50 </span><span class="lineCov">        114 :             clear();</span>
-<span class="lineNum">      51 </span><span class="lineCov">        114 :         }</span>
+<span class="lineNum">      50 </span><span class="lineCov">        122 :             clear();</span>
+<span class="lineNum">      51 </span><span class="lineCov">        122 :         }</span>
 <span class="lineNum">      52 </span>            : 
 <span class="lineNum">      53 </span>            :         /**
 <span class="lineNum">      54 </span>            :          * Allocates space for elements to fit at lest specified number of elements. Reallocation only happens if
@@ -170,24 +170,24 @@
 <span class="lineNum">     108 </span>            :          */
 <a name="109"><span class="lineNum">     109 </span>            :         void clear() noexcept;</a>
 <span class="lineNum">     110 </span>            : 
-<span class="lineNum">     111 </span><span class="lineCov">       7424 :         reference operator[](size_type index)</span>
+<span class="lineNum">     111 </span><span class="lineCov">       8044 :         reference operator[](size_type index)</span>
 <span class="lineNum">     112 </span>            :         {
-<span class="lineNum">     113 </span><span class="lineCov">       7424 :             if (empty() || index &gt;= size_)</span>
+<span class="lineNum">     113 </span><span class="lineCov">       8044 :             if (empty() || index &gt;= size_)</span>
 <span class="lineNum">     114 </span>            :             {
 <span class="lineNum">     115 </span><span class="lineCov">          8 :                 throw std::out_of_range(&quot;Index out of bounds&quot;);</span>
 <span class="lineNum">     116 </span>            :             }
-<span class="lineNum">     117 </span><span class="lineCov">       7416 :             iterator it = begin();</span>
-<span class="lineNum">     118 </span><span class="lineCov">       7416 :             return it[index];</span>
+<span class="lineNum">     117 </span><span class="lineCov">       8036 :             iterator it = begin();</span>
+<span class="lineNum">     118 </span><span class="lineCov">       8036 :             return it[index];</span>
 <a name="119"><span class="lineNum">     119 </span>            :         }</a>
 <span class="lineNum">     120 </span>            : 
-<span class="lineNum">     121 </span><span class="lineCov">       2159 :         const_reference operator[](size_type index) const</span>
+<span class="lineNum">     121 </span><span class="lineCov">       2417 :         const_reference operator[](size_type index) const</span>
 <span class="lineNum">     122 </span>            :         {
-<span class="lineNum">     123 </span><span class="lineCov">       2159 :             if (empty() || index &gt;= size_)</span>
+<span class="lineNum">     123 </span><span class="lineCov">       2417 :             if (empty() || index &gt;= size_)</span>
 <span class="lineNum">     124 </span>            :             {
 <span class="lineNum">     125 </span><span class="lineCov">          8 :                 throw std::out_of_range(&quot;Index out of bounds&quot;);</span>
 <span class="lineNum">     126 </span>            :             }
-<span class="lineNum">     127 </span><span class="lineCov">       2151 :             auto it = begin();</span>
-<span class="lineNum">     128 </span><span class="lineCov">       2151 :             return it[index];</span>
+<span class="lineNum">     127 </span><span class="lineCov">       2409 :             auto it = begin();</span>
+<span class="lineNum">     128 </span><span class="lineCov">       2409 :             return it[index];</span>
 <a name="129"><span class="lineNum">     129 </span>            :         }</a>
 <span class="lineNum">     130 </span>            : 
 <span class="lineNum">     131 </span><span class="lineCov">          7 :         reference at(size_type index)</span>
@@ -200,9 +200,9 @@
 <span class="lineNum">     138 </span><span class="lineCov">          6 :             return (*this)[index];</span>
 <a name="139"><span class="lineNum">     139 </span>            :         }</a>
 <span class="lineNum">     140 </span>            : 
-<span class="lineNum">     141 </span><span class="lineCov">         68 :         reference front()</span>
+<span class="lineNum">     141 </span><span class="lineCov">         87 :         reference front()</span>
 <span class="lineNum">     142 </span>            :         {
-<span class="lineNum">     143 </span><span class="lineCov">         68 :             return (*this)[0];</span>
+<span class="lineNum">     143 </span><span class="lineCov">         87 :             return (*this)[0];</span>
 <a name="144"><span class="lineNum">     144 </span>            :         }</a>
 <span class="lineNum">     145 </span>            : 
 <span class="lineNum">     146 </span><span class="lineCov">          3 :         const_reference front() const</span>
@@ -220,29 +220,29 @@
 <span class="lineNum">     158 </span><span class="lineCov">          3 :             return (*this)[size_ - 1];</span>
 <a name="159"><span class="lineNum">     159 </span>            :         }</a>
 <span class="lineNum">     160 </span>            : 
-<span class="lineNum">     161 </span><span class="lineCov">      13002 :         iterator begin() noexcept</span>
+<span class="lineNum">     161 </span><span class="lineCov">      13705 :         iterator begin() noexcept</span>
 <span class="lineNum">     162 </span>            :         {
-<span class="lineNum">     163 </span><span class="lineCov">      13002 :             return reinterpret_cast&lt;iterator&gt;(data_.get());</span>
+<span class="lineNum">     163 </span><span class="lineCov">      13705 :             return reinterpret_cast&lt;iterator&gt;(data_.get());</span>
 <a name="164"><span class="lineNum">     164 </span>            :         }</a>
 <span class="lineNum">     165 </span>            : 
-<span class="lineNum">     166 </span><span class="lineCov">        364 :         iterator end() noexcept</span>
+<span class="lineNum">     166 </span><span class="lineCov">        394 :         iterator end() noexcept</span>
 <span class="lineNum">     167 </span>            :         {
-<span class="lineNum">     168 </span><span class="lineCov">        364 :             return reinterpret_cast&lt;iterator&gt;(data_.get() + (size_ * sizeof(T)));</span>
+<span class="lineNum">     168 </span><span class="lineCov">        394 :             return reinterpret_cast&lt;iterator&gt;(data_.get() + (size_ * sizeof(T)));</span>
 <a name="169"><span class="lineNum">     169 </span>            :         }</a>
 <span class="lineNum">     170 </span>            : 
-<span class="lineNum">     171 </span><span class="lineCov">       2173 :         const_iterator begin() const noexcept</span>
+<span class="lineNum">     171 </span><span class="lineCov">       2436 :         const_iterator begin() const noexcept</span>
 <span class="lineNum">     172 </span>            :         {
-<span class="lineNum">     173 </span><span class="lineCov">       2173 :             return reinterpret_cast&lt;const_iterator&gt;(data_.get());</span>
+<span class="lineNum">     173 </span><span class="lineCov">       2436 :             return reinterpret_cast&lt;const_iterator&gt;(data_.get());</span>
 <a name="174"><span class="lineNum">     174 </span>            :         }</a>
 <span class="lineNum">     175 </span>            : 
-<span class="lineNum">     176 </span><span class="lineCov">         76 :         const_iterator end() const noexcept</span>
+<span class="lineNum">     176 </span><span class="lineCov">         91 :         const_iterator end() const noexcept</span>
 <span class="lineNum">     177 </span>            :         {
-<span class="lineNum">     178 </span><span class="lineCov">         76 :             return reinterpret_cast&lt;const_iterator&gt;(data_.get() + (size_ * sizeof(T)));</span>
+<span class="lineNum">     178 </span><span class="lineCov">         91 :             return reinterpret_cast&lt;const_iterator&gt;(data_.get() + (size_ * sizeof(T)));</span>
 <a name="179"><span class="lineNum">     179 </span>            :         }</a>
 <span class="lineNum">     180 </span>            : 
-<span class="lineNum">     181 </span><span class="lineCov">       1259 :         size_type size() const noexcept</span>
+<span class="lineNum">     181 </span><span class="lineCov">       1556 :         size_type size() const noexcept</span>
 <span class="lineNum">     182 </span>            :         {
-<span class="lineNum">     183 </span><span class="lineCov">       1259 :             return size_;</span>
+<span class="lineNum">     183 </span><span class="lineCov">       1556 :             return size_;</span>
 <a name="184"><span class="lineNum">     184 </span>            :         }</a>
 <span class="lineNum">     185 </span>            : 
 <span class="lineNum">     186 </span><span class="lineCov">          8 :         size_type capacity() const noexcept</span>
@@ -250,9 +250,9 @@
 <span class="lineNum">     188 </span><span class="lineCov">          8 :             return capacity_;</span>
 <a name="189"><span class="lineNum">     189 </span>            :         }</a>
 <span class="lineNum">     190 </span>            : 
-<span class="lineNum">     191 </span><span class="lineCov">       9659 :         bool empty() const noexcept</span>
+<span class="lineNum">     191 </span><span class="lineCov">      10557 :         bool empty() const noexcept</span>
 <span class="lineNum">     192 </span>            :         {
-<span class="lineNum">     193 </span><span class="lineCov">       9659 :             return size_ == 0;</span>
+<span class="lineNum">     193 </span><span class="lineCov">      10557 :             return size_ == 0;</span>
 <span class="lineNum">     194 </span>            :         }
 <span class="lineNum">     195 </span>            : 
 <span class="lineNum">     196 </span>            :     private:

@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-04-21 00:18:07</td>
+            <td class="headerValue">2017-04-27 23:42:56</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">6</td>
@@ -62,70 +62,73 @@
 <pre class="source">
 <a name="1"><span class="lineNum">       1 </span>            : #include &quot;Encoder.h&quot;</a>
 <span class="lineNum">       2 </span>            : 
-<span class="lineNum">       3 </span>            : #include &lt;sstream&gt;
-<span class="lineNum">       4 </span>            : #include &lt;cassert&gt;
-<span class="lineNum">       5 </span>            : 
-<span class="lineNum">       6 </span>            : #include &quot;io/FileUtils.h&quot;
+<span class="lineNum">       3 </span>            : #include &lt;cassert&gt;
+<span class="lineNum">       4 </span>            : 
+<span class="lineNum">       5 </span>            : #include &quot;io/FileUtils.h&quot;
+<span class="lineNum">       6 </span>            : 
 <a name="7"><span class="lineNum">       7 </span>            : namespace</a>
 <span class="lineNum">       8 </span>            : {
-<span class="lineNum">       9 </span><span class="lineCov">         11 :     void writeTreeInBinary(huffman::types::handle_t rootHandle, const huffman::HuffmanTree &amp;huffmanTree, common::BitStack&amp; treeInBinary)</span>
-<span class="lineNum">      10 </span>            :     {
-<span class="lineNum">      11 </span><span class="lineCov">         11 :         const huffman::TreeNode* root = huffmanTree.getNode(rootHandle);</span>
-<span class="lineNum">      12 </span><span class="lineCov">         11 :         if (root-&gt;isLeaf())</span>
-<span class="lineNum">      13 </span>            :         {
-<span class="lineNum">      14 </span><span class="lineCov">          6 :             treeInBinary.push_back(true);</span>
-<span class="lineNum">      15 </span><span class="lineCov">          6 :             huffman::io::insertByte(root-&gt;getData(), treeInBinary);</span>
-<span class="lineNum">      16 </span>            :         } else
-<span class="lineNum">      17 </span>            :         {
-<span class="lineNum">      18 </span><span class="lineCov">          5 :             treeInBinary.push_back(false);</span>
-<span class="lineNum">      19 </span><span class="lineCov">          5 :             writeTreeInBinary(root-&gt;getLeftChildHandle(), huffmanTree, treeInBinary);</span>
-<span class="lineNum">      20 </span><span class="lineCov">          5 :             writeTreeInBinary(root-&gt;getRightChildHandle(), huffmanTree, treeInBinary);</span>
-<span class="lineNum">      21 </span>            :         }
-<span class="lineNum">      22 </span><span class="lineCov">         11 :     }</span>
-<a name="23"><span class="lineNum">      23 </span>            : }</a>
-<span class="lineNum">      24 </span>            : 
-<span class="lineNum">      25 </span><span class="lineCov">          2 : huffman::Encoder::Encoder()</span>
-<span class="lineNum">      26 </span>            :         : headerData_{},
-<span class="lineNum">      27 </span><span class="lineCov">          2 :           encodedData_{}</span>
-<span class="lineNum">      28 </span>            : {
-<span class="lineNum">      29 </span><span class="lineCov">          2 : }</span>
-<a name="30"><span class="lineNum">      30 </span>            : </a>
-<span class="lineNum">      31 </span>            : void
-<span class="lineNum">      32 </span><span class="lineCov">          1 : huffman::Encoder::encodeData(const huffman::types::encode_table_t&amp; encode_table, const common::Vector&lt;types::byte_t&gt;&amp; data)</span>
-<span class="lineNum">      33 </span>            : {
-<span class="lineNum">      34 </span><span class="lineCov">          1 :     assert(encode_table.size() == constants::CHARACTERS);</span>
-<span class="lineNum">      35 </span>            : 
-<span class="lineNum">      36 </span><span class="lineCov">          8 :     for (auto byte : data)</span>
-<span class="lineNum">      37 </span>            :     {
-<span class="lineNum">      38 </span><span class="lineCov">          7 :         types::encode_entry_t encode_entry = encode_table[byte];</span>
-<span class="lineNum">      39 </span><span class="lineCov">          7 :         uint32_t code = encode_entry.first;</span>
-<span class="lineNum">      40 </span><span class="lineCov">          7 :         uint8_t length = encode_entry.second;</span>
-<span class="lineNum">      41 </span><span class="lineCov">          7 :         assert(length != 0);</span>
-<span class="lineNum">      42 </span><span class="lineCov">          7 :         encodedData_.push_back(code, length);</span>
-<span class="lineNum">      43 </span>            :     }
-<a name="44"><span class="lineNum">      44 </span><span class="lineCov">          1 : }</span></a>
-<span class="lineNum">      45 </span>            : 
-<span class="lineNum">      46 </span><span class="lineCov">          1 : void huffman::Encoder::createHeader(const huffman::HuffmanTree&amp; huffmanTree)</span>
-<span class="lineNum">      47 </span>            : {
-<span class="lineNum">      48 </span><span class="lineCov">          1 :     if (huffmanTree.getRoot() != nullptr)</span>
-<span class="lineNum">      49 </span>            :     {
-<span class="lineNum">      50 </span><span class="lineCov">          1 :         writeTreeInBinary(huffmanTree.getRoot()-&gt;getHandle(), huffmanTree, headerData_);</span>
-<span class="lineNum">      51 </span>            :     }
-<a name="52"><span class="lineNum">      52 </span><span class="lineCov">          1 : }</span></a>
-<span class="lineNum">      53 </span>            : 
-<span class="lineNum">      54 </span><span class="lineCov">          1 : const common::BitStack&amp; huffman::Encoder::getHeaderData() const</span>
-<span class="lineNum">      55 </span>            : {
-<span class="lineNum">      56 </span><span class="lineCov">          1 :     return headerData_;</span>
-<span class="lineNum">      57 </span>            : }
-<a name="58"><span class="lineNum">      58 </span>            : </a>
-<span class="lineNum">      59 </span>            : 
-<span class="lineNum">      60 </span><span class="lineCov">          1 : const common::BitStack&amp; huffman::Encoder::getEncodedData() const</span>
-<span class="lineNum">      61 </span>            : {
-<span class="lineNum">      62 </span><span class="lineCov">          1 :     return encodedData_;</span>
-<span class="lineNum">      63 </span>            : }
-<span class="lineNum">      64 </span>            : 
-<span class="lineNum">      65 </span>            : 
-<span class="lineNum">      66 </span>            : 
+<span class="lineNum">       9 </span><span class="lineCov">         30 :     void writeTreeInBinary(huffman::types::handle_t rootHandle, const huffman::HuffmanTree&amp; huffmanTree,</span>
+<span class="lineNum">      10 </span>            :                            common::BitStack&amp; treeInBinary)
+<span class="lineNum">      11 </span>            :     {
+<span class="lineNum">      12 </span><span class="lineCov">         30 :         const huffman::TreeNode* root = huffmanTree.getNode(rootHandle);</span>
+<span class="lineNum">      13 </span><span class="lineCov">         30 :         if (root-&gt;isLeaf())</span>
+<span class="lineNum">      14 </span>            :         {
+<span class="lineNum">      15 </span><span class="lineCov">         16 :             treeInBinary.push_back(true);</span>
+<span class="lineNum">      16 </span><span class="lineCov">         16 :             huffman::io::insertByte(root-&gt;getData(), treeInBinary);</span>
+<span class="lineNum">      17 </span>            :         }
+<span class="lineNum">      18 </span>            :         else
+<span class="lineNum">      19 </span>            :         {
+<span class="lineNum">      20 </span><span class="lineCov">         14 :             treeInBinary.push_back(false);</span>
+<span class="lineNum">      21 </span><span class="lineCov">         14 :             writeTreeInBinary(root-&gt;getLeftChildHandle(), huffmanTree, treeInBinary);</span>
+<span class="lineNum">      22 </span><span class="lineCov">         14 :             writeTreeInBinary(root-&gt;getRightChildHandle(), huffmanTree, treeInBinary);</span>
+<span class="lineNum">      23 </span>            :         }
+<span class="lineNum">      24 </span><span class="lineCov">         30 :     }</span>
+<a name="25"><span class="lineNum">      25 </span>            : }</a>
+<span class="lineNum">      26 </span>            : 
+<span class="lineNum">      27 </span><span class="lineCov">          3 : huffman::Encoder::Encoder()</span>
+<span class="lineNum">      28 </span>            :         : headerData_{},
+<span class="lineNum">      29 </span><span class="lineCov">          3 :           encodedData_{}</span>
+<span class="lineNum">      30 </span>            : {
+<span class="lineNum">      31 </span><span class="lineCov">          3 : }</span>
+<a name="32"><span class="lineNum">      32 </span>            : </a>
+<span class="lineNum">      33 </span>            : void
+<span class="lineNum">      34 </span><span class="lineCov">          2 : huffman::Encoder::encodeData(const huffman::types::encode_table_t&amp; encode_table,</span>
+<span class="lineNum">      35 </span>            :                              const common::Vector&lt;types::byte_t&gt;&amp; data)
+<span class="lineNum">      36 </span>            : {
+<span class="lineNum">      37 </span><span class="lineCov">          2 :     assert(encode_table.size() == constants::CHARACTERS);</span>
+<span class="lineNum">      38 </span>            : 
+<span class="lineNum">      39 </span><span class="lineCov">         22 :     for (auto byte : data)</span>
+<span class="lineNum">      40 </span>            :     {
+<span class="lineNum">      41 </span><span class="lineCov">         20 :         types::encode_entry_t encode_entry = encode_table[byte];</span>
+<span class="lineNum">      42 </span><span class="lineCov">         20 :         uint32_t code = encode_entry.first;</span>
+<span class="lineNum">      43 </span><span class="lineCov">         20 :         uint8_t length = encode_entry.second;</span>
+<span class="lineNum">      44 </span><span class="lineCov">         20 :         assert(length != 0);</span>
+<span class="lineNum">      45 </span><span class="lineCov">         20 :         encodedData_.push_back(code, length);</span>
+<span class="lineNum">      46 </span>            :     }
+<a name="47"><span class="lineNum">      47 </span><span class="lineCov">          2 : }</span></a>
+<span class="lineNum">      48 </span>            : 
+<span class="lineNum">      49 </span><span class="lineCov">          2 : void huffman::Encoder::createHeader(const huffman::HuffmanTree&amp; huffmanTree)</span>
+<span class="lineNum">      50 </span>            : {
+<span class="lineNum">      51 </span><span class="lineCov">          2 :     if (huffmanTree.getRoot() != nullptr)</span>
+<span class="lineNum">      52 </span>            :     {
+<span class="lineNum">      53 </span><span class="lineCov">          2 :         writeTreeInBinary(huffmanTree.getRoot()-&gt;getHandle(), huffmanTree, headerData_);</span>
+<span class="lineNum">      54 </span>            :     }
+<a name="55"><span class="lineNum">      55 </span><span class="lineCov">          2 : }</span></a>
+<span class="lineNum">      56 </span>            : 
+<span class="lineNum">      57 </span><span class="lineCov">          2 : const common::BitStack&amp; huffman::Encoder::getHeaderData() const</span>
+<span class="lineNum">      58 </span>            : {
+<span class="lineNum">      59 </span><span class="lineCov">          2 :     return headerData_;</span>
+<span class="lineNum">      60 </span>            : }
+<a name="61"><span class="lineNum">      61 </span>            : </a>
+<span class="lineNum">      62 </span>            : 
+<span class="lineNum">      63 </span><span class="lineCov">         88 : const common::BitStack&amp; huffman::Encoder::getEncodedData() const</span>
+<span class="lineNum">      64 </span>            : {
+<span class="lineNum">      65 </span><span class="lineCov">         88 :     return encodedData_;</span>
+<span class="lineNum">      66 </span>            : }
+<span class="lineNum">      67 </span>            : 
+<span class="lineNum">      68 </span>            : 
+<span class="lineNum">      69 </span>            : 
 </pre>
       </td>
     </tr>
