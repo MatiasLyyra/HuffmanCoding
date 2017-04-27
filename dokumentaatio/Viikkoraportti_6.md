@@ -1,6 +1,6 @@
 # Viikkoraportti 6
 
-Tämä viikko on kulunut lähinnä pienten bugien/ongelmien korjaamisessa, dokumentaation viimeistelyssä ja vertaisarvionnin tekemisessä. Seuraavalla viikolla tiedossa on lähinnä palautukseen liittyviä hommia ja mahdollisten vastaantulevien ongelmien korjaamista.
+Tämä viikko on kulunut lähinnä pienten bugien/ongelmien korjaamisessa, dokumentaation viimeistelyssä ja vertaisarvioinnin tekemisessä. Seuraavalla viikolla tiedossa on lähinnä palautukseen liittyviä hommia ja mahdollisten vastaantulevien ongelmien korjaamista.
 
 ### Tuntikirjanpito
 Päivä | Tunnit | Kuvaus
