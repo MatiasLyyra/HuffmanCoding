@@ -157,7 +157,15 @@ bool parseParameters(int argc, char* const* argv)
         }
         else if (strcmp(argv[i], "-benchmark") == 0 && (i + 1) < argc)
         {
-            benchmark = atoi(argv[++i]);
+            std::string count{argv[++i]};
+            for (auto it = count.begin(); it != count.end(); ++it)
+            {
+                if (!std::isdigit(*it) || count.empty())
+                {
+                    return false;
+                }
+            }
+            benchmark = atoi(count.c_str());
         }
         else
         {
