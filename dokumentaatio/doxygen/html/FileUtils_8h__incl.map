@@ -1,5 +1,5 @@
 <map id="FileUtils.h" name="FileUtils.h">
-<area shape="rect" id="node3" href="$Vector_8h.html" title="Vector.h" alt="" coords="180,155,251,181"/>
-<area shape="rect" id="node9" href="$BitStack_8h.html" title="BitStack.h" alt="" coords="214,80,297,107"/>
-<area shape="rect" id="node10" href="$Common_8h.html" title="../Common.h" alt="" coords="321,80,419,107"/>
+<area shape="rect" id="node3" href="$Vector_8h.html" title="common/Vector.h" alt="" coords="153,155,278,181"/>
+<area shape="rect" id="node9" href="$BitStack_8h.html" title="common/BitStack.h" alt="" coords="200,80,337,107"/>
+<area shape="rect" id="node10" href="$Common_8h.html" title="../Common.h" alt="" coords="362,80,461,107"/>
 </map>

@@ -1,0 +1,196 @@
+\hypertarget{classcommon_1_1PriorityQueue}{}\section{common\+:\+:Priority\+Queue$<$ T, Compare $>$ Class Template Reference}
+\label{classcommon_1_1PriorityQueue}\index{common\+::\+Priority\+Queue$<$ T, Compare $>$@{common\+::\+Priority\+Queue$<$ T, Compare $>$}}
+
+
+{\ttfamily \#include $<$Priority\+Queue.\+h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \hyperlink{classcommon_1_1PriorityQueue_ab57641d3a949b913edba887241ca6e7d}{size\+\_\+type} = std\+::size\+\_\+t
+\item 
+using \hyperlink{classcommon_1_1PriorityQueue_ab537c372fee0c15e7d6319fac2fc8a62}{iterator} = T $\ast$
+\item 
+using \hyperlink{classcommon_1_1PriorityQueue_ad22a4ff01afbdd1ab13ebffa8c61c924}{const\+\_\+iterator} = T const $\ast$
+\item 
+using \hyperlink{classcommon_1_1PriorityQueue_ab373612fd8bc3716f22936d6b6454b86}{reference} = T \&
+\item 
+using \hyperlink{classcommon_1_1PriorityQueue_ae9270b1553c1337f99508699590ee7c0}{const\+\_\+reference} = T const \&
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classcommon_1_1PriorityQueue_af0a3b595aac162d4a20c75caa4a65326}{Priority\+Queue} (Compare const \&compare=Compare())
+\item 
+\hyperlink{classcommon_1_1PriorityQueue_ab373612fd8bc3716f22936d6b6454b86}{reference} \hyperlink{classcommon_1_1PriorityQueue_abbbde5cab4d7e63fb6ceacbdc49ea72f}{top} () noexcept
+\item 
+\hyperlink{classcommon_1_1PriorityQueue_ae9270b1553c1337f99508699590ee7c0}{const\+\_\+reference} \hyperlink{classcommon_1_1PriorityQueue_ad9054b1e9619b25e58093e4062bfb572}{top} () const noexcept
+\item 
+void \hyperlink{classcommon_1_1PriorityQueue_a9ef038beba24f28a531549c0efe897e1}{push} (\hyperlink{classcommon_1_1PriorityQueue_ae9270b1553c1337f99508699590ee7c0}{const\+\_\+reference} value)
+\item 
+void \hyperlink{classcommon_1_1PriorityQueue_ae6ac69810a0341b7ff6e8bce859474d4}{pop} ()
+\item 
+Vector$<$ T $>$ const \& \hyperlink{classcommon_1_1PriorityQueue_a4d8f6971c573d31d6b063ae4e1d8512a}{data} () const noexcept
+\item 
+\hyperlink{classcommon_1_1PriorityQueue_ab57641d3a949b913edba887241ca6e7d}{size\+\_\+type} \hyperlink{classcommon_1_1PriorityQueue_a3be24d83880082c1e1d97e362b2ed25c}{size} () const noexcept
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$class T, class Compare = std\+::less$<$\+T$>$$>$\\*
+class common\+::\+Priority\+Queue$<$ T, Compare $>$}
+
+\hyperlink{classcommon_1_1PriorityQueue}{Priority\+Queue} implementation using binary heap. 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Type of the element to store. \\
+\hline
+{\em Compare} & Comparison function that is used to order elements. \\
+\hline
+\end{DoxyTemplParams}
+
+
+Definition at line 16 of file Priority\+Queue.\+h.
+
+
+
+\subsection{Member Typedef Documentation}
+\index{common\+::\+Priority\+Queue@{common\+::\+Priority\+Queue}!const\+\_\+iterator@{const\+\_\+iterator}}
+\index{const\+\_\+iterator@{const\+\_\+iterator}!common\+::\+Priority\+Queue@{common\+::\+Priority\+Queue}}
+\subsubsection[{\texorpdfstring{const\+\_\+iterator}{const_iterator}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T, class Compare = std\+::less$<$\+T$>$$>$ using {\bf common\+::\+Priority\+Queue}$<$ T, Compare $>$\+::{\bf const\+\_\+iterator} =  T const$\ast$}\hypertarget{classcommon_1_1PriorityQueue_ad22a4ff01afbdd1ab13ebffa8c61c924}{}\label{classcommon_1_1PriorityQueue_ad22a4ff01afbdd1ab13ebffa8c61c924}
+
+
+Definition at line 21 of file Priority\+Queue.\+h.
+
+\index{common\+::\+Priority\+Queue@{common\+::\+Priority\+Queue}!const\+\_\+reference@{const\+\_\+reference}}
+\index{const\+\_\+reference@{const\+\_\+reference}!common\+::\+Priority\+Queue@{common\+::\+Priority\+Queue}}
+\subsubsection[{\texorpdfstring{const\+\_\+reference}{const_reference}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T, class Compare = std\+::less$<$\+T$>$$>$ using {\bf common\+::\+Priority\+Queue}$<$ T, Compare $>$\+::{\bf const\+\_\+reference} =  T const\&}\hypertarget{classcommon_1_1PriorityQueue_ae9270b1553c1337f99508699590ee7c0}{}\label{classcommon_1_1PriorityQueue_ae9270b1553c1337f99508699590ee7c0}
+
+
+Definition at line 23 of file Priority\+Queue.\+h.
+
+\index{common\+::\+Priority\+Queue@{common\+::\+Priority\+Queue}!iterator@{iterator}}
+\index{iterator@{iterator}!common\+::\+Priority\+Queue@{common\+::\+Priority\+Queue}}
+\subsubsection[{\texorpdfstring{iterator}{iterator}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T, class Compare = std\+::less$<$\+T$>$$>$ using {\bf common\+::\+Priority\+Queue}$<$ T, Compare $>$\+::{\bf iterator} =  T$\ast$}\hypertarget{classcommon_1_1PriorityQueue_ab537c372fee0c15e7d6319fac2fc8a62}{}\label{classcommon_1_1PriorityQueue_ab537c372fee0c15e7d6319fac2fc8a62}
+
+
+Definition at line 20 of file Priority\+Queue.\+h.
+
+\index{common\+::\+Priority\+Queue@{common\+::\+Priority\+Queue}!reference@{reference}}
+\index{reference@{reference}!common\+::\+Priority\+Queue@{common\+::\+Priority\+Queue}}
+\subsubsection[{\texorpdfstring{reference}{reference}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T, class Compare = std\+::less$<$\+T$>$$>$ using {\bf common\+::\+Priority\+Queue}$<$ T, Compare $>$\+::{\bf reference} =  T\&}\hypertarget{classcommon_1_1PriorityQueue_ab373612fd8bc3716f22936d6b6454b86}{}\label{classcommon_1_1PriorityQueue_ab373612fd8bc3716f22936d6b6454b86}
+
+
+Definition at line 22 of file Priority\+Queue.\+h.
+
+\index{common\+::\+Priority\+Queue@{common\+::\+Priority\+Queue}!size\+\_\+type@{size\+\_\+type}}
+\index{size\+\_\+type@{size\+\_\+type}!common\+::\+Priority\+Queue@{common\+::\+Priority\+Queue}}
+\subsubsection[{\texorpdfstring{size\+\_\+type}{size_type}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T, class Compare = std\+::less$<$\+T$>$$>$ using {\bf common\+::\+Priority\+Queue}$<$ T, Compare $>$\+::{\bf size\+\_\+type} =  std\+::size\+\_\+t}\hypertarget{classcommon_1_1PriorityQueue_ab57641d3a949b913edba887241ca6e7d}{}\label{classcommon_1_1PriorityQueue_ab57641d3a949b913edba887241ca6e7d}
+
+
+Definition at line 19 of file Priority\+Queue.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{common\+::\+Priority\+Queue@{common\+::\+Priority\+Queue}!Priority\+Queue@{Priority\+Queue}}
+\index{Priority\+Queue@{Priority\+Queue}!common\+::\+Priority\+Queue@{common\+::\+Priority\+Queue}}
+\subsubsection[{\texorpdfstring{Priority\+Queue(\+Compare const \&compare=\+Compare())}{PriorityQueue(Compare const &compare=Compare())}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T, class Compare = std\+::less$<$\+T$>$$>$ {\bf common\+::\+Priority\+Queue}$<$ T, Compare $>$\+::{\bf Priority\+Queue} (
+\begin{DoxyParamCaption}
+\item[{Compare const \&}]{compare = {\ttfamily Compare()}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}\hypertarget{classcommon_1_1PriorityQueue_af0a3b595aac162d4a20c75caa4a65326}{}\label{classcommon_1_1PriorityQueue_af0a3b595aac162d4a20c75caa4a65326}
+
+
+Definition at line 25 of file Priority\+Queue.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{common\+::\+Priority\+Queue@{common\+::\+Priority\+Queue}!data@{data}}
+\index{data@{data}!common\+::\+Priority\+Queue@{common\+::\+Priority\+Queue}}
+\subsubsection[{\texorpdfstring{data() const noexcept}{data() const noexcept}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T, class Compare = std\+::less$<$\+T$>$$>$ Vector$<$T$>$ const\& {\bf common\+::\+Priority\+Queue}$<$ T, Compare $>$\+::data (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}\hypertarget{classcommon_1_1PriorityQueue_a4d8f6971c573d31d6b063ae4e1d8512a}{}\label{classcommon_1_1PriorityQueue_a4d8f6971c573d31d6b063ae4e1d8512a}
+Provides immutable access to the underlying container. \begin{DoxyReturn}{Returns}
+Underlying container. 
+\end{DoxyReturn}
+
+
+Definition at line 88 of file Priority\+Queue.\+h.
+
+\index{common\+::\+Priority\+Queue@{common\+::\+Priority\+Queue}!pop@{pop}}
+\index{pop@{pop}!common\+::\+Priority\+Queue@{common\+::\+Priority\+Queue}}
+\subsubsection[{\texorpdfstring{pop()}{pop()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T, class Compare = std\+::less$<$\+T$>$$>$ void {\bf common\+::\+Priority\+Queue}$<$ T, Compare $>$\+::pop (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classcommon_1_1PriorityQueue_ae6ac69810a0341b7ff6e8bce859474d4}{}\label{classcommon_1_1PriorityQueue_ae6ac69810a0341b7ff6e8bce859474d4}
+Removes the top of the queue. 
+
+Definition at line 74 of file Priority\+Queue.\+h.
+
+\index{common\+::\+Priority\+Queue@{common\+::\+Priority\+Queue}!push@{push}}
+\index{push@{push}!common\+::\+Priority\+Queue@{common\+::\+Priority\+Queue}}
+\subsubsection[{\texorpdfstring{push(const\+\_\+reference value)}{push(const_reference value)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T, class Compare = std\+::less$<$\+T$>$$>$ void {\bf common\+::\+Priority\+Queue}$<$ T, Compare $>$\+::push (
+\begin{DoxyParamCaption}
+\item[{{\bf const\+\_\+reference}}]{value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classcommon_1_1PriorityQueue_a9ef038beba24f28a531549c0efe897e1}{}\label{classcommon_1_1PriorityQueue_a9ef038beba24f28a531549c0efe897e1}
+Pushes given value to the queue. 
+\begin{DoxyParams}{Parameters}
+{\em value} & Value to push in to the queue \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 52 of file Priority\+Queue.\+h.
+
+\index{common\+::\+Priority\+Queue@{common\+::\+Priority\+Queue}!size@{size}}
+\index{size@{size}!common\+::\+Priority\+Queue@{common\+::\+Priority\+Queue}}
+\subsubsection[{\texorpdfstring{size() const noexcept}{size() const noexcept}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T, class Compare = std\+::less$<$\+T$>$$>$ {\bf size\+\_\+type} {\bf common\+::\+Priority\+Queue}$<$ T, Compare $>$\+::size (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}\hypertarget{classcommon_1_1PriorityQueue_a3be24d83880082c1e1d97e362b2ed25c}{}\label{classcommon_1_1PriorityQueue_a3be24d83880082c1e1d97e362b2ed25c}
+Returns size of the queue. \begin{DoxyReturn}{Returns}
+Size of the queue. 
+\end{DoxyReturn}
+
+
+Definition at line 97 of file Priority\+Queue.\+h.
+
+\index{common\+::\+Priority\+Queue@{common\+::\+Priority\+Queue}!top@{top}}
+\index{top@{top}!common\+::\+Priority\+Queue@{common\+::\+Priority\+Queue}}
+\subsubsection[{\texorpdfstring{top() noexcept}{top() noexcept}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T, class Compare = std\+::less$<$\+T$>$$>$ {\bf reference} {\bf common\+::\+Priority\+Queue}$<$ T, Compare $>$\+::top (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}\hypertarget{classcommon_1_1PriorityQueue_abbbde5cab4d7e63fb6ceacbdc49ea72f}{}\label{classcommon_1_1PriorityQueue_abbbde5cab4d7e63fb6ceacbdc49ea72f}
+Returns the top of the priority queue \begin{DoxyReturn}{Returns}
+Top of the priority queue 
+\end{DoxyReturn}
+
+
+Definition at line 34 of file Priority\+Queue.\+h.
+
+\index{common\+::\+Priority\+Queue@{common\+::\+Priority\+Queue}!top@{top}}
+\index{top@{top}!common\+::\+Priority\+Queue@{common\+::\+Priority\+Queue}}
+\subsubsection[{\texorpdfstring{top() const noexcept}{top() const noexcept}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T, class Compare = std\+::less$<$\+T$>$$>$ {\bf const\+\_\+reference} {\bf common\+::\+Priority\+Queue}$<$ T, Compare $>$\+::top (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}\hypertarget{classcommon_1_1PriorityQueue_ad9054b1e9619b25e58093e4062bfb572}{}\label{classcommon_1_1PriorityQueue_ad9054b1e9619b25e58093e4062bfb572}
+Returns the top of the priority queue \begin{DoxyReturn}{Returns}
+Top of the priority queue 
+\end{DoxyReturn}
+
+
+Definition at line 43 of file Priority\+Queue.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{PriorityQueue_8h}{Priority\+Queue.\+h}\end{DoxyCompactItemize}

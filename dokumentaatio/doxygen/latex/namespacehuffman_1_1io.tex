@@ -7,17 +7,21 @@ common\+::\+Vector$<$ \hyperlink{namespacehuffman_1_1types_a198fb2bbef1012ab1696
 \item 
 void \hyperlink{namespacehuffman_1_1io_a46774d6debc0d1318c44db613a700ab0}{write\+File} (std\+::ostream \&ostream, const common\+::\+Vector$<$ \hyperlink{namespacehuffman_1_1types_a198fb2bbef1012ab1696124836c56f0d}{huffman\+::types\+::byte\+\_\+t} $>$ \&data)
 \item 
-void \hyperlink{namespacehuffman_1_1io_a54d99edde92b3edabf312b6075a2e32e}{write\+Binary\+File} (std\+::ostream \&ostream, const \hyperlink{classcommon_1_1BitStack}{common\+::\+Bit\+Stack} \&data)
+void \hyperlink{namespacehuffman_1_1io_afa4a671ca46f3b2fdb8052639340178f}{write\+Binary\+File} (std\+::ostream \&ostream, const \hyperlink{classcommon_1_1BitStack}{common\+::\+Bit\+Stack} \&data, bool magic\+Number=false)
 \item 
 \hyperlink{classcommon_1_1BitStack}{common\+::\+Bit\+Stack} \hyperlink{namespacehuffman_1_1io_ada2a069d00c22f9fed6aab608d863276}{read\+Binary\+File} (std\+::istream \&istream, bool ignore\+Header)
 \item 
-uint64\+\_\+t \hyperlink{namespacehuffman_1_1io_a74c4d7967e01dff1bf9bc744be4caeb1}{read64\+Bit\+Number} (const uint8\+\_\+t(\&data)\mbox{[}8\mbox{]})
+uint64\+\_\+t \hyperlink{namespacehuffman_1_1io_aab7992b4b13288b7ea2a4a1f741f7d65}{read\+Uint64} (std\+::istream \&istream)
 \item 
-void \hyperlink{namespacehuffman_1_1io_ad2faf41d8e4c35955127f096b42f48e9}{write64\+Bit\+Number\+To\+Stream} (uint64\+\_\+t number, std\+::ostream \&ostream)
+void \hyperlink{namespacehuffman_1_1io_af709b79bf385345e28dc5e3068fc744a}{write\+Uint64} (uint64\+\_\+t number, std\+::ostream \&ostream)
 \item 
 void \hyperlink{namespacehuffman_1_1io_ada1e15818c5ab806b890ad58a7c58270}{insert\+Byte} (\hyperlink{namespacehuffman_1_1types_a198fb2bbef1012ab1696124836c56f0d}{huffman\+::types\+::byte\+\_\+t} byte, \hyperlink{classcommon_1_1BitStack}{common\+::\+Bit\+Stack} \&vector)
 \item 
 \hyperlink{namespacehuffman_1_1types_a198fb2bbef1012ab1696124836c56f0d}{huffman\+::types\+::byte\+\_\+t} \hyperlink{namespacehuffman_1_1io_af34a00787e1294fb7b72c7d02d214875}{read\+Byte} (const \hyperlink{classcommon_1_1BitStack}{common\+::\+Bit\+Stack} \&vector, uint64\+\_\+t start)
+\item 
+bool \hyperlink{namespacehuffman_1_1io_a3672cf6420fd059c8d726e129c7a1e1f}{verify\+Magic\+Number} (std\+::istream \&istream)
+\item 
+void \hyperlink{namespacehuffman_1_1io_a0dcd66b464011e749fd3d8d7d889c529}{write\+Magic\+Number} (std\+::ostream \&ostream)
 \end{DoxyCompactItemize}
 
 
@@ -39,26 +43,7 @@ Inserts byte to the vector as binary values.
 \end{DoxyParams}
 
 
-Definition at line 96 of file File\+Utils.\+cpp.
-
-\index{huffman\+::io@{huffman\+::io}!read64\+Bit\+Number@{read64\+Bit\+Number}}
-\index{read64\+Bit\+Number@{read64\+Bit\+Number}!huffman\+::io@{huffman\+::io}}
-\subsubsection[{\texorpdfstring{read64\+Bit\+Number(const uint8\+\_\+t(\&data)[8])}{read64BitNumber(const uint8_t(&data)[8])}}]{\setlength{\rightskip}{0pt plus 5cm}uint64\+\_\+t huffman\+::io\+::read64\+Bit\+Number (
-\begin{DoxyParamCaption}
-\item[{const uint8\+\_\+t(\&)}]{data\mbox{[}8\mbox{]}}
-\end{DoxyParamCaption}
-)}\hypertarget{namespacehuffman_1_1io_a74c4d7967e01dff1bf9bc744be4caeb1}{}\label{namespacehuffman_1_1io_a74c4d7967e01dff1bf9bc744be4caeb1}
-Reads eight bytes from the data and outputs unsigned 64-\/bit number. First byte in the array is the least significant and the last is the most significant. 
-\begin{DoxyParams}{Parameters}
-{\em data} & Eight bytes that represent 64-\/bit number \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-Unsigned 64-\/bit number 
-\end{DoxyReturn}
-
-
-Definition at line 7 of file File\+Utils.\+cpp.
+Definition at line 102 of file File\+Utils.\+cpp.
 
 \index{huffman\+::io@{huffman\+::io}!read\+Binary\+File@{read\+Binary\+File}}
 \index{read\+Binary\+File@{read\+Binary\+File}!huffman\+::io@{huffman\+::io}}
@@ -79,8 +64,13 @@ Reads data from the stream to vector containing bool values.
 Data read from the stream 
 \end{DoxyReturn}
 
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & if huffman\+::constants\+::\+M\+A\+G\+I\+C\+\_\+\+N\+U\+M\+B\+ER is not found from the start of the stream \\
+\hline
+\end{DoxyExceptions}
 
-Definition at line 62 of file File\+Utils.\+cpp.
+
+Definition at line 65 of file File\+Utils.\+cpp.
 
 \index{huffman\+::io@{huffman\+::io}!read\+Byte@{read\+Byte}}
 \index{read\+Byte@{read\+Byte}!huffman\+::io@{huffman\+::io}}
@@ -102,7 +92,7 @@ Byte read from the vector
 \end{DoxyReturn}
 
 
-Definition at line 106 of file File\+Utils.\+cpp.
+Definition at line 112 of file File\+Utils.\+cpp.
 
 \index{huffman\+::io@{huffman\+::io}!read\+File@{read\+File}}
 \index{read\+File@{read\+File}!huffman\+::io@{huffman\+::io}}
@@ -121,35 +111,55 @@ Returns vector of bytes containing data from the stream
 \end{DoxyReturn}
 
 
-Definition at line 28 of file File\+Utils.\+cpp.
+Definition at line 31 of file File\+Utils.\+cpp.
 
-\index{huffman\+::io@{huffman\+::io}!write64\+Bit\+Number\+To\+Stream@{write64\+Bit\+Number\+To\+Stream}}
-\index{write64\+Bit\+Number\+To\+Stream@{write64\+Bit\+Number\+To\+Stream}!huffman\+::io@{huffman\+::io}}
-\subsubsection[{\texorpdfstring{write64\+Bit\+Number\+To\+Stream(uint64\+\_\+t number, std\+::ostream \&ostream)}{write64BitNumberToStream(uint64_t number, std::ostream &ostream)}}]{\setlength{\rightskip}{0pt plus 5cm}void huffman\+::io\+::write64\+Bit\+Number\+To\+Stream (
+\index{huffman\+::io@{huffman\+::io}!read\+Uint64@{read\+Uint64}}
+\index{read\+Uint64@{read\+Uint64}!huffman\+::io@{huffman\+::io}}
+\subsubsection[{\texorpdfstring{read\+Uint64(std\+::istream \&istream)}{readUint64(std::istream &istream)}}]{\setlength{\rightskip}{0pt plus 5cm}uint64\+\_\+t huffman\+::io\+::read\+Uint64 (
 \begin{DoxyParamCaption}
-\item[{uint64\+\_\+t}]{number, }
-\item[{std\+::ostream \&}]{ostream}
+\item[{std\+::istream \&}]{istream}
 \end{DoxyParamCaption}
-)}\hypertarget{namespacehuffman_1_1io_ad2faf41d8e4c35955127f096b42f48e9}{}\label{namespacehuffman_1_1io_ad2faf41d8e4c35955127f096b42f48e9}
-Writes 64-\/bit number to the specified stream as individual bytes. The first byte in the stream represents the least significant byte of the number and the last is the most significant byte. 
+)}\hypertarget{namespacehuffman_1_1io_aab7992b4b13288b7ea2a4a1f741f7d65}{}\label{namespacehuffman_1_1io_aab7992b4b13288b7ea2a4a1f741f7d65}
+Reads eight bytes from the data and outputs unsigned 64-\/bit number. First byte in the array is the least significant and the last is the most significant. 
 \begin{DoxyParams}{Parameters}
-{\em number} & 64-\/bit number that is written to the stream. \\
-\hline
-{\em ostream} & Stream that is written to. \\
+{\em data} & Eight bytes that represent 64-\/bit number \\
 \hline
 \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Unsigned 64-\/bit number 
+\end{DoxyReturn}
 
 
-Definition at line 17 of file File\+Utils.\+cpp.
+Definition at line 8 of file File\+Utils.\+cpp.
+
+\index{huffman\+::io@{huffman\+::io}!verify\+Magic\+Number@{verify\+Magic\+Number}}
+\index{verify\+Magic\+Number@{verify\+Magic\+Number}!huffman\+::io@{huffman\+::io}}
+\subsubsection[{\texorpdfstring{verify\+Magic\+Number(std\+::istream \&istream)}{verifyMagicNumber(std::istream &istream)}}]{\setlength{\rightskip}{0pt plus 5cm}bool huffman\+::io\+::verify\+Magic\+Number (
+\begin{DoxyParamCaption}
+\item[{std\+::istream \&}]{istream}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacehuffman_1_1io_a3672cf6420fd059c8d726e129c7a1e1f}{}\label{namespacehuffman_1_1io_a3672cf6420fd059c8d726e129c7a1e1f}
+Verifies that the magic read from the stream matches to huffman\+::constants\+::\+M\+A\+G\+I\+C\+\_\+\+N\+U\+M\+B\+ER. 
+\begin{DoxyParams}{Parameters}
+{\em istream} & Stream to read from. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the magic number matches, otherwise false. 
+\end{DoxyReturn}
+
+
+Definition at line 126 of file File\+Utils.\+cpp.
 
 \index{huffman\+::io@{huffman\+::io}!write\+Binary\+File@{write\+Binary\+File}}
 \index{write\+Binary\+File@{write\+Binary\+File}!huffman\+::io@{huffman\+::io}}
-\subsubsection[{\texorpdfstring{write\+Binary\+File(std\+::ostream \&ostream, const common\+::\+Bit\+Stack \&data)}{writeBinaryFile(std::ostream &ostream, const common::BitStack &data)}}]{\setlength{\rightskip}{0pt plus 5cm}void huffman\+::io\+::write\+Binary\+File (
+\subsubsection[{\texorpdfstring{write\+Binary\+File(std\+::ostream \&ostream, const common\+::\+Bit\+Stack \&data, bool magic\+Number=false)}{writeBinaryFile(std::ostream &ostream, const common::BitStack &data, bool magicNumber=false)}}]{\setlength{\rightskip}{0pt plus 5cm}void huffman\+::io\+::write\+Binary\+File (
 \begin{DoxyParamCaption}
 \item[{std\+::ostream \&}]{ostream, }
-\item[{const {\bf common\+::\+Bit\+Stack} \&}]{data}
+\item[{const {\bf common\+::\+Bit\+Stack} \&}]{data, }
+\item[{bool}]{magic\+Number = {\ttfamily false}}
 \end{DoxyParamCaption}
-)}\hypertarget{namespacehuffman_1_1io_a54d99edde92b3edabf312b6075a2e32e}{}\label{namespacehuffman_1_1io_a54d99edde92b3edabf312b6075a2e32e}
+)}\hypertarget{namespacehuffman_1_1io_afa4a671ca46f3b2fdb8052639340178f}{}\label{namespacehuffman_1_1io_afa4a671ca46f3b2fdb8052639340178f}
 Writes data as binary data to the stream. 
 \begin{DoxyParams}{Parameters}
 {\em ostream} & Stream to write to. \\
@@ -159,7 +169,7 @@ Writes data as binary data to the stream.
 \end{DoxyParams}
 
 
-Definition at line 40 of file File\+Utils.\+cpp.
+Definition at line 43 of file File\+Utils.\+cpp.
 
 \index{huffman\+::io@{huffman\+::io}!write\+File@{write\+File}}
 \index{write\+File@{write\+File}!huffman\+::io@{huffman\+::io}}
@@ -178,5 +188,40 @@ Writes data to the specified stream
 \end{DoxyParams}
 
 
-Definition at line 91 of file File\+Utils.\+cpp.
+Definition at line 97 of file File\+Utils.\+cpp.
+
+\index{huffman\+::io@{huffman\+::io}!write\+Magic\+Number@{write\+Magic\+Number}}
+\index{write\+Magic\+Number@{write\+Magic\+Number}!huffman\+::io@{huffman\+::io}}
+\subsubsection[{\texorpdfstring{write\+Magic\+Number(std\+::ostream \&ostream)}{writeMagicNumber(std::ostream &ostream)}}]{\setlength{\rightskip}{0pt plus 5cm}void huffman\+::io\+::write\+Magic\+Number (
+\begin{DoxyParamCaption}
+\item[{std\+::ostream \&}]{ostream}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacehuffman_1_1io_a0dcd66b464011e749fd3d8d7d889c529}{}\label{namespacehuffman_1_1io_a0dcd66b464011e749fd3d8d7d889c529}
+Writes huffman\+::constants\+::\+M\+A\+G\+I\+C\+\_\+\+N\+U\+M\+B\+ER to the stream. 
+\begin{DoxyParams}{Parameters}
+{\em ostream} & Stream to write to. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 132 of file File\+Utils.\+cpp.
+
+\index{huffman\+::io@{huffman\+::io}!write\+Uint64@{write\+Uint64}}
+\index{write\+Uint64@{write\+Uint64}!huffman\+::io@{huffman\+::io}}
+\subsubsection[{\texorpdfstring{write\+Uint64(uint64\+\_\+t number, std\+::ostream \&ostream)}{writeUint64(uint64_t number, std::ostream &ostream)}}]{\setlength{\rightskip}{0pt plus 5cm}void huffman\+::io\+::write\+Uint64 (
+\begin{DoxyParamCaption}
+\item[{uint64\+\_\+t}]{number, }
+\item[{std\+::ostream \&}]{ostream}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacehuffman_1_1io_af709b79bf385345e28dc5e3068fc744a}{}\label{namespacehuffman_1_1io_af709b79bf385345e28dc5e3068fc744a}
+Writes 64-\/bit number to the specified stream as individual bytes. The first byte in the stream represents the least significant byte of the number and the last is the most significant byte. 
+\begin{DoxyParams}{Parameters}
+{\em number} & 64-\/bit number that is written to the stream. \\
+\hline
+{\em ostream} & Stream that is written to. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 20 of file File\+Utils.\+cpp.
 

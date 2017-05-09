@@ -1,6 +1,6 @@
 <map id="HuffmanTree.h" name="HuffmanTree.h">
-<area shape="rect" id="node4" href="$Vector_8h.html" title="Vector.h" alt="" coords="200,155,271,181"/>
-<area shape="rect" id="node10" href="$BitStack_8h.html" title="BitStack.h" alt="" coords="273,80,355,107"/>
-<area shape="rect" id="node11" href="$Common_8h.html" title="Common.h" alt="" coords="432,155,519,181"/>
-<area shape="rect" id="node13" href="$TreeNode_8h.html" title="TreeNode.h" alt="" coords="430,80,521,107"/>
+<area shape="rect" id="node4" href="$Vector_8h.html" title="common/Vector.h" alt="" coords="153,155,278,181"/>
+<area shape="rect" id="node10" href="$BitStack_8h.html" title="common/BitStack.h" alt="" coords="245,80,383,107"/>
+<area shape="rect" id="node11" href="$Common_8h.html" title="Common.h" alt="" coords="456,155,543,181"/>
+<area shape="rect" id="node13" href="$TreeNode_8h.html" title="TreeNode.h" alt="" coords="458,80,549,107"/>
 </map>

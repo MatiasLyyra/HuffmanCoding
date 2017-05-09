@@ -93,17 +93,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;iosfwd&gt;</code><br />
-<code>#include &quot;<a class="el" href="Vector_8h_source.html">Vector.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="BitStack_8h_source.html">BitStack.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="Vector_8h_source.html">common/Vector.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="BitStack_8h_source.html">common/BitStack.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="Common_8h_source.html">../Common.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for FileUtils.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="FileUtils_8h__incl.png" border="0" usemap="#FileUtils_8h" alt=""/></div>
 <map name="FileUtils_8h" id="FileUtils_8h">
-<area shape="rect" id="node3" href="Vector_8h.html" title="Vector.h" alt="" coords="180,155,251,181"/>
-<area shape="rect" id="node9" href="BitStack_8h.html" title="BitStack.h" alt="" coords="214,80,297,107"/>
-<area shape="rect" id="node10" href="Common_8h.html" title="../Common.h" alt="" coords="321,80,419,107"/>
+<area shape="rect" id="node3" href="Vector_8h.html" title="common/Vector.h" alt="" coords="153,155,278,181"/>
+<area shape="rect" id="node9" href="BitStack_8h.html" title="common/BitStack.h" alt="" coords="200,80,337,107"/>
+<area shape="rect" id="node10" href="Common_8h.html" title="../Common.h" alt="" coords="362,80,461,107"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -132,18 +132,22 @@ Functions</h2></td></tr>
 <tr class="separator:a3dc9d3bd379dd95a993bff408092514a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a46774d6debc0d1318c44db613a700ab0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehuffman_1_1io.html#a46774d6debc0d1318c44db613a700ab0">huffman::io::writeFile</a> (std::ostream &amp;ostream, const common::Vector&lt; <a class="el" href="namespacehuffman_1_1types.html#a198fb2bbef1012ab1696124836c56f0d">huffman::types::byte_t</a> &gt; &amp;data)</td></tr>
 <tr class="separator:a46774d6debc0d1318c44db613a700ab0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a54d99edde92b3edabf312b6075a2e32e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehuffman_1_1io.html#a54d99edde92b3edabf312b6075a2e32e">huffman::io::writeBinaryFile</a> (std::ostream &amp;ostream, const <a class="el" href="classcommon_1_1BitStack.html">common::BitStack</a> &amp;data)</td></tr>
-<tr class="separator:a54d99edde92b3edabf312b6075a2e32e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa4a671ca46f3b2fdb8052639340178f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehuffman_1_1io.html#afa4a671ca46f3b2fdb8052639340178f">huffman::io::writeBinaryFile</a> (std::ostream &amp;ostream, const <a class="el" href="classcommon_1_1BitStack.html">common::BitStack</a> &amp;data, bool magicNumber=false)</td></tr>
+<tr class="separator:afa4a671ca46f3b2fdb8052639340178f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada2a069d00c22f9fed6aab608d863276"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcommon_1_1BitStack.html">common::BitStack</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehuffman_1_1io.html#ada2a069d00c22f9fed6aab608d863276">huffman::io::readBinaryFile</a> (std::istream &amp;istream, bool ignoreHeader)</td></tr>
 <tr class="separator:ada2a069d00c22f9fed6aab608d863276"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a74c4d7967e01dff1bf9bc744be4caeb1"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehuffman_1_1io.html#a74c4d7967e01dff1bf9bc744be4caeb1">huffman::io::read64BitNumber</a> (const uint8_t(&amp;data)[8])</td></tr>
-<tr class="separator:a74c4d7967e01dff1bf9bc744be4caeb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad2faf41d8e4c35955127f096b42f48e9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehuffman_1_1io.html#ad2faf41d8e4c35955127f096b42f48e9">huffman::io::write64BitNumberToStream</a> (uint64_t number, std::ostream &amp;ostream)</td></tr>
-<tr class="separator:ad2faf41d8e4c35955127f096b42f48e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab7992b4b13288b7ea2a4a1f741f7d65"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehuffman_1_1io.html#aab7992b4b13288b7ea2a4a1f741f7d65">huffman::io::readUint64</a> (std::istream &amp;istream)</td></tr>
+<tr class="separator:aab7992b4b13288b7ea2a4a1f741f7d65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af709b79bf385345e28dc5e3068fc744a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehuffman_1_1io.html#af709b79bf385345e28dc5e3068fc744a">huffman::io::writeUint64</a> (uint64_t number, std::ostream &amp;ostream)</td></tr>
+<tr class="separator:af709b79bf385345e28dc5e3068fc744a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada1e15818c5ab806b890ad58a7c58270"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehuffman_1_1io.html#ada1e15818c5ab806b890ad58a7c58270">huffman::io::insertByte</a> (<a class="el" href="namespacehuffman_1_1types.html#a198fb2bbef1012ab1696124836c56f0d">huffman::types::byte_t</a> byte, <a class="el" href="classcommon_1_1BitStack.html">common::BitStack</a> &amp;vector)</td></tr>
 <tr class="separator:ada1e15818c5ab806b890ad58a7c58270"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af34a00787e1294fb7b72c7d02d214875"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehuffman_1_1types.html#a198fb2bbef1012ab1696124836c56f0d">huffman::types::byte_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehuffman_1_1io.html#af34a00787e1294fb7b72c7d02d214875">huffman::io::readByte</a> (const <a class="el" href="classcommon_1_1BitStack.html">common::BitStack</a> &amp;vector, uint64_t start)</td></tr>
 <tr class="separator:af34a00787e1294fb7b72c7d02d214875"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3672cf6420fd059c8d726e129c7a1e1f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehuffman_1_1io.html#a3672cf6420fd059c8d726e129c7a1e1f">huffman::io::verifyMagicNumber</a> (std::istream &amp;istream)</td></tr>
+<tr class="separator:a3672cf6420fd059c8d726e129c7a1e1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0dcd66b464011e749fd3d8d7d889c529"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehuffman_1_1io.html#a0dcd66b464011e749fd3d8d7d889c529">huffman::io::writeMagicNumber</a> (std::ostream &amp;ostream)</td></tr>
+<tr class="separator:a0dcd66b464011e749fd3d8d7d889c529"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->

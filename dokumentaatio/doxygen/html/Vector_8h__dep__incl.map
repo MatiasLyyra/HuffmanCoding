@@ -1,12 +1,13 @@
 <map id="Vector.h" name="Vector.h">
-<area shape="rect" id="node2" href="$Decoder_8h.html" title="Decoder.h" alt="" coords="5,155,88,181"/>
-<area shape="rect" id="node4" href="$HuffmanTree_8h.html" title="HuffmanTree.h" alt="" coords="112,155,221,181"/>
-<area shape="rect" id="node5" href="$Encoder_8h.html" title="Encoder.h" alt="" coords="245,229,326,256"/>
-<area shape="rect" id="node8" href="$FileUtils_8h.html" title="FileUtils.h" alt="" coords="470,155,551,181"/>
-<area shape="rect" id="node10" href="$BitStack_8h.html" title="BitStack.h" alt="" coords="253,80,336,107"/>
-<area shape="rect" id="node3" href="$Decoder_8cpp.html" title="Decoder.cpp" alt="" coords="59,229,155,256"/>
-<area shape="rect" id="node7" href="$HuffmanTree_8cpp.html" title="HuffmanTree.cpp" alt="" coords="351,229,473,256"/>
-<area shape="rect" id="node6" href="$Encoder_8cpp.html" title="Encoder.cpp" alt="" coords="350,304,445,331"/>
-<area shape="rect" id="node9" href="$FileUtils_8cpp.html" title="FileUtils.cpp" alt="" coords="549,229,643,256"/>
-<area shape="rect" id="node11" href="$BitStack_8cpp.html" title="BitStack.cpp" alt="" coords="246,155,343,181"/>
+<area shape="rect" id="node2" href="$Decoder_8h.html" title="Decoder.h" alt="" coords="162,155,245,181"/>
+<area shape="rect" id="node4" href="$HuffmanTree_8h.html" title="HuffmanTree.h" alt="" coords="391,155,501,181"/>
+<area shape="rect" id="node5" href="$Encoder_8h.html" title="Encoder.h" alt="" coords="483,229,564,256"/>
+<area shape="rect" id="node8" href="$FileUtils_8h.html" title="FileUtils.h" alt="" coords="5,155,87,181"/>
+<area shape="rect" id="node10" href="$BitStack_8h.html" title="BitStack.h" alt="" coords="275,80,358,107"/>
+<area shape="rect" id="node12" href="$PriorityQueue_8h.html" title="PriorityQueue.h" alt="" coords="85,80,197,107"/>
+<area shape="rect" id="node3" href="$Decoder_8cpp.html" title="Decoder.cpp" alt="" coords="347,229,443,256"/>
+<area shape="rect" id="node7" href="$HuffmanTree_8cpp.html" title="HuffmanTree.cpp" alt="" coords="171,229,294,256"/>
+<area shape="rect" id="node6" href="$Encoder_8cpp.html" title="Encoder.cpp" alt="" coords="221,304,316,331"/>
+<area shape="rect" id="node9" href="$FileUtils_8cpp.html" title="FileUtils.cpp" alt="" coords="52,229,147,256"/>
+<area shape="rect" id="node11" href="$BitStack_8cpp.html" title="BitStack.cpp" alt="" coords="269,155,367,181"/>
 </map>

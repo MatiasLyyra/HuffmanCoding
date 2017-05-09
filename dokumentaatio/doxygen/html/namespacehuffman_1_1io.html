@@ -98,18 +98,22 @@ Functions</h2></td></tr>
 <tr class="separator:a3dc9d3bd379dd95a993bff408092514a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a46774d6debc0d1318c44db613a700ab0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehuffman_1_1io.html#a46774d6debc0d1318c44db613a700ab0">writeFile</a> (std::ostream &amp;ostream, const common::Vector&lt; <a class="el" href="namespacehuffman_1_1types.html#a198fb2bbef1012ab1696124836c56f0d">huffman::types::byte_t</a> &gt; &amp;data)</td></tr>
 <tr class="separator:a46774d6debc0d1318c44db613a700ab0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a54d99edde92b3edabf312b6075a2e32e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehuffman_1_1io.html#a54d99edde92b3edabf312b6075a2e32e">writeBinaryFile</a> (std::ostream &amp;ostream, const <a class="el" href="classcommon_1_1BitStack.html">common::BitStack</a> &amp;data)</td></tr>
-<tr class="separator:a54d99edde92b3edabf312b6075a2e32e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa4a671ca46f3b2fdb8052639340178f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehuffman_1_1io.html#afa4a671ca46f3b2fdb8052639340178f">writeBinaryFile</a> (std::ostream &amp;ostream, const <a class="el" href="classcommon_1_1BitStack.html">common::BitStack</a> &amp;data, bool magicNumber=false)</td></tr>
+<tr class="separator:afa4a671ca46f3b2fdb8052639340178f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada2a069d00c22f9fed6aab608d863276"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcommon_1_1BitStack.html">common::BitStack</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehuffman_1_1io.html#ada2a069d00c22f9fed6aab608d863276">readBinaryFile</a> (std::istream &amp;istream, bool ignoreHeader)</td></tr>
 <tr class="separator:ada2a069d00c22f9fed6aab608d863276"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a74c4d7967e01dff1bf9bc744be4caeb1"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehuffman_1_1io.html#a74c4d7967e01dff1bf9bc744be4caeb1">read64BitNumber</a> (const uint8_t(&amp;data)[8])</td></tr>
-<tr class="separator:a74c4d7967e01dff1bf9bc744be4caeb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad2faf41d8e4c35955127f096b42f48e9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehuffman_1_1io.html#ad2faf41d8e4c35955127f096b42f48e9">write64BitNumberToStream</a> (uint64_t number, std::ostream &amp;ostream)</td></tr>
-<tr class="separator:ad2faf41d8e4c35955127f096b42f48e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab7992b4b13288b7ea2a4a1f741f7d65"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehuffman_1_1io.html#aab7992b4b13288b7ea2a4a1f741f7d65">readUint64</a> (std::istream &amp;istream)</td></tr>
+<tr class="separator:aab7992b4b13288b7ea2a4a1f741f7d65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af709b79bf385345e28dc5e3068fc744a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehuffman_1_1io.html#af709b79bf385345e28dc5e3068fc744a">writeUint64</a> (uint64_t number, std::ostream &amp;ostream)</td></tr>
+<tr class="separator:af709b79bf385345e28dc5e3068fc744a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada1e15818c5ab806b890ad58a7c58270"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehuffman_1_1io.html#ada1e15818c5ab806b890ad58a7c58270">insertByte</a> (<a class="el" href="namespacehuffman_1_1types.html#a198fb2bbef1012ab1696124836c56f0d">huffman::types::byte_t</a> byte, <a class="el" href="classcommon_1_1BitStack.html">common::BitStack</a> &amp;vector)</td></tr>
 <tr class="separator:ada1e15818c5ab806b890ad58a7c58270"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af34a00787e1294fb7b72c7d02d214875"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehuffman_1_1types.html#a198fb2bbef1012ab1696124836c56f0d">huffman::types::byte_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehuffman_1_1io.html#af34a00787e1294fb7b72c7d02d214875">readByte</a> (const <a class="el" href="classcommon_1_1BitStack.html">common::BitStack</a> &amp;vector, uint64_t start)</td></tr>
 <tr class="separator:af34a00787e1294fb7b72c7d02d214875"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3672cf6420fd059c8d726e129c7a1e1f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehuffman_1_1io.html#a3672cf6420fd059c8d726e129c7a1e1f">verifyMagicNumber</a> (std::istream &amp;istream)</td></tr>
+<tr class="separator:a3672cf6420fd059c8d726e129c7a1e1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0dcd66b464011e749fd3d8d7d889c529"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehuffman_1_1io.html#a0dcd66b464011e749fd3d8d7d889c529">writeMagicNumber</a> (std::ostream &amp;ostream)</td></tr>
+<tr class="separator:a0dcd66b464011e749fd3d8d7d889c529"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a class="anchor" id="ada1e15818c5ab806b890ad58a7c58270"></a>
@@ -143,32 +147,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="FileUtils_8cpp_source.html#l00096">96</a> of file <a class="el" href="FileUtils_8cpp_source.html">FileUtils.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a74c4d7967e01dff1bf9bc744be4caeb1"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint64_t huffman::io::read64BitNumber </td>
-          <td>(</td>
-          <td class="paramtype">const uint8_t(&amp;)&#160;</td>
-          <td class="paramname"><em>data</em>[8]</td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Reads eight bytes from the data and outputs unsigned 64-bit number. First byte in the array is the least significant and the last is the most significant. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">data</td><td>Eight bytes that represent 64-bit number </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Unsigned 64-bit number </dd></dl>
-
-<p>Definition at line <a class="el" href="FileUtils_8cpp_source.html#l00007">7</a> of file <a class="el" href="FileUtils_8cpp_source.html">FileUtils.cpp</a>.</p>
+<p>Definition at line <a class="el" href="FileUtils_8cpp_source.html#l00102">102</a> of file <a class="el" href="FileUtils_8cpp_source.html">FileUtils.cpp</a>.</p>
 
 </div>
 </div>
@@ -203,8 +182,14 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Data read from the stream </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::invalid_argument</td><td>if huffman::constants::MAGIC_NUMBER is not found from the start of the stream </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p>Definition at line <a class="el" href="FileUtils_8cpp_source.html#l00062">62</a> of file <a class="el" href="FileUtils_8cpp_source.html">FileUtils.cpp</a>.</p>
+<p>Definition at line <a class="el" href="FileUtils_8cpp_source.html#l00065">65</a> of file <a class="el" href="FileUtils_8cpp_source.html">FileUtils.cpp</a>.</p>
 
 </div>
 </div>
@@ -240,7 +225,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Byte read from the vector </dd></dl>
 
-<p>Definition at line <a class="el" href="FileUtils_8cpp_source.html#l00106">106</a> of file <a class="el" href="FileUtils_8cpp_source.html">FileUtils.cpp</a>.</p>
+<p>Definition at line <a class="el" href="FileUtils_8cpp_source.html#l00112">112</a> of file <a class="el" href="FileUtils_8cpp_source.html">FileUtils.cpp</a>.</p>
 
 </div>
 </div>
@@ -265,46 +250,61 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Returns vector of bytes containing data from the stream </dd></dl>
 
-<p>Definition at line <a class="el" href="FileUtils_8cpp_source.html#l00028">28</a> of file <a class="el" href="FileUtils_8cpp_source.html">FileUtils.cpp</a>.</p>
+<p>Definition at line <a class="el" href="FileUtils_8cpp_source.html#l00031">31</a> of file <a class="el" href="FileUtils_8cpp_source.html">FileUtils.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ad2faf41d8e4c35955127f096b42f48e9"></a>
+<a class="anchor" id="aab7992b4b13288b7ea2a4a1f741f7d65"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void huffman::io::write64BitNumberToStream </td>
+          <td class="memname">uint64_t huffman::io::readUint64 </td>
           <td>(</td>
-          <td class="paramtype">uint64_t&#160;</td>
-          <td class="paramname"><em>number</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype">std::istream &amp;&#160;</td>
+          <td class="paramname"><em>istream</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">std::ostream &amp;&#160;</td>
-          <td class="paramname"><em>ostream</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Writes 64-bit number to the specified stream as individual bytes. The first byte in the stream represents the least significant byte of the number and the last is the most significant byte. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Reads eight bytes from the data and outputs unsigned 64-bit number. First byte in the array is the least significant and the last is the most significant. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">number</td><td>64-bit number that is written to the stream. </td></tr>
-    <tr><td class="paramname">ostream</td><td>Stream that is written to. </td></tr>
+    <tr><td class="paramname">data</td><td>Eight bytes that represent 64-bit number </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>Unsigned 64-bit number </dd></dl>
 
-<p>Definition at line <a class="el" href="FileUtils_8cpp_source.html#l00017">17</a> of file <a class="el" href="FileUtils_8cpp_source.html">FileUtils.cpp</a>.</p>
+<p>Definition at line <a class="el" href="FileUtils_8cpp_source.html#l00008">8</a> of file <a class="el" href="FileUtils_8cpp_source.html">FileUtils.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a54d99edde92b3edabf312b6075a2e32e"></a>
+<a class="anchor" id="a3672cf6420fd059c8d726e129c7a1e1f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool huffman::io::verifyMagicNumber </td>
+          <td>(</td>
+          <td class="paramtype">std::istream &amp;&#160;</td>
+          <td class="paramname"><em>istream</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Verifies that the magic read from the stream matches to huffman::constants::MAGIC_NUMBER. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">istream</td><td>Stream to read from. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the magic number matches, otherwise false. </dd></dl>
+
+<p>Definition at line <a class="el" href="FileUtils_8cpp_source.html#l00126">126</a> of file <a class="el" href="FileUtils_8cpp_source.html">FileUtils.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="afa4a671ca46f3b2fdb8052639340178f"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -318,7 +318,13 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const <a class="el" href="classcommon_1_1BitStack.html">common::BitStack</a> &amp;&#160;</td>
-          <td class="paramname"><em>data</em>&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>magicNumber</em> = <code>false</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -335,7 +341,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="FileUtils_8cpp_source.html#l00040">40</a> of file <a class="el" href="FileUtils_8cpp_source.html">FileUtils.cpp</a>.</p>
+<p>Definition at line <a class="el" href="FileUtils_8cpp_source.html#l00043">43</a> of file <a class="el" href="FileUtils_8cpp_source.html">FileUtils.cpp</a>.</p>
 
 </div>
 </div>
@@ -370,7 +376,66 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="FileUtils_8cpp_source.html#l00091">91</a> of file <a class="el" href="FileUtils_8cpp_source.html">FileUtils.cpp</a>.</p>
+<p>Definition at line <a class="el" href="FileUtils_8cpp_source.html#l00097">97</a> of file <a class="el" href="FileUtils_8cpp_source.html">FileUtils.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a0dcd66b464011e749fd3d8d7d889c529"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void huffman::io::writeMagicNumber </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>ostream</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Writes huffman::constants::MAGIC_NUMBER to the stream. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ostream</td><td>Stream to write to. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="FileUtils_8cpp_source.html#l00132">132</a> of file <a class="el" href="FileUtils_8cpp_source.html">FileUtils.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="af709b79bf385345e28dc5e3068fc744a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void huffman::io::writeUint64 </td>
+          <td>(</td>
+          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramname"><em>number</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>ostream</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Writes 64-bit number to the specified stream as individual bytes. The first byte in the stream represents the least significant byte of the number and the last is the most significant byte. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">number</td><td>64-bit number that is written to the stream. </td></tr>
+    <tr><td class="paramname">ostream</td><td>Stream that is written to. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="FileUtils_8cpp_source.html#l00020">20</a> of file <a class="el" href="FileUtils_8cpp_source.html">FileUtils.cpp</a>.</p>
 
 </div>
 </div>

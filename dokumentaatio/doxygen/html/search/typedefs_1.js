@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['encode_5fentry_5ft',['encode_entry_t',['../namespacehuffman_1_1types.html#a562530b9038f6a3cb2923f1c116a450c',1,'huffman::types']]],
-  ['encode_5ftable_5ft',['encode_table_t',['../namespacehuffman_1_1types.html#a2d111e21190970dfeb935ef0786973c0',1,'huffman::types']]]
+  ['const_5fiterator',['const_iterator',['../classcommon_1_1PriorityQueue.html#ad22a4ff01afbdd1ab13ebffa8c61c924',1,'common::PriorityQueue']]],
+  ['const_5freference',['const_reference',['../classcommon_1_1PriorityQueue.html#ae9270b1553c1337f99508699590ee7c0',1,'common::PriorityQueue']]]
 ];

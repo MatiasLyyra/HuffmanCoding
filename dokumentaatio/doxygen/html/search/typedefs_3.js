@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['size_5ftype',['size_type',['../classcommon_1_1BitStack.html#a058742dc4b8474a7896e6ce27878f306',1,'common::BitStack']]]
+  ['handle_5ft',['handle_t',['../namespacehuffman_1_1types.html#a41dc8ca07e19043152b0a5c8b5fec90b',1,'huffman::types']]]
 ];
